@@ -16,3 +16,13 @@ sections(pacHowDoUWantItData)
 # error
 summary(pacHowDoUWantItData)
 # error - code stops at interpretations
+
+centCandyShopData <- readHumdrum("50Cent_CandyShop.rap")
+census(centCandyShopData)
+reference(centCandyShopData)
+spines(centCandyShopData)
+interpretations(centCandyShopData)
+sections(centCandyShopData)
+summary(centCandyShopData)
+
+# seems that the functions interpretations and sections are not working for the rap datasets.
