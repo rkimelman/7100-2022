@@ -26,3 +26,12 @@ sections(centCandyShopData)
 summary(centCandyShopData)
 
 # seems that the functions interpretations and sections are not working for the rap datasets.
+
+rapData <- readHumdrum('.*rap')
+
+census(rapData)
+reference(rapData)
+spines(rapData)
+interpretations(rapData)
+sections(rapData)
+summary(rapData)
