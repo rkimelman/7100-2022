@@ -35,3 +35,7 @@ spines(rapData)
 interpretations(rapData)
 sections(rapData)
 summary(rapData)
+
+filterhumdrum(rapData)
+
+rapData[2]
