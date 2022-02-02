@@ -3,8 +3,14 @@ dummyData <- data.frame(values)
 # test on dummyData, then implement into function
 for (i in 1:nrow(dummyData)){
   splitString <- strsplit(dummyData[i, 1], "")[[1]]
-  print(splitString)
+  for(j in length(splitString)){
+    print(1)
+    if(j == 1){
+      print(TRUE)
+    }
+  }
 }
+
 
 
 text <- function (data){
