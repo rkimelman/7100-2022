@@ -27,6 +27,19 @@ summary(centCandyShopData)
 
 # seems that the functions interpretations and sections are not working for the rap datasets.
 
+rapData <- readHumdrum('.*rap')
+
+census(rapData)
+reference(rapData)
+spines(rapData)
+interpretations(rapData)
+sections(rapData)
+summary(rapData)
+
+filterhumdrum(rapData)
+
+rapData[2]
+
 segments <- function(x, reverse = FALSE) {
   if (!is.logical(x)) x <- c(TRUE, head(x, -1L) != tail(x, -1L))
   if (reverse) x <- rev(x)
@@ -48,15 +61,5 @@ mcf$Token %hum>% c(~segments(Break %in% c('3', '4','5')), by ~ File) -> mcf$Phra
 
 mcf$Token %hum<% c(~list(paste(Lyrics, collapse = ' ')), by ~ File ~ Phrase)
 
-rapData <- readHumdrum('.*rap')
+mcf$Token %hum<% c(~list(Rhyme), by ~ File ~ Phrase)
 
-census(rapData)
-reference(rapData)
-spines(rapData)
-interpretations(rapData)
-sections(rapData)
-summary(rapData)
-
-filterhumdrum(rapData)
-
-rapData[2]
