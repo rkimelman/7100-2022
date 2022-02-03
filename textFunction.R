@@ -43,3 +43,8 @@ text <- function(data, iteration){
     }
   return(data)
 }
+values <- c("ya'll", 'act', 'like', "you've", '-come', 'e-', '-very-', '-bo-', '-dy', 'to', 'the', 'wild', 'wild', 'west.')
+dummyData <- data.frame(values)
+silbeFormat <- function(data){
+  
+}

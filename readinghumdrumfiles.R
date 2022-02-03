@@ -27,6 +27,13 @@ summary(centCandyShopData)
 
 # seems that the functions interpretations and sections are not working for the rap datasets.
 
+mcf <- readHumdrum('.*rap')
+spinePipe(mcf, 2:8, 1) -> mcf[rev(c('Stress', 'Tone', 'Break', 'Rhyme', 'IPA', 'Lyrics', 'Hype'))]
+
+mcf$Token %hum>% c(~segments(Break %in% c('3', '4','5')), by ~ File) -> mcf$Phrase
+
+mcf$Token %hum<% c(~list(paste(Lyrics, collapse = ' ')), by ~ File ~ Phrase)
+
 rapData <- readHumdrum('.*rap')
 
 census(rapData)
