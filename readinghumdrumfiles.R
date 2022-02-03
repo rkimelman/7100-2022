@@ -40,6 +40,8 @@ filterhumdrum(rapData)
 
 rapData[2]
 
+library(humdrumR)
+
 segments <- function(x, reverse = FALSE) {
   if (!is.logical(x)) x <- c(TRUE, head(x, -1L) != tail(x, -1L))
   if (reverse) x <- rev(x)
