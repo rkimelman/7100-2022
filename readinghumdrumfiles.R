@@ -27,6 +27,20 @@ summary(centCandyShopData)
 
 # seems that the functions interpretations and sections are not working for the rap datasets.
 
+segments <- function(x, reverse = FALSE) {
+  if (!is.logical(x)) x <- c(TRUE, head(x, -1L) != tail(x, -1L))
+  if (reverse) x <- rev(x)
+  
+  x <- cumsum(x)
+  
+  if (reverse) {
+    x <- rev(-x) + max(x) + 1
+  }
+  
+  x
+  
+}
+
 mcf <- readHumdrum('.*rap')
 spinePipe(mcf, 2:8, 1) -> mcf[rev(c('Stress', 'Tone', 'Break', 'Rhyme', 'IPA', 'Lyrics', 'Hype'))]
 
