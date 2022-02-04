@@ -1,20 +1,18 @@
 values <- c('Now', 'let', 'me', 'wel-', '-come', 'e-', '-very-', '-bo-', '-dy', 'to', 'the', 'wild', 'wild', 'west.')
 dummyData <- data.frame(values)
-text <- function(data, iteration){
+text <- function(data){
   save_initial_row <- 0
   save_word <- ""
   save_value <- c()
   iteration <- 1
   for (i in iteration:nrow(data)){
     splitString <- strsplit(data[i, 1], "")[[1]]
-    print(splitString)
     if(splitString[length(splitString)] == '-' ||  splitString[1] == '-'){
       if(splitString[length(splitString)] == '-' && splitString[1] != '-') {
         save_initial_row = i
         save_value <- append(save_value, splitString)
         splitStringBelow <- strsplit(data[i+1, 1], "")[[1]]
         save_value <- append(save_value, splitStringBelow)
-        print(splitStringBelow)
         if(splitStringBelow[length(splitStringBelow)] != '-'){
           save_value <- save_value[save_value != "-"]
           save_word <- paste(save_value, collapse = '')
@@ -43,6 +41,7 @@ text <- function(data, iteration){
     }
   return(data)
 }
+text(dummyData)
 values <- c("ya'll", 'act', 'like', "you've", 'ne-', 'ver', 'seen', 'a', 'white', 'per-', 'son', 'be-', 'fore')
 dummyData <- data.frame(values)
 silbeFormat <- function(data){
@@ -68,10 +67,10 @@ silbeFormat <- function(data){
   }
   else{
 #      print("error, improperly formatted **silbe:")
-      cat("error, improperly formatted **silbe:", save_initials[1][[1]], "should be", save_corrected[1][[1]])
+      return(cat("error, improperly formatted **silbe:", save_initials[1][[1]], "should be", save_corrected[1][[1]]))
       if(counter > 1){
         for(i in 2:counter){
-          cat(" and", save_initials[i][[1]], "should be", save_corrected[i][[1]])
+          return(cat(" and", save_initials[i][[1]], "should be", save_corrected[i][[1]]))
         }
       }
   }
