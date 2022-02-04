@@ -68,10 +68,10 @@ silbeFormat <- function(data){
   }
   else{
 #      print("error, improperly formatted **silbe:")
-      corrections <- cat("error, improperly formatted **silbe:", save_initials[1][[1]], "should be", save_corrected[1][[1]])
+      cat("error, improperly formatted **silbe:", save_initials[1][[1]], "should be", save_corrected[1][[1]])
       if(counter > 1){
         for(i in 2:counter){
-          corrections <- cat(corrections, c("and", save_initials[i][[1]], "should be", save_corrected[i][[1]]))
+          cat(" and", save_initials[i][[1]], "should be", save_corrected[i][[1]])
         }
       }
   }
