@@ -20,6 +20,63 @@ transpose1 <- t(dummyData)
 transpose2 <- t(transpose1)
 dummyData <- as.data.frame(transpose2)
 
+values <- c('Now', 'let', 'me', 'wel-', '-come', 'e-', '-very-', '-bo-', '-dy', 'to', 'the', 'wild', 'wild', 'west.')
+dummyData <- data.frame(values)
+dummyData <- toString(dummyData[,1])
+dummyData <- str_replace_all(dummyData, "-, -", "")
+dummyData <- str_replace_all(dummyData, ",", "")
+dummyData <- as.list(strsplit(dummyData, '\\s+')[[1]])
+transpose1 <- t(dummyData)
+transpose2 <- t(transpose1)
+dummyData <- as.data.frame(transpose2)
+
+wordAddSpace <- function(value){
+  if(substr(value,1,1) == "-"){
+    return(TRUE)
+  }
+  else{
+    return(FALSE)
+  }
+}
+replaceWithNullToken <- function(booleanValue){
+  if(booleanValue == TRUE){
+    return(".")
+  }
+  else{
+    return("word")
+  }
+}
+values <- c('Now', 'let', 'me', 'wel-', '-come', 'e-', '-very-', '-bo-', '-dy', 'to', 'the', 'wild', 'wild', 'west.')
+dummyData <- data.frame(values)
+save <- apply(dummyData, 1, function(x){wordAddSpace(x)})
+save <- as.data.frame(save)
+# go through and if true then add space below
+save2 <- apply(save, 1, function(x){replaceWithNullToken(x)})
+save2 <- as.data.frame(save2)
+saveWords <- text(dummyData, nullTokens = FALSE)
+
+finalData <- apply(save2, 1, function(x){replaceWord(x, saveWords, replaceWord(x, saveWords, ))})
+
+newFunction <- function(data, rowValue){
+  rowValueToString <- toString(rowValue)
+  data[rowValue,1] <- paste(data[rowValue,1], rowValueToString, sep = "")
+  return(data[rowValue,1])
+}
+replaceWord <- function(template, wordsInput){
+  if(grepl("word", template) == TRUE){
+    return(template)
+  }
+  else{
+    currentWord <- "."
+    iteration = iteration + 1
+  }
+  c(currentWord, iteration)
+}
+numbers <- 1:nrow(save2)
+numbers <- as.data.frame(numbers)
+saveNew <- apply(numbers, 1, function(x){newFunction(save2,x)})
+saveNew <- as.data.frame(saveNew)
+
 text <- function(data, nullTokens = TRUE){
   if(nullTokens == FALSE){
     data <- toString(data[,1])
