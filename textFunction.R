@@ -2,9 +2,20 @@ library(stringr)
 values <- c('Now', 'let', 'me', 'wel-', '-come', 'e-', '-very-', '-bo-', '-dy', 'to', 'the', 'wild', 'wild', 'west.')
 dummyData <- data.frame(values)
 dummyData <- toString(dummyData[,1])
-dummyData <- str_replace_all(dummyData, "-, -", "")
+dummyData <- str_replace_all(dummyData, "-, -", "-")
+word_count <- str_count(dummyData, '\\w+')
+locations_add_spaces <- str_locate_all(dummyData, "-")
+dummyDataList <- as.list(strsplit(dummyData, "")[[1]])
+# access each character in data
+save <- str_locate_all(dummyData, "-")
+# find locations of each - signifying there needs to be a token added beneath the word
+substr(dummyData, 1, 1)
+# word count also: lengths(gregexpr("\\W+", dummyData))
 dummyData <- str_replace_all(dummyData, ",", "")
 dummyData <- as.list(strsplit(dummyData, '\\s+')[[1]])
+dummyData <- str_replace_all(dummyData, "(\\b\\w)", ' \\1')
+
+
 transpose1 <- t(dummyData)
 transpose2 <- t(transpose1)
 dummyData <- as.data.frame(transpose2)
