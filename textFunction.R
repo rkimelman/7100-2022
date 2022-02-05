@@ -10,49 +10,59 @@ transpose2 <- t(transpose1)
 dummyData <- as.data.frame(transpose2)
 
 text <- function(data, nullTokens = TRUE){
-  save_initial_row <- 0
-  save_word <- ""
-  save_value <- c()
-  iteration <- 1
-  for (i in iteration:nrow(data)){
-    splitString <- strsplit(data[i, 1], "")[[1]]
-    if(splitString[length(splitString)] == '-' ||  splitString[1] == '-'){
-      if(splitString[length(splitString)] == '-' && splitString[1] != '-') {
-        save_initial_row = i
-        save_value <- append(save_value, splitString)
-        splitStringBelow <- strsplit(data[i+1, 1], "")[[1]]
-        save_value <- append(save_value, splitStringBelow)
-        if(splitStringBelow[length(splitStringBelow)] != '-'){
+  if(nullTokens == FALSE){
+    data <- toString(data[,1])
+    data <- str_replace_all(data, "-, -", "")
+    data <- str_replace_all(data, ",", "")
+    data <- as.list(strsplit(data, '\\s+')[[1]])
+    transpose1 <- t(data)
+    transpose2 <- t(transpose1)
+    data <- as.data.frame(transpose2)
+  }
+  else{
+    save_initial_row <- 0
+    save_word <- ""
+    save_value <- c()
+    iteration <- 1
+    for (i in iteration:nrow(data)){
+      splitString <- strsplit(data[i, 1], "")[[1]]
+      if(splitString[length(splitString)] == '-' ||  splitString[1] == '-'){
+        if(splitString[length(splitString)] == '-' && splitString[1] != '-') {
+          save_initial_row = i
+          save_value <- append(save_value, splitString)
+          splitStringBelow <- strsplit(data[i+1, 1], "")[[1]]
+          save_value <- append(save_value, splitStringBelow)
+          if(splitStringBelow[length(splitStringBelow)] != '-'){
+            save_value <- save_value[save_value != "-"]
+            save_word <- paste(save_value, collapse = '')
+            data[save_initial_row,] <- save_word
+            data[save_initial_row+1,] <- "."
+            iteration = i + 1
+            save_value <- c()
+          }
+          else{
+            iteration <- i+1
+          }
+        }
+        if(splitString[length(splitString)] == '-' &&  splitString[1] == '-'){
+            save_value <- append(save_value, strsplit(data[i+1, 1], "")[[1]])
+            data[i,] = "."
+        }
+        if(splitString[length(splitString)] != '-' && splitString[1] == '-') {
+          data[i,] = "."
           save_value <- save_value[save_value != "-"]
           save_word <- paste(save_value, collapse = '')
-          data[save_initial_row,] <- save_word
-          data[save_initial_row+1,] <- "."
+          data[save_initial_row,] = save_word
           iteration = i + 1
           save_value <- c()
         }
-        else{
-          iteration <- i+1
-        }
-      }
-      if(splitString[length(splitString)] == '-' &&  splitString[1] == '-'){
-          save_value <- append(save_value, strsplit(data[i+1, 1], "")[[1]])
-          data[i,] = "."
-      }
-      if(splitString[length(splitString)] != '-' && splitString[1] == '-') {
-        data[i,] = "."
-        save_value <- save_value[save_value != "-"]
-        save_word <- paste(save_value, collapse = '')
-        data[save_initial_row,] = save_word
-        iteration = i + 1
-        save_value <- c()
       }
     }
   }
-  if(nullTokens == FALSE){
-    data <- data[,1]
-  }
   return(data)
 }
+
+text(dummyData)
 
 textVectorized <- function(data, current_iteration, nullTokens = TRUE){
   splitString <- strsplit(data[current_iteration, 1], "")[[1]]
