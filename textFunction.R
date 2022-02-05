@@ -1,6 +1,10 @@
+library(stringr)
 values <- c('Now', 'let', 'me', 'wel-', '-come', 'e-', '-very-', '-bo-', '-dy', 'to', 'the', 'wild', 'wild', 'west.')
 dummyData <- data.frame(values)
-text <- function(data){
+dummyData <- toString(dummyData[,1])
+dummyData <- str_replace_all(dummyData, "-, -", "")
+
+text <- function(data, nullTokens = TRUE){
   save_initial_row <- 0
   save_word <- ""
   save_value <- c()
@@ -38,7 +42,46 @@ text <- function(data){
         save_value <- c()
       }
     }
+  }
+  if(nullTokens == FALSE){
+    data <- data[,1]
+  }
+  return(data)
+}
+
+textVectorized <- function(data, current_iteration, nullTokens = TRUE){
+  splitString <- strsplit(data[current_iteration, 1], "")[[1]]
+  if(splitString[length(splitString)] == '-' ||  splitString[1] == '-'){
+    if(splitString[length(splitString)] == '-' && splitString[1] != '-') {
+      save_initial_row = current_iteration
+      save_value <- append(save_value, splitString)
+      splitStringBelow <- strsplit(data[current_iteration+1, 1], "")[[1]]
+      save_value <- append(save_value, splitStringBelow)
+      if(splitStringBelow[length(splitStringBelow)] != '-'){
+        save_value <- save_value[save_value != "-"]
+        save_word <- paste(save_value, collapse = '')
+        data[save_initial_row,] <- save_word
+        data[save_initial_row+1,] <- "."
+        current_iteration = current_iteration + 1
+        save_value <- c()
+      }
+      else{
+        current_iteration <- current_iteration+1
+      }
     }
+    if(splitString[length(splitString)] == '-' &&  splitString[1] == '-'){
+      save_value <- append(save_value, strsplit(data[i+1, 1], "")[[1]])
+      data[i,] = "."
+    }
+    if(splitString[length(splitString)] != '-' && splitString[1] == '-') {
+      data[i,] = "."
+      save_value <- save_value[save_value != "-"]
+      save_word <- paste(save_value, collapse = '')
+      data[save_initial_row,] = save_word
+      iteration = i + 1
+      save_value <- c()
+    }
+  }
   return(data)
 }
 text(dummyData)
