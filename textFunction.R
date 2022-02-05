@@ -62,9 +62,13 @@ newFunction <- function(data, rowValue){
   data[rowValue,1] <- paste(data[rowValue,1], rowValueToString, sep = "")
   return(data[rowValue,1])
 }
+newFunction2 <- function(findRowValues, iteration){
+  getRowValueFinal <- sub("word*", "", findRowValues[iteration,1])
+  return(getRowValueFinal)
+}
 replaceWord <- function(template, wordsInput){
   if(grepl("word", template) == TRUE){
-    return(template)
+    return(template[])
   }
   else{
     currentWord <- "."
@@ -76,6 +80,12 @@ numbers <- 1:nrow(save2)
 numbers <- as.data.frame(numbers)
 saveNew <- apply(numbers, 1, function(x){newFunction(save2,x)})
 saveNew <- as.data.frame(saveNew)
+saveNew <- saveNew[!grepl(".", saveNew$saveNew, fixed = TRUE),]
+finalData <- numbers
+finalWordsLength <- 1:nrow(saveWords)
+finalWordsLength <- as.data.frame(finalWordsLength)
+saveNewDataFrame <- as.data.frame(saveNew)
+finalData <- apply(finalWordsLength, 1, function(x){newFunction2(saveNewDataFrame, x)})
 
 text <- function(data, nullTokens = TRUE){
   if(nullTokens == FALSE){
