@@ -3,6 +3,8 @@ values <- c('Now', 'let', 'me', 'wel-', '-come', 'e-', '-very-', '-bo-', '-dy', 
 dummyData <- data.frame(values)
 dummyData <- toString(dummyData[,1])
 dummyData <- str_replace_all(dummyData, "-, -", "")
+dummyData <- str_replace_all(dummyData, ",", "")
+dummyData <- as.list(strsplit(dummyData, '\\s+')[[1]])
 
 text <- function(data, nullTokens = TRUE){
   save_initial_row <- 0
