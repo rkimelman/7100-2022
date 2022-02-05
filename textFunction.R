@@ -5,6 +5,9 @@ dummyData <- toString(dummyData[,1])
 dummyData <- str_replace_all(dummyData, "-, -", "")
 dummyData <- str_replace_all(dummyData, ",", "")
 dummyData <- as.list(strsplit(dummyData, '\\s+')[[1]])
+transpose1 <- t(dummyData)
+transpose2 <- t(transpose1)
+dummyData <- as.data.frame(transpose2)
 
 text <- function(data, nullTokens = TRUE){
   save_initial_row <- 0
