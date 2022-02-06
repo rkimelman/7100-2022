@@ -46,6 +46,7 @@ replaceWithNullToken <- function(booleanValue){
     return("word")
   }
 }
+# Enclosed below is code that will create spine with words while replacing null tokens without loops
 values <- c('Now', 'let', 'me', 'wel-', '-come', 'e-', '-very-', '-bo-', '-dy', 'to', 'the', 'wild', 'wild', 'west.')
 dummyData <- data.frame(values)
 save <- apply(dummyData, 1, function(x){wordAddSpace(x)})
@@ -54,8 +55,6 @@ save <- as.data.frame(save)
 save2 <- apply(save, 1, function(x){replaceWithNullToken(x)})
 save2 <- as.data.frame(save2)
 saveWords <- text(dummyData, nullTokens = FALSE)
-
-finalData <- apply(save2, 1, function(x){replaceWord(x, saveWords, replaceWord(x, saveWords, ))})
 
 newFunction <- function(data, rowValue){
   rowValueToString <- toString(rowValue)
@@ -66,24 +65,6 @@ newFunction2 <- function(findRowValues, iteration){
   getRowValueFinal <- sub("word*", "", findRowValues[iteration,1])
   return(getRowValueFinal)
 }
-replaceWord <- function(template, wordsInput){
-  if(grepl("word", template) == TRUE){
-    return(template[])
-  }
-  else{
-    currentWord <- "."
-    iteration = iteration + 1
-  }
-  c(currentWord, iteration)
-}
-newFunction3 <- function(iterate, rowValueOfWord, dataOfWords, maxLength, newDataSet){
-  if(iterate != rowValueOfWord){
-    return(".")
-  }
-  newDataSet[rowValueOfWord, 1] <- dataOfWords[iterate, 1]
-  return(newDataSet)
-}
-dataScore <- 1
 newFunction4 <- function(iterate, final, wordsArray){
   iterateToString <- toString(iterate)
   if(iterateToString %in% final){
@@ -93,9 +74,6 @@ newFunction4 <- function(iterate, final, wordsArray){
     return(".")
   }
 }
-numbers2 <- 1:14
-numbers2 <- as.data.frame(numbers2)
-numbers2[finalData[5],1] <- saveWords[5,1]
 numbers <- 1:nrow(save2)
 numbers <- as.data.frame(numbers)
 saveNew <- apply(numbers, 1, function(x){newFunction(save2,x)})
@@ -106,10 +84,9 @@ finalWordsLength <- 1:nrow(saveWords)
 finalWordsLength <- as.data.frame(finalWordsLength)
 saveNewDataFrame <- as.data.frame(saveNew)
 finalData <- apply(finalWordsLength, 1, function(x){newFunction2(saveNewDataFrame, x)})
-finalDataComplete <- numbers
-data1 <- numbers
 finalDataComplete <- apply(numbers, 1, function(x){newFunction4(x, finalData, saveWords)})
 
+#------------------------------------------------------------------------------------------------
 text <- function(data, nullTokens = TRUE){
   if(nullTokens == FALSE){
     data <- toString(data[,1])
