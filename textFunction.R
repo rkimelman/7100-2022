@@ -30,6 +30,59 @@ transpose1 <- t(dummyData)
 transpose2 <- t(transpose1)
 dummyData <- as.data.frame(transpose2)
 
+# Enclosed below is code that will create spine with words while replacing null tokens without loops
+text <- function(data, nullTokens = TRUE){
+  if(nullTokens == FALSE){
+    data <- toString(data[,1])
+    data <- str_replace_all(data, "-, -", "")
+    data <- str_replace_all(data, ",", "")
+    data <- as.list(strsplit(data, '\\s+')[[1]])
+    transpose1 <- t(data)
+    transpose2 <- t(transpose1)
+    data <- as.data.frame(transpose2)
+  }
+  else{
+    save_initial_row <- 0
+    save_word <- ""
+    save_value <- c()
+    iteration <- 1
+    for (i in iteration:nrow(data)){
+      splitString <- strsplit(data[i, 1], "")[[1]]
+      if(splitString[length(splitString)] == '-' ||  splitString[1] == '-'){
+        if(splitString[length(splitString)] == '-' && splitString[1] != '-') {
+          save_initial_row = i
+          save_value <- append(save_value, splitString)
+          splitStringBelow <- strsplit(data[i+1, 1], "")[[1]]
+          save_value <- append(save_value, splitStringBelow)
+          if(splitStringBelow[length(splitStringBelow)] != '-'){
+            save_value <- save_value[save_value != "-"]
+            save_word <- paste(save_value, collapse = '')
+            data[save_initial_row,] <- save_word
+            data[save_initial_row+1,] <- "."
+            iteration = i + 1
+            save_value <- c()
+          }
+          else{
+            iteration <- i+1
+          }
+        }
+        if(splitString[length(splitString)] == '-' &&  splitString[1] == '-'){
+          save_value <- append(save_value, strsplit(data[i+1, 1], "")[[1]])
+          data[i,] = "."
+        }
+        if(splitString[length(splitString)] != '-' && splitString[1] == '-') {
+          data[i,] = "."
+          save_value <- save_value[save_value != "-"]
+          save_word <- paste(save_value, collapse = '')
+          data[save_initial_row,] = save_word
+          iteration = i + 1
+          save_value <- c()
+        }
+      }
+    }
+  }
+  return(data)
+}
 wordAddSpace <- function(value){
   if(substr(value,1,1) == "-"){
     return(TRUE)
@@ -46,7 +99,7 @@ replaceWithNullToken <- function(booleanValue){
     return("word")
   }
 }
-# Enclosed below is code that will create spine with words while replacing null tokens without loops
+
 values <- c('Now', 'let', 'me', 'wel-', '-come', 'e-', '-very-', '-bo-', '-dy', 'to', 'the', 'wild', 'wild', 'west.')
 dummyData <- data.frame(values)
 save <- apply(dummyData, 1, function(x){wordAddSpace(x)})
@@ -86,61 +139,8 @@ saveNewDataFrame <- as.data.frame(saveNew)
 finalData <- apply(finalWordsLength, 1, function(x){newFunction2(saveNewDataFrame, x)})
 finalDataComplete <- apply(numbers, 1, function(x){newFunction4(x, finalData, saveWords)})
 
-#------------------------------------------------------------------------------------------------
-text <- function(data, nullTokens = TRUE){
-  if(nullTokens == FALSE){
-    data <- toString(data[,1])
-    data <- str_replace_all(data, "-, -", "")
-    data <- str_replace_all(data, ",", "")
-    data <- as.list(strsplit(data, '\\s+')[[1]])
-    transpose1 <- t(data)
-    transpose2 <- t(transpose1)
-    data <- as.data.frame(transpose2)
-  }
-  else{
-    save_initial_row <- 0
-    save_word <- ""
-    save_value <- c()
-    iteration <- 1
-    for (i in iteration:nrow(data)){
-      splitString <- strsplit(data[i, 1], "")[[1]]
-      if(splitString[length(splitString)] == '-' ||  splitString[1] == '-'){
-        if(splitString[length(splitString)] == '-' && splitString[1] != '-') {
-          save_initial_row = i
-          save_value <- append(save_value, splitString)
-          splitStringBelow <- strsplit(data[i+1, 1], "")[[1]]
-          save_value <- append(save_value, splitStringBelow)
-          if(splitStringBelow[length(splitStringBelow)] != '-'){
-            save_value <- save_value[save_value != "-"]
-            save_word <- paste(save_value, collapse = '')
-            data[save_initial_row,] <- save_word
-            data[save_initial_row+1,] <- "."
-            iteration = i + 1
-            save_value <- c()
-          }
-          else{
-            iteration <- i+1
-          }
-        }
-        if(splitString[length(splitString)] == '-' &&  splitString[1] == '-'){
-            save_value <- append(save_value, strsplit(data[i+1, 1], "")[[1]])
-            data[i,] = "."
-        }
-        if(splitString[length(splitString)] != '-' && splitString[1] == '-') {
-          data[i,] = "."
-          save_value <- save_value[save_value != "-"]
-          save_word <- paste(save_value, collapse = '')
-          data[save_initial_row,] = save_word
-          iteration = i + 1
-          save_value <- c()
-        }
-      }
-    }
-  }
-  return(data)
-}
+#-----------------------------------------------------------------------------------------------
 
-text(dummyData)
 
 textVectorized <- function(data, current_iteration, nullTokens = TRUE){
   splitString <- strsplit(data[current_iteration, 1], "")[[1]]
