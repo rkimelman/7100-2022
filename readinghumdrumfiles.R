@@ -79,3 +79,10 @@ iteration <- as.data.frame(iteration)
 df <- rbind(rhymeSchemes)
 df <- as.data.frame(t(df))
 frequencyTables <- apply(iteration, 1, function(x){countFrequencies(df[x,])})
+
+recordInternalRhymes <- function(table){
+  
+}
+df2 <- as.data.frame(frequencyTables[[968]])
+determine <- which(df2$Freq > 1)
+internalRhymes <- df2$frequencyCount[determine]
