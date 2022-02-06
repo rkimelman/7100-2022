@@ -81,8 +81,16 @@ df <- as.data.frame(t(df))
 frequencyTables <- apply(iteration, 1, function(x){countFrequencies(df[x,])})
 
 recordInternalRhymes <- function(table){
-  
+  df <- as.data.frame(table)
+  determine <- which(df$frequencyTables.Freq > 1)
+  internalRhymes <- df$frequencyTables.frequencyCount[determine]
+  return(internalRhymes)
 }
+# test function
 df2 <- as.data.frame(frequencyTables[[968]])
 determine <- which(df2$Freq > 1)
 internalRhymes <- df2$frequencyCount[determine]
+# implement function
+frequencyTablesDataFrame <- rbind(frequencyTables)
+frequencyTablesDataFrame <- as.data.frame(frequencyTablesDataFrame)
+internalRhymesList <- apply(iteration, 1, function(x){recordInternalRhymes(frequencyTablesDataFrame[1,x])})
