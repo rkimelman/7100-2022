@@ -63,5 +63,8 @@ mcf$Token %hum>% c(~segments(Break %in% c('3', '4','5')), by ~ File) -> mcf$Phra
 
 mcf$Token %hum<% c(~list(paste(Lyrics, collapse = ' ')), by ~ File ~ Phrase)
 
-mcf$Token %hum<% c(~list(Rhyme), by ~ File ~ Phrase)
+rhymeSchemes <- mcf$Token %hum<% c(~list(Rhyme), by ~ File ~ Phrase)
 
+rhymeSchemes3 <- unlist(rhymeSchemes[[1000]])
+
+occurrences <- table(rhymeSchemes3)
