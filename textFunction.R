@@ -76,6 +76,26 @@ replaceWord <- function(template, wordsInput){
   }
   c(currentWord, iteration)
 }
+newFunction3 <- function(iterate, rowValueOfWord, dataOfWords, maxLength, newDataSet){
+  if(iterate != rowValueOfWord){
+    return(".")
+  }
+  newDataSet[rowValueOfWord, 1] <- dataOfWords[iterate, 1]
+  return(newDataSet)
+}
+dataScore <- 1
+newFunction4 <- function(iterate, final, wordsArray){
+  iterateToString <- toString(iterate)
+  if(iterateToString %in% final){
+    return(wordsArray[match(iterate,final),1])
+  }
+  else{
+    return(".")
+  }
+}
+numbers2 <- 1:14
+numbers2 <- as.data.frame(numbers2)
+numbers2[finalData[5],1] <- saveWords[5,1]
 numbers <- 1:nrow(save2)
 numbers <- as.data.frame(numbers)
 saveNew <- apply(numbers, 1, function(x){newFunction(save2,x)})
@@ -86,6 +106,9 @@ finalWordsLength <- 1:nrow(saveWords)
 finalWordsLength <- as.data.frame(finalWordsLength)
 saveNewDataFrame <- as.data.frame(saveNew)
 finalData <- apply(finalWordsLength, 1, function(x){newFunction2(saveNewDataFrame, x)})
+finalDataComplete <- numbers
+data1 <- numbers
+finalDataComplete <- apply(numbers, 1, function(x){newFunction4(x, finalData, saveWords)})
 
 text <- function(data, nullTokens = TRUE){
   if(nullTokens == FALSE){
