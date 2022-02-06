@@ -68,3 +68,14 @@ rhymeSchemes <- mcf$Token %hum<% c(~list(Rhyme), by ~ File ~ Phrase)
 rhymeSchemes3 <- unlist(rhymeSchemes[[1000]])
 
 occurrences <- table(rhymeSchemes3)
+
+countFrequencies <- function(element){
+  frequencyCount <- unlist(element)
+  frequencyCount <- table(frequencyCount)
+  return(frequencyCount)
+}
+iteration <- 1:length(rhymeSchemes)
+iteration <- as.data.frame(iteration)
+df <- rbind(rhymeSchemes)
+df <- as.data.frame(t(df))
+frequencyTables <- apply(iteration, 1, function(x){countFrequencies(df[x,])})
