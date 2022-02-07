@@ -74,23 +74,48 @@ countFrequencies <- function(element){
   frequencyCount <- table(frequencyCount)
   return(frequencyCount)
 }
-iteration <- 1:length(rhymeSchemes)
-iteration <- as.data.frame(iteration)
-df <- rbind(rhymeSchemes)
-df <- as.data.frame(t(df))
-frequencyTables <- apply(iteration, 1, function(x){countFrequencies(df[x,])})
 
-recordInternalRhymes <- function(table){
-  df <- as.data.frame(table)
-  determine <- which(df$frequencyTables.Freq > 1)
-  internalRhymes <- df$frequencyTables.frequencyCount[determine]
+recordMoreThanOneInstance <- function(table){
+  saveList <- unlist(table)
+  saveList <- as.data.frame(saveList)
+  saveList <- t(saveList)
+  determine <- which(saveList > 1)
+  saveList <- as.data.frame(saveList)
+  internalRhymes <- saveList[determine]
   return(internalRhymes)
+}
+recordFreqDifference <- function(table){
+  # record frequency difference between non rhyming words and the most frequent internal rhyme
+  # df <- as.data.frame(table)
+  nonRhymingWordFrequencyRowIndex <- which(table$frequencyTables.frequencyCount == ".")
+  nonRhymingWordFrequency <- table[nonRhymingWordFrequencyRowIndex,]$frequencyTables.Freq
+  vector <- which(table$frequencyTables.frequencyCount != ".")
+  maxInternalRhymeIndex <- max(vector)
+  maxInternalRhymeVector <- table[maxInternalRhymeIndex,]$frequencyTables.Freq
+  maxInternalRhyme <- max(maxInternalRhymeVector)
+  difference <- nonRhymingWordFrequency - maxInternalRhyme
+  return(difference)
 }
 # test function
 df2 <- as.data.frame(frequencyTables[[968]])
 determine <- which(df2$Freq > 1)
 internalRhymes <- df2$frequencyCount[determine]
-# implement function
-frequencyTablesDataFrame <- rbind(frequencyTables)
-frequencyTablesDataFrame <- as.data.frame(frequencyTablesDataFrame)
-internalRhymesList <- apply(iteration, 1, function(x){recordInternalRhymes(frequencyTablesDataFrame[1,x])})
+# implement functions
+rhymeSchemes <- mcf$Token %hum<% c(~list(Rhyme), by ~ File ~ Phrase)
+iteration <- 1:length(rhymeSchemes)
+iteration <- as.data.frame(iteration)
+df <- rbind(rhymeSchemes)
+df <- as.data.frame(t(df))
+frequencyTables <- apply(iteration, 1, function(x){countFrequencies(df[x,1])})
+frequencyTablesDataFrame <- cbind(frequencyTables)
+# frequencyTablesDataFrame <- as.data.frame(frequencyTablesDataFrame)
+internalRhymesList <- apply(iteration, 1, function(x){recordMoreThanOneInstance(frequencyTablesDataFrame[x][1])})
+internalRhymesListDataFrame <- rbind(internalRhymesList)
+internalRhymesListDataFrame <- as.data.frame(internalRhymesListDataFrame)
+# internalRhymesListDataFrame <- t(internalRhymesListDataFrame)
+findMaxDifference <- apply(iteration, 1, function(x){recordFreqDifference(internalRhymesListDataFrame[1,x]$internalRhymesList)})
+findMaxDifference <- findMaxDifference[!is.na(findMaxDifference)]
+maxDifference <- max(unlist(findMaxDifference))
+findMaxDifference <- apply(iteration, 1, function(x){recordFreqDifference(internalRhymesListDataFrame[1,x]$internalRhymesList)})
+tableWithMaxDifference <- which(findMaxDifference == maxDifference)
+findTableWithMaxDifference <- frequencyTables[tableWithMaxDifference]
