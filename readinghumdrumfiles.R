@@ -84,6 +84,12 @@ recordMoreThanOneInstance <- function(table){
   internalRhymes <- saveList[determine]
   return(internalRhymes)
 }
+# 1. look for most common number of internal rhymes in each line
+# 2. look to see if most occur in the first or second half of the line for example - is there a difference in perception there?
+# 3. is it easier to perceive an internal rhyme with the rhymes sort of far apart if the song were to be rehearsed such that the line was broken up into two lines and the rhymes
+#    occurred at the end of each line?
+# 4. look at likelihood of internal rhymes in a similar way as nat's theory with phonemes -- is an internal rhyme more likely to be perceived as a rhyme if it is an internal rhyme
+#    structure that is not seen very often in rap music?
 recordFreqDifference <- function(table){
   # record frequency difference between non rhyming words and the most frequent internal rhyme
   # df <- as.data.frame(table)
