@@ -96,7 +96,10 @@ recordMoreThanOneInstance <- function(table){
 # 5. Is a rhyme perceived if the artist puts intonation on the end word of a line and the first word on the next line technically rhymes with that word but they 
 #    say it in a "normal" talking voice. What if they put intonation on the first word, it rhymes with the last word but there's no intonation on it.
 # 6. Compare rhymes in a normal talking voice and rapping voice.
-# 7. What is largest difference between # of non-rhyming words and the max # of internal rhymes in any given line? In function below.
+# 7. What is largest difference between # of non-rhyming words and the max # of internal rhymes in any given line? How often can person detect the rhyme there? Maybe the person's
+#    level of attention decreases as the line moves forward and then an internal rhyme doesn't catch their attention - or maybe the opposite. In function below.
+#    Can also look at how the distance between two internal rhyming words interacts with the number of non-rhyming words occurring before the first instance of an internal rhyming word
+#    since there has been so much time passing without a rhyme.
 # 8. Does perception of rhyme differ when you flip the order of a double internal rhyme? I.e. is ab ab perceived the same or in a similar way as ba ab. I.e. inverse. Same for jJj and JjJ?
 
 recordFreqDifference <- function(table){
