@@ -91,6 +91,10 @@ recordMoreThanOneInstance <- function(table){
 #    scheme/event?
 # 3. is it easier to perceive an internal rhyme with the rhymes sort of far apart if the song were to be rehearsed such that the line was broken up into two lines and the rhymes
 #    occurred at the end of each line?
+#    keep diving into it more. naming these things.
+#   initial experiment - internal rhyme. When do you notice an internal rhyme. bring in statistical thing. 1. Computational  - doing analyses (improving or
+#   expanding MCFlow. Start writing abstract. Collab on overleaf. Two challenges - what are the stimuli? Other - what is the task? Both EEG and behavioral.
+#   first 2 hypotheses - likelihood of rhyme and perception of it. can manipulate where we put it. 
 # 4. look at likelihood of internal rhymes in a similar way as nat's theory with phonemes -- is an internal rhyme more likely to be perceived as a rhyme if it is an internal rhyme
 #    structure that is not seen very often in rap music?
 # 5. Is a rhyme perceived if the artist puts intonation on the end word of a line and the first word on the next line technically rhymes with that word but they 
