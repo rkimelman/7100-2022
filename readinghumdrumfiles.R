@@ -85,11 +85,20 @@ recordMoreThanOneInstance <- function(table){
   return(internalRhymes)
 }
 # 1. look for most common number of internal rhymes in each line
-# 2. look to see if most occur in the first or second half of the line for example - is there a difference in perception there?
+# 2. look to see if most occur in the first or second half of the line for example - is there a difference in perception there? Maybe the longer an artist goes without rhyming,
+#    the more likely you are to catch the internal rhyme, or there is a greater reaction (brain or implicit reaction). Theory is that if internal rhyme occurs earlier in the line
+#    the listener is not ready for it and it cannot be processed fully because the person has not completely focused in on the audio. Each line sort of starts a new processing
+#    scheme/event?
 # 3. is it easier to perceive an internal rhyme with the rhymes sort of far apart if the song were to be rehearsed such that the line was broken up into two lines and the rhymes
 #    occurred at the end of each line?
 # 4. look at likelihood of internal rhymes in a similar way as nat's theory with phonemes -- is an internal rhyme more likely to be perceived as a rhyme if it is an internal rhyme
 #    structure that is not seen very often in rap music?
+# 5. Is a rhyme perceived if the artist puts intonation on the end word of a line and the first word on the next line technically rhymes with that word but they 
+#    say it in a "normal" talking voice. What if they put intonation on the first word, it rhymes with the last word but there's no intonation on it.
+# 6. Compare rhymes in a normal talking voice and rapping voice.
+# 7. What is largest difference between # of non-rhyming words and the max # of internal rhymes in any given line? In function below.
+# 8. Does perception of rhyme differ when you flip the order of a double internal rhyme? I.e. is ab ab perceived the same or in a similar way as ba ab. I.e. inverse. Same for jJj and JjJ?
+
 recordFreqDifference <- function(table){
   # record frequency difference between non rhyming words and the most frequent internal rhyme
   # df <- as.data.frame(table)
