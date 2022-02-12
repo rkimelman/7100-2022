@@ -8,19 +8,22 @@
 #' functions for creating quick summaries of \code{\linkS4class{humdrumR}}
 #' corpora:
 #' \describe{
-#' \item{\link[humdrumR:humCensus]{census}}{Tabulates the raw size of the humdrumR corpus. An example of such output is below (taken from MCFlow corpus):
-#'        Token Census:
-#' 
-#' ###### humdrumR census of GLIMDd records in object object (124 Filenames)
-#' ###### Totals:
-#'                                  Records    Tokens (unique)   Characters (per token)
-#'                                   82,643   646,744 (13,177)    1,178,769      (1.82)}
+#' \item{\link[humdrumR:humCensus]{census}}{Tabulates the raw size of the humdrumR corpus. An example of the first item of such output is below (taken from MCFlow corpus):
+#' ###### humdrumR census of GLIMDd records in mcf object (124 Filenames)
+###### By Filename :
+#'                                 Records    Tokens  (unique)  Characters (per token)
+#' 2pac_CaliforniaLove.rap [  1]       491      3802    (592)         7514      (1.98)
+#' ...                                 ...       ...      ...          ...         ...
 #' \item{\link[humdrumR:humReference]{reference}}{Tabulates reference records (metadata) for each file. An example of the first item of such output is below (taken from MCFlow corpus):
-#' Filename                OTL             RTL            RRD        RRM       RC#    BPP BPD        COC  COL           COM                                     CDT                                         ENC                      EED                      RDT
-#' 2pac_CaliforniaLove.rap California Love All Eyez on Me 1995/12/28 Death Row 854652 6   1996/06/22 2Pac Dr. Dre; 2Pac Andre Romelle Young; Tupac Amaru Shakur 1965/02/18->2016/01/; 1971/06/16-1996/09/13 Nathaniel Condit-Schultz Nathaniel Condit-Schultz 2014/-2016/
+#' File Filename                OTL             RTL            RRD        RRM       RC#    BPP BPD        COC  COL           COM                                     CDT                                         ENC                      EED                      RDT
+#' 1    2pac_CaliforniaLove.rap California Love All Eyez on Me 1995/12/28 Death Row 854652 6   1996/06/22 2Pac Dr. Dre; 2Pac Andre Romelle Young; Tupac Amaru Shakur 1965/02/18->2016/01/; 1971/06/16-1996/09/13 Nathaniel Condit-Schultz Nathaniel Condit-Schultz 2014/-2016/
 #' ...                     ...             ...            ...        ...       ...    ... ...        ...  ...           ...                                     ...                                         ...                      ...                      ... 
 #' }
-#' \item{\link[humdrumR:humPaths]{spines}}{Tabulates the number of spines and spine paths in files in the corpus. An example of such output is below (taken from MCFlow corpus):
+#' \item{\link[humdrumR:humPaths]{spines}}{Tabulates the number of spines and spine paths in files in the corpus. An example of the first item of such output is below 
+#' (taken from MCFlow corpus):
+#' File Filename                Spines Columns Splits Slices Where
+#' 1    2pac_CaliforniaLove.rap 8      8       0      0      c(0, 0, 0, 0, 0, 0, 0, 0)
+#' ...  ...                     ...    ...     ...    ...    ...
 #' }
 #' \item{\link[humdrumR:humInterpretations]{interpretations}}{Tabulates the types of exclusive and tandem interpretations in the corpus. An example of such output is below
 #' (taken from MCFlow corpus):
@@ -29,6 +32,17 @@
 #' }
 #' \item{summary}{Calls all of the above functions, and prints
 #' a condensed version of each.}
+#'                 Summary of humdrumR object
+#'         Token Census:
+#' 
+#' ###### humdrumR census of GLIMDd records in object object (124 Filenames)
+#' ###### Totals:
+#'                                  Records    Tokens (unique)   Characters (per token)
+#'                                   82,643   646,744 (13,177)    1,178,769      (1.82)
+#'         Reference Records:
+#'         ...
+#'         ...
+#'         ...
 #' }
 #' Each function takes a \code{\linkS4class{humdrumR}} object and returns a
 #' special class of data.table.
