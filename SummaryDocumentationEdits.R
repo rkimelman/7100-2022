@@ -8,17 +8,25 @@
 #' functions for creating quick summaries of \code{\linkS4class{humdrumR}}
 #' corpora:
 #' \describe{
-#' \item{\link[humdrumR:humCensus]{census}}{Tabulates the raw size of the humdrumR corpus. An example of such output is as follows (taken from MCFlow corpus):
+#' \item{\link[humdrumR:humCensus]{census}}{Tabulates the raw size of the humdrumR corpus. An example of such output is below (taken from MCFlow corpus):
 #'        Token Census:
 #' 
 #' ###### humdrumR census of GLIMDd records in object object (124 Filenames)
 #' ###### Totals:
 #'                                  Records    Tokens (unique)   Characters (per token)
 #'                                   82,643   646,744 (13,177)    1,178,769      (1.82)}
-#' \item{\link[humdrumR:humReference]{reference}}{Tabulates reference records (metadata) for each file.}
-#' \item{\link[humdrumR:humPaths]{spines}}{Tabulates the number of spines and spine paths in files in the corpus.}
-#' \item{\link[humdrumR:humInterpretations]{interpretations}}{Tabulates the types of exclusive and tandem interpretations in the corpus.}
-#' \item{\link[humdrumR:humSections]{sections}}{Tabulates any formal data (\code{"*>"}) in the corpus.}
+#' \item{\link[humdrumR:humReference]{reference}}{Tabulates reference records (metadata) for each file. An example of the first item of such output is below (taken from MCFlow corpus):
+#' Filename                OTL             RTL            RRD        RRM       RC#    BPP BPD        COC  COL           COM                                     CDT                                         ENC                      EED                      RDT
+#' 2pac_CaliforniaLove.rap California Love All Eyez on Me 1995/12/28 Death Row 854652 6   1996/06/22 2Pac Dr. Dre; 2Pac Andre Romelle Young; Tupac Amaru Shakur 1965/02/18->2016/01/; 1971/06/16-1996/09/13 Nathaniel Condit-Schultz Nathaniel Condit-Schultz 2014/-2016/
+#' ...                     ...             ...            ...        ...       ...    ... ...        ...  ...           ...                                     ...                                         ...                      ...                      ... 
+#' }
+#' \item{\link[humdrumR:humPaths]{spines}}{Tabulates the number of spines and spine paths in files in the corpus. An example of such output is below (taken from MCFlow corpus):
+#' }
+#' \item{\link[humdrumR:humInterpretations]{interpretations}}{Tabulates the types of exclusive and tandem interpretations in the corpus. An example of such output is below
+#' (taken from MCFlow corpus):
+#' }
+#' \item{\link[humdrumR:humSections]{sections}}{Tabulates any formal data (\code{"*>"}) in the corpus. An example of such output is below (taken from MCFlow corpus):
+#' }
 #' \item{summary}{Calls all of the above functions, and prints
 #' a condensed version of each.}
 #' }
