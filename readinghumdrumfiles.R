@@ -143,3 +143,13 @@ maxDifference <- max(unlist(findMaxDifference))
 findMaxDifference <- apply(iteration, 1, function(x){recordFreqDifference(internalRhymesListDataFrame[1,x]$internalRhymesList)})
 tableWithMaxDifference <- which(findMaxDifference == maxDifference)
 findTableWithMaxDifference <- frequencyTables[tableWithMaxDifference]
+
+# test summary functions again
+library(humdrumR)
+mcf <- readHumdrum('.*rap')
+census(mcf)
+reference(mcf)
+spines(mcf)
+interpretations(mcf)
+sections(mcf)
+summary(mcf)
