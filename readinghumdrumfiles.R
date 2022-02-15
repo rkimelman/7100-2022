@@ -145,9 +145,8 @@ internalRhymesListDataFrame <- as.data.frame(internalRhymesListDataFrame)
 save <- apply(iteration, 1, function(x){as.data.frame(internalRhymesListDataFrame[1,x])})
 # internalRhymesListDataFrame <- t(internalRhymesListDataFrame)
 findMaxDifference <- apply(iteration, 1, function(x){recordFreqDifference(internalRhymesListDataFrame[1,x])})
-findMaxDifference <- findMaxDifference[!is.na(findMaxDifference)]
-maxDifference <- max(unlist(findMaxDifference))
-findMaxDifference <- apply(iteration, 1, function(x){recordFreqDifference(internalRhymesListDataFrame[1,x]$internalRhymesList)})
+maxDifference <- max(findMaxDifference)
+# findMaxDifference <- apply(iteration, 1, function(x){recordFreqDifference(internalRhymesListDataFrame[1,x]$internalRhymesList)})
 tableWithMaxDifference <- which(findMaxDifference == maxDifference)
 findTableWithMaxDifference <- frequencyTables[tableWithMaxDifference]
 
