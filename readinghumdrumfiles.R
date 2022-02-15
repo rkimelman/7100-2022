@@ -162,12 +162,41 @@ findTableWithMaxDifference <- frequencyTables[tableWithMaxDifference]
 
 # largest distance between two internal rhymes
 
-rowRhymeSchemes <- cbind(rhymeSchemes)
+
 save <- rowRhymeSchemes[5,]$rhymeSchemes
 indicesOfLetters <- which(save != ".")
 letters <- save[indicesOfLetters]
+
+# gsub("\\s*\\([^\\)]","s",as.character(rowRhymeSchemes[5,]$rhymeSchemes))
+# gsub("\\s*\\)","t",as.character(rowRhymeSchemes[5,]$rhymeSchemes))
+save2 <- replaceWithRepeating(rowRhymeSchemes[5,]$rhymeSchemes)
+indices <- grep("bt", save2)
+
+# function
+rowRhymeSchemes <- cbind(rhymeSchemes)
+replaceWithRepeating <- function(string){
+  save <- gsub("\\s*\\([^\\)]","s",as.character(string))
+  save <- gsub("\\s*\\)","t",as.character(save))
+  # this allows R to read these as repeating rhymes
+  return(save)
+}
+getIndices <- function(pattern1, wholeString){
+  return(grep(pattern1, wholeString))
+}
+getIndicesOfLetters <- function(string){
+  if(length(string)<1){
+    return(0)
+  }
+  else{
+    return(which(string != "."))
+  }
+}
 iteration <- 1:length(indicesOfLetters)
+iterationForRhymes <- 1:length(rhymeSchemes)
+iterationForRhymes <- cbind(iterationForRhymes)
+letters <- apply(iterationForRhymes, 1, function(x){getIndicesOfLetters(rowRhymeSchemes[x,]$rhymeSchemes)})
+letters <- cbind(letters)
+getPatterns <- apply(iterationForRhymes, 1, function(x){return(rowRhymeSchemes[x,]$rhymeSchemes[letters[x,]$letters])}) 
+getIndicesPrint <- apply(iterationForRhymes, 1, function(x){getIndices(rowRhymeSchemes[x,]$rhymeSchemes)})
 printDistance <- apply(iteration, 1, function(x){grep(save[x], rowRhymeSchemes[5,]$rhymeSchemes)})
-gsub("\\s*\\([^\\)]","s",as.character(rowRhymeSchemes[5,]$rhymeSchemes))
-gsub("\\s*\\)","t",as.character(rowRhymeSchemes[5,]$rhymeSchemes))
-indices <- grep("A", rowRhymeSchemes[5,]$rhymeSchemes)
+
