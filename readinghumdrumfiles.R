@@ -159,3 +159,15 @@ findTableWithMaxDifference <- frequencyTables[tableWithMaxDifference]
 # interpretations(mcf)
 # sections(mcf)
 # summary(mcf)
+
+# largest distance between two internal rhymes
+
+rowRhymeSchemes <- cbind(rhymeSchemes)
+save <- rowRhymeSchemes[5,]$rhymeSchemes
+indicesOfLetters <- which(save != ".")
+letters <- save[indicesOfLetters]
+iteration <- 1:length(indicesOfLetters)
+printDistance <- apply(iteration, 1, function(x){grep(save[x], rowRhymeSchemes[5,]$rhymeSchemes)})
+gsub("\\s*\\([^\\)]","s",as.character(rowRhymeSchemes[5,]$rhymeSchemes))
+gsub("\\s*\\)","t",as.character(rowRhymeSchemes[5,]$rhymeSchemes))
+indices <- grep("A", rowRhymeSchemes[5,]$rhymeSchemes)
