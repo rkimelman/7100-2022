@@ -1,44 +1,44 @@
 library(humdrumR)
-pacCaliLoveData <- readHumdrum("2pac_CaliforniaLove.rap")
-pacHowDoUWantItData <- readHumdrum("2pac_HowDoUWantIt.rap")
-census(pacCaliLoveData)
-reference(pacCaliLoveData)
-spines(pacCaliLoveData)
-interpretations(pacCaliLoveData)
-# error - object 'exclusive' not found
-sections(pacCaliLoveData)
-# error - could not find function 'sections'
-summary(pacCaliLoveData)
-# error - code stops at interpretations
-interpretations(pacHowDoUWantItData)
-# error
-sections(pacHowDoUWantItData)
-# error
-summary(pacHowDoUWantItData)
-# error - code stops at interpretations
+# pacCaliLoveData <- readHumdrum("2pac_CaliforniaLove.rap")
+# pacHowDoUWantItData <- readHumdrum("2pac_HowDoUWantIt.rap")
+# census(pacCaliLoveData)
+# reference(pacCaliLoveData)
+# spines(pacCaliLoveData)
+# interpretations(pacCaliLoveData)
+# # error - object 'exclusive' not found
+# sections(pacCaliLoveData)
+# # error - could not find function 'sections'
+# summary(pacCaliLoveData)
+# # error - code stops at interpretations
+# interpretations(pacHowDoUWantItData)
+# # error
+# sections(pacHowDoUWantItData)
+# # error
+# summary(pacHowDoUWantItData)
+# # error - code stops at interpretations
+# 
+# centCandyShopData <- readHumdrum("50Cent_CandyShop.rap")
+# census(centCandyShopData)
+# reference(centCandyShopData)
+# spines(centCandyShopData)
+# interpretations(centCandyShopData)
+# sections(centCandyShopData)
+# summary(centCandyShopData)
+# 
+# # seems that the functions interpretations and sections are not working for the rap datasets.
+# 
+# rapData <- readHumdrum('.*rap')
+# 
+# census(rapData)
+# reference(rapData)
+# spines(rapData)
+# interpretations(rapData)
+# sections(rapData)
+# summary(rapData)
+# 
+# filterhumdrum(rapData)
 
-centCandyShopData <- readHumdrum("50Cent_CandyShop.rap")
-census(centCandyShopData)
-reference(centCandyShopData)
-spines(centCandyShopData)
-interpretations(centCandyShopData)
-sections(centCandyShopData)
-summary(centCandyShopData)
-
-# seems that the functions interpretations and sections are not working for the rap datasets.
-
-rapData <- readHumdrum('.*rap')
-
-census(rapData)
-reference(rapData)
-spines(rapData)
-interpretations(rapData)
-sections(rapData)
-summary(rapData)
-
-filterhumdrum(rapData)
-
-rapData[2]
+# rapData[2]
 
 library(humdrumR)
 
@@ -109,15 +109,21 @@ recordMoreThanOneInstance <- function(table){
 # 8. Does perception of rhyme differ when you flip the order of a double internal rhyme? I.e. is ab ab perceived the same or in a similar way as ba ab. I.e. inverse. Same for jJj and JjJ?
 
 recordFreqDifference <- function(table){
+  if(NCOL(table$internalRhymesList) == 0){
+    return(0)
+  }
   # record frequency difference between non rhyming words and the most frequent internal rhyme
-  # df <- as.data.frame(table)
-  nonRhymingWordFrequencyRowIndex <- which(table$frequencyTables.frequencyCount == ".")
-  nonRhymingWordFrequency <- table[nonRhymingWordFrequencyRowIndex,]$frequencyTables.Freq
-  vector <- which(table$frequencyTables.frequencyCount != ".")
-  maxInternalRhymeIndex <- max(vector)
-  maxInternalRhymeVector <- table[maxInternalRhymeIndex,]$frequencyTables.Freq
-  maxInternalRhyme <- max(maxInternalRhymeVector)
-  difference <- nonRhymingWordFrequency - maxInternalRhyme
+  df <- as.data.frame(table)
+  nonRhymingWordFrequency <- df[,1]
+  vector <- which(colnames(table$internalRhymesList) != ".")
+  if(length(vector) >= 1){
+    maxInternalRhyme <- max(table$internalRhymesList[,vector])
+    maxInternalRhymeIndex <- which(table$internalRhymesList == maxInternalRhyme)
+    difference <- nonRhymingWordFrequency - maxInternalRhyme
+  }
+  else{
+    return(0)
+  }
   return(difference)
 }
 # test function
@@ -127,7 +133,7 @@ internalRhymes <- df2$frequencyCount[determine]
 # implement functions
 rhymeSchemes <- mcf$Token %hum<% c(~list(Rhyme), by ~ File ~ Phrase)
 iteration <- 1:length(rhymeSchemes)
-iteration <- as.data.frame(iteration)
+iteration <- cbind(iteration)
 df <- rbind(rhymeSchemes)
 df <- as.data.frame(t(df))
 frequencyTables <- apply(iteration, 1, function(x){countFrequencies(df[x,1])})
@@ -136,8 +142,9 @@ frequencyTablesDataFrame <- cbind(frequencyTables)
 internalRhymesList <- apply(iteration, 1, function(x){recordMoreThanOneInstance(frequencyTablesDataFrame[x][1])})
 internalRhymesListDataFrame <- rbind(internalRhymesList)
 internalRhymesListDataFrame <- as.data.frame(internalRhymesListDataFrame)
+save <- apply(iteration, 1, function(x){as.data.frame(internalRhymesListDataFrame[1,x])})
 # internalRhymesListDataFrame <- t(internalRhymesListDataFrame)
-findMaxDifference <- apply(iteration, 1, function(x){recordFreqDifference(internalRhymesListDataFrame[1,x]$internalRhymesList)})
+findMaxDifference <- apply(iteration, 1, function(x){recordFreqDifference(internalRhymesListDataFrame[1,x])})
 findMaxDifference <- findMaxDifference[!is.na(findMaxDifference)]
 maxDifference <- max(unlist(findMaxDifference))
 findMaxDifference <- apply(iteration, 1, function(x){recordFreqDifference(internalRhymesListDataFrame[1,x]$internalRhymesList)})
@@ -145,11 +152,11 @@ tableWithMaxDifference <- which(findMaxDifference == maxDifference)
 findTableWithMaxDifference <- frequencyTables[tableWithMaxDifference]
 
 # test summary functions again
-library(humdrumR)
-mcf <- readHumdrum('.*rap')
-census(mcf)
-reference(mcf)
-spines(mcf)
-interpretations(mcf)
-sections(mcf)
-summary(mcf)
+# library(humdrumR)
+# mcf <- readHumdrum('.*rap')
+# census(mcf)
+# reference(mcf)
+# spines(mcf)
+# interpretations(mcf)
+# sections(mcf)
+# summary(mcf)
