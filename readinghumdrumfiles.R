@@ -205,16 +205,40 @@ replaceWithRepeating <- function(string){
   return(save)
 }
 getIndices <- function(pattern1, wholeString){
-  if(length(pattern1) > 0){
+  if(length(pattern1) >= 1){
     iteration <- 1:length(pattern1)
     iteration <- cbind(iteration)
-    save <- apply(iteration, 1, function(x){ grep(pattern1[x], wholeString)})
-    print(1)
-    return(save)
+    save11 <- apply(iteration, 1, function(x){ 
+      if(grepl("\\(", pattern1[x]) == TRUE){
+        pattern1[x] <- paste(pattern1[x], ")", sep = "")
+      }
+      if(grepl("\\[", pattern1[x]) == TRUE){
+        pattern1[x] <- paste(pattern1[x], "]", sep = "")
+      }
+      return(grep(pattern1[x], wholeString))
+      # if(length(grep(pattern1[x], wholeString)) > 1){
+      #   return(TRUE)
+      # }
+      # else{
+      #   return(FALSE)
+      # }
+    }
+    
+    )
   }
   else{
-    return(-1)
+    return(0)
   }
+  # if(length(pattern1) > 0){
+  #   iteration <- 1:length(pattern1)
+  #   iteration <- cbind(iteration)
+  #   save <- apply(iteration, 1, function(x){ grep(pattern1[x], wholeString)})
+  #   print(1)
+  #   return(save)
+  # }
+  # else{
+  #   return(-1)
+  # }
 }
 getIndicesOfLetters <- function(string){
   if(length(string)<1){
@@ -291,6 +315,16 @@ library(tidyr)
 checkIfInternalRhymePrint5[is.na(checkIfInternalRhymePrint2)] <- FALSE
 indices <- which(checkIfInternalRhymePrint5 == TRUE)
 internalRhymesFinal <- rhymeSchemes[indices]
+uniqchars <- function(x) unique(strsplit(x, "")[[1]]) 
+iteration <- 1:length(internalRhymesFinal)
+iteration <- cbind(iteration)
+findUniqueChars <- apply(iteration, 1, function(x){uniqchars(internalRhymesFinal[[x]])})
+saveDifferences <- apply(iteration, 1, function(x){getIndices(replaceWithRepeatingPrint[[x]], renameRhymeSchemes[[x]])})
+findDifference <- function(vector1){
+  return(diff(range(vector1)))
+}
+saveDifferences2 <- lapply(iteration, function(x){findDifference(saveDifferences[[x]])})
+maxDifference <- 
 # getIndicesPrint <- apply(iterationForRhymes, 1, function(x){getIndices(convertToVectors[[x]], renameRhymeSchemes[[x]])})
 # printDistance <- apply(iteration, 1, function(x){grep(rowRhymeSchemes[x], rowRhymeSchemes[5,]$rhymeSchemes)})
 
