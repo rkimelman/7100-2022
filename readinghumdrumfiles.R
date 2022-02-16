@@ -317,6 +317,13 @@ removeAmbiguousCharsFunc <- function(string){
   newString5 <- str_replace_all(newString4, "[ ]", "")
   return(newString5)
 }
+calcDifferences <- function(rhymeScheme, letters, index){
+  return(diff(grep(substr(letters, index, index), rhymeScheme)))
+}
+returnMax <- function(numberList){
+  numbers <- unlist(numberList)
+  return(max(numbers))
+}
 checkIfInternalRhymePrint2 <- nullToNA(checkIfInternalRhymePrint)
 library(tidyr)
 # checkIfInternalRhymePrint3 <- cbind(checkIfInternalRhymePrint2)
@@ -329,13 +336,19 @@ iteration <- 1:length(internalRhymesFinal)
 iteration <- cbind(iteration)
 findUniqueChars <- apply(iteration, 1, function(x){uniqchars(internalRhymesFinal[[x]])})
 removeAmbiguousChars <- apply(iteration, 1, function(x){removeAmbiguousCharsFunc(toString(findUniqueChars[[x]]))})
+lengthsOfLetters <- apply(iteration, 1, function(x){return(nchar(removeAmbiguousChars[[x]]))})
+saveDifferencesFinal <- apply(iteration, 1, function(x){calcDifferences(internalRhymesFinal[[x]], removeAmbiguousChars[[x]], lengthsOfLetters[x])})
+maxDistances <- apply(iteration, 1, function(x){returnMax(saveDifferencesFinal[[x]])})  
+findMaxFinal <- max(maxDistances)
+findIndexMaxFinal <- which(maxDistances == findMaxFinal)
+maxInternalRhymeDifference <- internalRhymesFinal[[findIndexMaxFinal]]
 iteration <- 1:length(replaceWithRepeatingPrint)
 iteration <- cbind(iteration)
 saveDifferences <- apply(iteration, 1, function(x){getIndices(replaceWithRepeatingPrint[[x]], renameRhymeSchemes[[x]])})
-findDifference <- function(vector1){
-  return(diff(range(vector1)))
-}
-saveDifferences2 <- lapply(iteration, function(x){findDifference(saveDifferences[[x]])})
-maxDifference <- 
+# findDifference <- function(vector1){
+#   return(diff(range(vector1)))
+# }
+# saveDifferences2 <- lapply(iteration, function(x){findDifference(saveDifferences[[x]])})
+# maxDifference <- 
 # getIndicesPrint <- apply(iterationForRhymes, 1, function(x){getIndices(convertToVectors[[x]], renameRhymeSchemes[[x]])})
 # printDistance <- apply(iteration, 1, function(x){grep(rowRhymeSchemes[x], rowRhymeSchemes[5,]$rhymeSchemes)})
