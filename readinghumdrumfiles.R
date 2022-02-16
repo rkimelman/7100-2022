@@ -173,6 +173,29 @@ save2 <- replaceWithRepeating(rowRhymeSchemes[5,]$rhymeSchemes)
 indices <- grep("bt", save2)
 
 # function
+library(humdrumR)
+mcf <- readHumdrum('.*rap')
+spinePipe(mcf, 2:8, 1) -> mcf[rev(c('Stress', 'Tone', 'Break', 'Rhyme', 'IPA', 'Lyrics', 'Hype'))]
+
+segments <- function(x, reverse = FALSE) {
+  if (!is.logical(x)) x <- c(TRUE, head(x, -1L) != tail(x, -1L))
+  if (reverse) x <- rev(x)
+  
+  x <- cumsum(x)
+  
+  if (reverse) {
+    x <- rev(-x) + max(x) + 1
+  }
+  
+  x
+  
+}
+
+mcf$Token %hum>% c(~segments(Break %in% c('3', '4','5')), by ~ File) -> mcf$Phrase
+
+mcf$Token %hum<% c(~list(paste(Lyrics, collapse = ' ')), by ~ File ~ Phrase)
+
+rhymeSchemes <- mcf$Token %hum<% c(~list(Rhyme), by ~ File ~ Phrase)
 rowRhymeSchemes <- cbind(rhymeSchemes)
 replaceWithRepeating <- function(string){
   save <- gsub("\\s*\\([^\\)]","s",as.character(string))
@@ -211,33 +234,62 @@ renameRhymeSchemes <- apply(iterationForRhymes, 1, function(x){replaceWithRepeat
 convertToVectors <- apply(iterationForRhymes, 1, function(x){return(as.vector(replaceWithRepeatingPrint[[x]]))})
 convertToVectors2 <- apply(iterationForRhymes, 1, function(x){return(as.vector(getPatterns[[x]]))})
 checkIfInternalRhyme <- function(pattern2, wholeString2){
-  if(length(pattern2) > 0){
-  iteration <- 1:length(pattern2)
-  iteration <- cbind(iteration)
-  if(length(pattern2) > 1){
-    save3 <- apply(iteration, 1, function(x){ 
-      if(grepl("\\(", pattern2[x]) == TRUE){
-        pattern2[x] <- paste(pattern2[x], ")")
-      }
-      if(grepl("\\[", pattern2[x]) == TRUE){
-        pattern2[x] <- paste(pattern2[x], "]")
-      }
-      if(length(grep(pattern2[x], wholeString2)) >= 1){
-        return(TRUE)
+  save3 <- list(FALSE)
+  if(length(pattern2) >= 1){
+    iteration <- 1:length(pattern2)
+    iteration <- cbind(iteration)
+      save3 <- apply(iteration, 1, function(x){ 
+        if(grepl("\\(", pattern2[x]) == TRUE){
+          pattern2[x] <- paste(pattern2[x], ")", sep = "")
+        }
+        if(grepl("\\[", pattern2[x]) == TRUE){
+          pattern2[x] <- paste(pattern2[x], "]", sep = "")
+        }
+        if(length(grep(pattern2[x], wholeString2)) > 1){
+          return(TRUE)
+        }
+        else{
+          return(FALSE)
         }
       }
-      )
-    print(c("-",save3))
-  }
-  if(any(save) == TRUE){
-    return(TRUE)
-  }
-  }
-  else{
-    return(FALSE)
-  }
+        
+        )
+    }
+    else{
+      return(FALSE)
+    }
+    if(any(save3) == TRUE){
+      return(TRUE)
+    }
 }
+# save3 <- apply(iteration, 1, function(x){ 
+#   if(grepl("\\(", convertToVectors2[[2]][x]) == TRUE){
+#     convertToVectors2[[2]][x] <- paste(convertToVectors2[[2]][x], ")", sep = "")
+#   }
+#   if(grepl("\\[", convertToVectors2[[3]][x]) == TRUE){
+#     convertToVectors2[[2]][x] <- paste(convertToVectors2[[2]][x], "]", sep = "")
+#   }
+#   if(length(grep(convertToVectors2[[2]][x], rhymeSchemes[[2]])) > 1){
+#     return(TRUE)
+#   }
+#   else{
+#     return(FALSE)
+#   }
+# }
+
+#)
 checkIfInternalRhymePrint <- apply(iterationForRhymes, 1, function(x){checkIfInternalRhyme(convertToVectors2[[x]], rhymeSchemes[[x]])})
+nullToNA <- function(x) {
+  x[sapply(x, is.null)] <- NA
+  return(x)
+}
+checkIfInternalRhymePrint2 <- nullToNA(checkIfInternalRhymePrint)
+library(tidyr)
+# checkIfInternalRhymePrint3 <- cbind(checkIfInternalRhymePrint2)
+# checkIfInternalRhymePrint4 <- as.data.frame(checkIfInternalRhymePrint3)
+checkIfInternalRhymePrint5[is.na(checkIfInternalRhymePrint2)] <- FALSE
+indices <- which(checkIfInternalRhymePrint5 == TRUE)
+internalRhymesFinal <- rhymeSchemes[indices]
 # getIndicesPrint <- apply(iterationForRhymes, 1, function(x){getIndices(convertToVectors[[x]], renameRhymeSchemes[[x]])})
 # printDistance <- apply(iteration, 1, function(x){grep(rowRhymeSchemes[x], rowRhymeSchemes[5,]$rhymeSchemes)})
 
