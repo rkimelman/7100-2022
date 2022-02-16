@@ -308,6 +308,15 @@ nullToNA <- function(x) {
   x[sapply(x, is.null)] <- NA
   return(x)
 }
+library(stringr)
+removeAmbiguousCharsFunc <- function(string){
+  newString <- str_replace_all(string, "[.]", "")
+  newString2 <- str_replace_all(newString, "[\\(]", "")
+  newString3 <- str_replace_all(newString2, "[\\)]", "")
+  newString4 <- str_replace_all(newString3, "[,]", "")
+  newString5 <- str_replace_all(newString4, "[ ]", "")
+  return(newString5)
+}
 checkIfInternalRhymePrint2 <- nullToNA(checkIfInternalRhymePrint)
 library(tidyr)
 # checkIfInternalRhymePrint3 <- cbind(checkIfInternalRhymePrint2)
@@ -319,6 +328,9 @@ uniqchars <- function(string1){ unique(unlist(strsplit(string1, "")))}
 iteration <- 1:length(internalRhymesFinal)
 iteration <- cbind(iteration)
 findUniqueChars <- apply(iteration, 1, function(x){uniqchars(internalRhymesFinal[[x]])})
+removeAmbiguousChars <- apply(iteration, 1, function(x){removeAmbiguousCharsFunc(toString(findUniqueChars[[x]]))})
+iteration <- 1:length(replaceWithRepeatingPrint)
+iteration <- cbind(iteration)
 saveDifferences <- apply(iteration, 1, function(x){getIndices(replaceWithRepeatingPrint[[x]], renameRhymeSchemes[[x]])})
 findDifference <- function(vector1){
   return(diff(range(vector1)))
