@@ -126,10 +126,6 @@ recordFreqDifference <- function(table){
   }
   return(difference)
 }
-# test function
-df2 <- as.data.frame(frequencyTables[[968]])
-determine <- which(df2$Freq > 1)
-internalRhymes <- df2$frequencyCount[determine]
 # implement functions
 rhymeSchemes <- mcf$Token %hum<% c(~list(Rhyme), by ~ File ~ Phrase)
 iteration <- 1:length(rhymeSchemes)
@@ -149,6 +145,11 @@ maxDifference <- max(findMaxDifference)
 # findMaxDifference <- apply(iteration, 1, function(x){recordFreqDifference(internalRhymesListDataFrame[1,x]$internalRhymesList)})
 tableWithMaxDifference <- which(findMaxDifference == maxDifference)
 findTableWithMaxDifference <- frequencyTables[tableWithMaxDifference]
+
+# test function
+df2 <- as.data.frame(frequencyTables[[968]])
+determine <- which(df2$Freq > 1)
+internalRhymes <- df2$frequencyCount[determine]
 
 # test summary functions again
 # library(humdrumR)
