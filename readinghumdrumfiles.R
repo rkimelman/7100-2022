@@ -315,7 +315,7 @@ library(tidyr)
 checkIfInternalRhymePrint5[is.na(checkIfInternalRhymePrint2)] <- FALSE
 indices <- which(checkIfInternalRhymePrint5 == TRUE)
 internalRhymesFinal <- rhymeSchemes[indices]
-uniqchars <- function(x) unique(strsplit(x, "")[[1]]) 
+uniqchars <- function(string1){ unique(unlist(strsplit(string1, "")))}
 iteration <- 1:length(internalRhymesFinal)
 iteration <- cbind(iteration)
 findUniqueChars <- apply(iteration, 1, function(x){uniqchars(internalRhymesFinal[[x]])})
@@ -327,4 +327,3 @@ saveDifferences2 <- lapply(iteration, function(x){findDifference(saveDifferences
 maxDifference <- 
 # getIndicesPrint <- apply(iterationForRhymes, 1, function(x){getIndices(convertToVectors[[x]], renameRhymeSchemes[[x]])})
 # printDistance <- apply(iteration, 1, function(x){grep(rowRhymeSchemes[x], rowRhymeSchemes[5,]$rhymeSchemes)})
-
