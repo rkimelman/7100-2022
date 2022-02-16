@@ -212,18 +212,23 @@ convertToVectors <- apply(iterationForRhymes, 1, function(x){return(as.vector(re
 convertToVectors2 <- apply(iterationForRhymes, 1, function(x){return(as.vector(getPatterns[[x]]))})
 checkIfInternalRhyme <- function(pattern2, wholeString2){
   if(length(pattern2) > 0){
-  iteration <- 1:length(wholeString2)
+  iteration <- 1:length(pattern2)
   iteration <- cbind(iteration)
-  save <- apply(iteration, 1, function(x){ 
-    if(grepl("\\(", pattern2[x]) == TRUE){
-      pattern2[x] <- paste(pattern2[x], ")")
-    }
-    if(length(grep(pattern2[x], wholeString2)) >= 1){
-      return(TRUE)
+  if(length(pattern2) > 1){
+    save3 <- apply(iteration, 1, function(x){ 
+      if(grepl("\\(", pattern2[x]) == TRUE){
+        pattern2[x] <- paste(pattern2[x], ")")
       }
-    }
-    )
-  print(save)
+      if(grepl("\\[", pattern2[x]) == TRUE){
+        pattern2[x] <- paste(pattern2[x], "]")
+      }
+      if(length(grep(pattern2[x], wholeString2)) >= 1){
+        return(TRUE)
+        }
+      }
+      )
+    print(c("-",save3))
+  }
   if(any(save) == TRUE){
     return(TRUE)
   }
