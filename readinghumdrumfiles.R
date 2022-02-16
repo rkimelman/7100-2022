@@ -181,7 +181,16 @@ replaceWithRepeating <- function(string){
   return(save)
 }
 getIndices <- function(pattern1, wholeString){
-  return(grep(pattern1, wholeString))
+  if(length(pattern1) > 0){
+    iteration <- 1:length(pattern1)
+    iteration <- cbind(iteration)
+    save <- apply(iteration, 1, function(x){ grep(pattern1[x], wholeString)})
+    print(1)
+    return(save)
+  }
+  else{
+    return(-1)
+  }
 }
 getIndicesOfLetters <- function(string){
   if(length(string)<1){
@@ -197,6 +206,33 @@ iterationForRhymes <- cbind(iterationForRhymes)
 letters <- apply(iterationForRhymes, 1, function(x){getIndicesOfLetters(rowRhymeSchemes[x,]$rhymeSchemes)})
 letters <- cbind(letters)
 getPatterns <- apply(iterationForRhymes, 1, function(x){return(rowRhymeSchemes[x,]$rhymeSchemes[letters[x,]$letters])}) 
-getIndicesPrint <- apply(iterationForRhymes, 1, function(x){getIndices(rowRhymeSchemes[x,]$rhymeSchemes)})
-printDistance <- apply(iteration, 1, function(x){grep(save[x], rowRhymeSchemes[5,]$rhymeSchemes)})
+replaceWithRepeatingPrint <- apply(iterationForRhymes, 1, function(x){replaceWithRepeating(getPatterns[[x]])})
+renameRhymeSchemes <- apply(iterationForRhymes, 1, function(x){replaceWithRepeating(rowRhymeSchemes[x,]$rhymeSchemes)})
+convertToVectors <- apply(iterationForRhymes, 1, function(x){return(as.vector(replaceWithRepeatingPrint[[x]]))})
+convertToVectors2 <- apply(iterationForRhymes, 1, function(x){return(as.vector(getPatterns[[x]]))})
+checkIfInternalRhyme <- function(pattern2, wholeString2){
+  if(length(pattern2) > 0){
+  iteration <- 1:length(wholeString2)
+  iteration <- cbind(iteration)
+  save <- apply(iteration, 1, function(x){ 
+    if(grepl("\\(", pattern2[x]) == TRUE){
+      pattern2[x] <- paste(pattern2[x], ")")
+    }
+    if(length(grep(pattern2[x], wholeString2)) >= 1){
+      return(TRUE)
+      }
+    }
+    )
+  print(save)
+  if(any(save) == TRUE){
+    return(TRUE)
+  }
+  }
+  else{
+    return(FALSE)
+  }
+}
+checkIfInternalRhymePrint <- apply(iterationForRhymes, 1, function(x){checkIfInternalRhyme(convertToVectors2[[x]], rhymeSchemes[[x]])})
+# getIndicesPrint <- apply(iterationForRhymes, 1, function(x){getIndices(convertToVectors[[x]], renameRhymeSchemes[[x]])})
+# printDistance <- apply(iteration, 1, function(x){grep(rowRhymeSchemes[x], rowRhymeSchemes[5,]$rhymeSchemes)})
 
