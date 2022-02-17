@@ -326,10 +326,10 @@ returnMax <- function(numberList){
 }
 checkIfInternalRhymePrint2 <- nullToNA(checkIfInternalRhymePrint)
 library(tidyr)
-# checkIfInternalRhymePrint3 <- cbind(checkIfInternalRhymePrint2)
-# checkIfInternalRhymePrint4 <- as.data.frame(checkIfInternalRhymePrint3)
-checkIfInternalRhymePrint5[is.na(checkIfInternalRhymePrint2)] <- FALSE
-indices <- which(checkIfInternalRhymePrint5 == TRUE)
+checkIfInternalRhymePrint3 <- cbind(checkIfInternalRhymePrint2)
+checkIfInternalRhymePrint4 <- as.data.frame(checkIfInternalRhymePrint3)
+checkIfInternalRhymePrint4[is.na(checkIfInternalRhymePrint4)] <- FALSE
+indices <- which(checkIfInternalRhymePrint4 == TRUE)
 internalRhymesFinal <- rhymeSchemes[indices]
 uniqchars <- function(string1){ unique(unlist(strsplit(string1, "")))}
 iteration <- 1:length(internalRhymesFinal)
