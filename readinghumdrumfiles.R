@@ -1,46 +1,8 @@
 library(humdrumR)
-# pacCaliLoveData <- readHumdrum("2pac_CaliforniaLove.rap")
-# pacHowDoUWantItData <- readHumdrum("2pac_HowDoUWantIt.rap")
-# census(pacCaliLoveData)
-# reference(pacCaliLoveData)
-# spines(pacCaliLoveData)
-# interpretations(pacCaliLoveData)
-# # error - object 'exclusive' not found
-# sections(pacCaliLoveData)
-# # error - could not find function 'sections'
-# summary(pacCaliLoveData)
-# # error - code stops at interpretations
-# interpretations(pacHowDoUWantItData)
-# # error
-# sections(pacHowDoUWantItData)
-# # error
-# summary(pacHowDoUWantItData)
-# # error - code stops at interpretations
-# 
-# centCandyShopData <- readHumdrum("50Cent_CandyShop.rap")
-# census(centCandyShopData)
-# reference(centCandyShopData)
-# spines(centCandyShopData)
-# interpretations(centCandyShopData)
-# sections(centCandyShopData)
-# summary(centCandyShopData)
-# 
-# # seems that the functions interpretations and sections are not working for the rap datasets.
-# 
-# rapData <- readHumdrum('.*rap')
-# 
-# census(rapData)
-# reference(rapData)
-# spines(rapData)
-# interpretations(rapData)
-# sections(rapData)
-# summary(rapData)
-# 
-# filterhumdrum(rapData)
 
-# rapData[2]
+library(stringr)
 
-library(humdrumR)
+library(tidyr)
 
 segments <- function(x, reverse = FALSE) {
   if (!is.logical(x)) x <- c(TRUE, head(x, -1L) != tail(x, -1L))
@@ -57,6 +19,7 @@ segments <- function(x, reverse = FALSE) {
 }
 
 mcf <- readHumdrum('.*rap')
+
 spinePipe(mcf, 2:8, 1) -> mcf[rev(c('Stress', 'Tone', 'Break', 'Rhyme', 'IPA', 'Lyrics', 'Hype'))]
 
 mcf$Token %hum>% c(~segments(Break %in% c('3', '4','5')), by ~ File) -> mcf$Phrase
@@ -64,10 +27,6 @@ mcf$Token %hum>% c(~segments(Break %in% c('3', '4','5')), by ~ File) -> mcf$Phra
 mcf$Token %hum<% c(~list(paste(Lyrics, collapse = ' ')), by ~ File ~ Phrase)
 
 rhymeSchemes <- mcf$Token %hum<% c(~list(Rhyme), by ~ File ~ Phrase)
-
-rhymeSchemes3 <- unlist(rhymeSchemes[[1000]])
-
-occurrences <- table(rhymeSchemes3)
 
 countFrequencies <- function(element){
   frequencyCount <- unlist(element)
@@ -84,6 +43,7 @@ recordMoreThanOneInstance <- function(table){
   internalRhymes <- saveList[determine]
   return(internalRhymes)
 }
+
 # 1. look for most common number of internal rhymes in each line
 # 2. look to see if most occur in the first or second half of the line for example - is there a difference in perception there? Maybe the longer an artist goes without rhyming,
 #    the more likely you are to catch the internal rhyme, or there is a greater reaction (brain or implicit reaction). Theory is that if internal rhyme occurs earlier in the line
@@ -126,23 +86,21 @@ recordFreqDifference <- function(table){
   }
   return(difference)
 }
+
 # implement functions
-rhymeSchemes <- mcf$Token %hum<% c(~list(Rhyme), by ~ File ~ Phrase)
+
 iteration <- 1:length(rhymeSchemes)
 iteration <- cbind(iteration)
 df <- rbind(rhymeSchemes)
 df <- as.data.frame(t(df))
 frequencyTables <- apply(iteration, 1, function(x){countFrequencies(df[x,1])})
 frequencyTablesDataFrame <- cbind(frequencyTables)
-# frequencyTablesDataFrame <- as.data.frame(frequencyTablesDataFrame)
 internalRhymesList <- apply(iteration, 1, function(x){recordMoreThanOneInstance(frequencyTablesDataFrame[x][1])})
 internalRhymesListDataFrame <- rbind(internalRhymesList)
 internalRhymesListDataFrame <- as.data.frame(internalRhymesListDataFrame)
 save <- apply(iteration, 1, function(x){as.data.frame(internalRhymesListDataFrame[1,x])})
-# internalRhymesListDataFrame <- t(internalRhymesListDataFrame)
 findMaxDifference <- apply(iteration, 1, function(x){recordFreqDifference(internalRhymesListDataFrame[1,x])})
 maxDifference <- max(findMaxDifference)
-# findMaxDifference <- apply(iteration, 1, function(x){recordFreqDifference(internalRhymesListDataFrame[1,x]$internalRhymesList)})
 tableWithMaxDifference <- which(findMaxDifference == maxDifference)
 findTableWithMaxDifference <- frequencyTables[tableWithMaxDifference]
 
@@ -151,59 +109,18 @@ df2 <- as.data.frame(frequencyTables[[968]])
 determine <- which(df2$Freq > 1)
 internalRhymes <- df2$frequencyCount[determine]
 
-# test summary functions again
-# library(humdrumR)
-# mcf <- readHumdrum('.*rap')
-# census(mcf)
-# reference(mcf)
-# spines(mcf)
-# interpretations(mcf)
-# sections(mcf)
-# summary(mcf)
-
 # largest distance between two internal rhymes
-
-
-save <- rowRhymeSchemes[5,]$rhymeSchemes
-indicesOfLetters <- which(save != ".")
-letters <- save[indicesOfLetters]
-
-# gsub("\\s*\\([^\\)]","s",as.character(rowRhymeSchemes[5,]$rhymeSchemes))
-# gsub("\\s*\\)","t",as.character(rowRhymeSchemes[5,]$rhymeSchemes))
-save2 <- replaceWithRepeating(rowRhymeSchemes[5,]$rhymeSchemes)
-indices <- grep("bt", save2)
-
 # function
-library(humdrumR)
-mcf <- readHumdrum('.*rap')
-spinePipe(mcf, 2:8, 1) -> mcf[rev(c('Stress', 'Tone', 'Break', 'Rhyme', 'IPA', 'Lyrics', 'Hype'))]
 
-segments <- function(x, reverse = FALSE) {
-  if (!is.logical(x)) x <- c(TRUE, head(x, -1L) != tail(x, -1L))
-  if (reverse) x <- rev(x)
-  
-  x <- cumsum(x)
-  
-  if (reverse) {
-    x <- rev(-x) + max(x) + 1
-  }
-  
-  x
-  
-}
-
-mcf$Token %hum>% c(~segments(Break %in% c('3', '4','5')), by ~ File) -> mcf$Phrase
-
-mcf$Token %hum<% c(~list(paste(Lyrics, collapse = ' ')), by ~ File ~ Phrase)
-
-rhymeSchemes <- mcf$Token %hum<% c(~list(Rhyme), by ~ File ~ Phrase)
 rowRhymeSchemes <- cbind(rhymeSchemes)
+
 replaceWithRepeating <- function(string){
   save <- gsub("\\s*\\([^\\)]","s",as.character(string))
   save <- gsub("\\s*\\)","t",as.character(save))
   # this allows R to read these as repeating rhymes
   return(save)
 }
+
 getIndices <- function(pattern1, wholeString){
   if(length(pattern1) >= 1){
     iteration <- 1:length(pattern1)
@@ -216,12 +133,6 @@ getIndices <- function(pattern1, wholeString){
         pattern1[x] <- paste(pattern1[x], "]", sep = "")
       }
       return(grep(pattern1[x], wholeString))
-      # if(length(grep(pattern1[x], wholeString)) > 1){
-      #   return(TRUE)
-      # }
-      # else{
-      #   return(FALSE)
-      # }
     }
     
     )
@@ -229,17 +140,8 @@ getIndices <- function(pattern1, wholeString){
   else{
     return(0)
   }
-  # if(length(pattern1) > 0){
-  #   iteration <- 1:length(pattern1)
-  #   iteration <- cbind(iteration)
-  #   save <- apply(iteration, 1, function(x){ grep(pattern1[x], wholeString)})
-  #   print(1)
-  #   return(save)
-  # }
-  # else{
-  #   return(-1)
-  # }
 }
+
 getIndicesOfLetters <- function(string){
   if(length(string)<1){
     return(0)
@@ -248,16 +150,27 @@ getIndicesOfLetters <- function(string){
     return(which(string != "."))
   }
 }
+
 iteration <- 1:length(indicesOfLetters)
+
 iterationForRhymes <- 1:length(rhymeSchemes)
+
 iterationForRhymes <- cbind(iterationForRhymes)
+
 letters <- apply(iterationForRhymes, 1, function(x){getIndicesOfLetters(rowRhymeSchemes[x,]$rhymeSchemes)})
+
 letters <- cbind(letters)
+
 getPatterns <- apply(iterationForRhymes, 1, function(x){return(rowRhymeSchemes[x,]$rhymeSchemes[letters[x,]$letters])}) 
+
 replaceWithRepeatingPrint <- apply(iterationForRhymes, 1, function(x){replaceWithRepeating(getPatterns[[x]])})
+
 renameRhymeSchemes <- apply(iterationForRhymes, 1, function(x){replaceWithRepeating(rowRhymeSchemes[x,]$rhymeSchemes)})
+
 convertToVectors <- apply(iterationForRhymes, 1, function(x){return(as.vector(replaceWithRepeatingPrint[[x]]))})
+
 convertToVectors2 <- apply(iterationForRhymes, 1, function(x){return(as.vector(getPatterns[[x]]))})
+
 checkIfInternalRhyme <- function(pattern2, wholeString2){
   save3 <- list(FALSE)
   if(length(pattern2) >= 1){
@@ -287,28 +200,14 @@ checkIfInternalRhyme <- function(pattern2, wholeString2){
       return(TRUE)
     }
 }
-# save3 <- apply(iteration, 1, function(x){ 
-#   if(grepl("\\(", convertToVectors2[[2]][x]) == TRUE){
-#     convertToVectors2[[2]][x] <- paste(convertToVectors2[[2]][x], ")", sep = "")
-#   }
-#   if(grepl("\\[", convertToVectors2[[3]][x]) == TRUE){
-#     convertToVectors2[[2]][x] <- paste(convertToVectors2[[2]][x], "]", sep = "")
-#   }
-#   if(length(grep(convertToVectors2[[2]][x], rhymeSchemes[[2]])) > 1){
-#     return(TRUE)
-#   }
-#   else{
-#     return(FALSE)
-#   }
-# }
 
-#)
 checkIfInternalRhymePrint <- apply(iterationForRhymes, 1, function(x){checkIfInternalRhyme(convertToVectors2[[x]], rhymeSchemes[[x]])})
+
 nullToNA <- function(x) {
   x[sapply(x, is.null)] <- NA
   return(x)
 }
-library(stringr)
+
 removeAmbiguousCharsFunc <- function(string){
   newString <- str_replace_all(string, "[.]", "")
   newString2 <- str_replace_all(newString, "[\\(]", "")
@@ -317,38 +216,46 @@ removeAmbiguousCharsFunc <- function(string){
   newString5 <- str_replace_all(newString4, "[ ]", "")
   return(newString5)
 }
+
 calcDifferences <- function(rhymeScheme, letters, index){
   return(diff(grep(substr(letters, index, index), rhymeScheme)))
 }
+
 returnMax <- function(numberList){
   numbers <- unlist(numberList)
   return(max(numbers))
 }
+
 checkIfInternalRhymePrint2 <- nullToNA(checkIfInternalRhymePrint)
-library(tidyr)
+
 checkIfInternalRhymePrint3 <- cbind(checkIfInternalRhymePrint2)
+
 checkIfInternalRhymePrint4 <- as.data.frame(checkIfInternalRhymePrint3)
+
 checkIfInternalRhymePrint4[is.na(checkIfInternalRhymePrint4)] <- FALSE
+
 indices <- which(checkIfInternalRhymePrint4 == TRUE)
+
 internalRhymesFinal <- rhymeSchemes[indices]
+
 uniqchars <- function(string1){ unique(unlist(strsplit(string1, "")))}
+
 iteration <- 1:length(internalRhymesFinal)
+
 iteration <- cbind(iteration)
+
 findUniqueChars <- apply(iteration, 1, function(x){uniqchars(internalRhymesFinal[[x]])})
+
 removeAmbiguousChars <- apply(iteration, 1, function(x){removeAmbiguousCharsFunc(toString(findUniqueChars[[x]]))})
+
 lengthsOfLetters <- apply(iteration, 1, function(x){return(nchar(removeAmbiguousChars[[x]]))})
+
 saveDifferencesFinal <- apply(iteration, 1, function(x){calcDifferences(internalRhymesFinal[[x]], removeAmbiguousChars[[x]], lengthsOfLetters[x])})
+
 maxDistances <- apply(iteration, 1, function(x){returnMax(saveDifferencesFinal[[x]])})  
+
 findMaxFinal <- max(maxDistances)
+
 findIndexMaxFinal <- which(maxDistances == findMaxFinal)
+
 maxInternalRhymeDifference <- internalRhymesFinal[[findIndexMaxFinal]]
-iteration <- 1:length(replaceWithRepeatingPrint)
-iteration <- cbind(iteration)
-saveDifferences <- apply(iteration, 1, function(x){getIndices(replaceWithRepeatingPrint[[x]], renameRhymeSchemes[[x]])})
-# findDifference <- function(vector1){
-#   return(diff(range(vector1)))
-# }
-# saveDifferences2 <- lapply(iteration, function(x){findDifference(saveDifferences[[x]])})
-# maxDifference <- 
-# getIndicesPrint <- apply(iterationForRhymes, 1, function(x){getIndices(convertToVectors[[x]], renameRhymeSchemes[[x]])})
-# printDistance <- apply(iteration, 1, function(x){grep(rowRhymeSchemes[x], rowRhymeSchemes[5,]$rhymeSchemes)})
