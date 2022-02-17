@@ -90,26 +90,44 @@ recordFreqDifference <- function(table){
 # implement functions
 
 iteration <- 1:length(rhymeSchemes)
+
 iteration <- cbind(iteration)
+
 df <- rbind(rhymeSchemes)
+
 df <- as.data.frame(t(df))
+
 frequencyTables <- apply(iteration, 1, function(x){countFrequencies(df[x,1])})
+
 frequencyTablesDataFrame <- cbind(frequencyTables)
+
 internalRhymesList <- apply(iteration, 1, function(x){recordMoreThanOneInstance(frequencyTablesDataFrame[x][1])})
+
 internalRhymesListDataFrame <- rbind(internalRhymesList)
+
+
 internalRhymesListDataFrame <- as.data.frame(internalRhymesListDataFrame)
+
 save <- apply(iteration, 1, function(x){as.data.frame(internalRhymesListDataFrame[1,x])})
+
 findMaxDifference <- apply(iteration, 1, function(x){recordFreqDifference(internalRhymesListDataFrame[1,x])})
+
 maxDifference <- max(findMaxDifference)
+
 tableWithMaxDifference <- which(findMaxDifference == maxDifference)
+
 findTableWithMaxDifference <- frequencyTables[tableWithMaxDifference]
 
 # test function
+
 df2 <- as.data.frame(frequencyTables[[968]])
+
 determine <- which(df2$Freq > 1)
+
 internalRhymes <- df2$frequencyCount[determine]
 
 # largest distance between two internal rhymes
+
 # function
 
 rowRhymeSchemes <- cbind(rhymeSchemes)
