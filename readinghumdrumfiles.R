@@ -1,7 +1,5 @@
 library(humdrumR)
-
 library(stringr)
-
 library(tidyr)
 
 segments <- function(x, reverse = FALSE) {
@@ -19,13 +17,9 @@ segments <- function(x, reverse = FALSE) {
 }
 
 mcf <- readHumdrum('.*rap')
-
 spinePipe(mcf, 2:8, 1) -> mcf[rev(c('Stress', 'Tone', 'Break', 'Rhyme', 'IPA', 'Lyrics', 'Hype'))]
-
 mcf$Token %hum>% c(~segments(Break %in% c('3', '4','5')), by ~ File) -> mcf$Phrase
-
 mcf$Token %hum<% c(~list(paste(Lyrics, collapse = ' ')), by ~ File ~ Phrase)
-
 rhymeSchemes <- mcf$Token %hum<% c(~list(Rhyme), by ~ File ~ Phrase)
 
 countFrequencies <- function(element){
@@ -88,50 +82,29 @@ recordFreqDifference <- function(table){
 }
 
 # implement functions
-
 iteration <- 1:length(rhymeSchemes)
-
 iteration <- cbind(iteration)
-
 df <- rbind(rhymeSchemes)
-
 df <- as.data.frame(t(df))
-
 frequencyTables <- apply(iteration, 1, function(x){countFrequencies(df[x,1])})
-
 frequencyTablesDataFrame <- cbind(frequencyTables)
-
 internalRhymesList <- apply(iteration, 1, function(x){recordMoreThanOneInstance(frequencyTablesDataFrame[x][1])})
-
 internalRhymesListDataFrame <- rbind(internalRhymesList)
-
-
 internalRhymesListDataFrame <- as.data.frame(internalRhymesListDataFrame)
-
 save <- apply(iteration, 1, function(x){as.data.frame(internalRhymesListDataFrame[1,x])})
-
 findMaxDifference <- apply(iteration, 1, function(x){recordFreqDifference(internalRhymesListDataFrame[1,x])})
-
 maxDifference <- max(findMaxDifference)
-
 tableWithMaxDifference <- which(findMaxDifference == maxDifference)
-
 findTableWithMaxDifference <- frequencyTables[tableWithMaxDifference]
 
 # test function
-
 df2 <- as.data.frame(frequencyTables[[968]])
-
 determine <- which(df2$Freq > 1)
-
 internalRhymes <- df2$frequencyCount[determine]
 
 # largest distance between two internal rhymes
-
 # function
-
 rowRhymeSchemes <- cbind(rhymeSchemes)
-
 replaceWithRepeating <- function(string){
   save <- gsub("\\s*\\([^\\)]","s",as.character(string))
   save <- gsub("\\s*\\)","t",as.character(save))
@@ -170,23 +143,14 @@ getIndicesOfLetters <- function(string){
 }
 
 iteration <- 1:length(indicesOfLetters)
-
 iterationForRhymes <- 1:length(rhymeSchemes)
-
 iterationForRhymes <- cbind(iterationForRhymes)
-
 letters <- apply(iterationForRhymes, 1, function(x){getIndicesOfLetters(rowRhymeSchemes[x,]$rhymeSchemes)})
-
 letters <- cbind(letters)
-
 getPatterns <- apply(iterationForRhymes, 1, function(x){return(rowRhymeSchemes[x,]$rhymeSchemes[letters[x,]$letters])}) 
-
 replaceWithRepeatingPrint <- apply(iterationForRhymes, 1, function(x){replaceWithRepeating(getPatterns[[x]])})
-
 renameRhymeSchemes <- apply(iterationForRhymes, 1, function(x){replaceWithRepeating(rowRhymeSchemes[x,]$rhymeSchemes)})
-
 convertToVectors <- apply(iterationForRhymes, 1, function(x){return(as.vector(replaceWithRepeatingPrint[[x]]))})
-
 convertToVectors2 <- apply(iterationForRhymes, 1, function(x){return(as.vector(getPatterns[[x]]))})
 
 checkIfInternalRhyme <- function(pattern2, wholeString2){
@@ -245,35 +209,19 @@ returnMax <- function(numberList){
 }
 
 checkIfInternalRhymePrint2 <- nullToNA(checkIfInternalRhymePrint)
-
 checkIfInternalRhymePrint3 <- cbind(checkIfInternalRhymePrint2)
-
 checkIfInternalRhymePrint4 <- as.data.frame(checkIfInternalRhymePrint3)
-
 checkIfInternalRhymePrint4[is.na(checkIfInternalRhymePrint4)] <- FALSE
-
 indices <- which(checkIfInternalRhymePrint4 == TRUE)
-
 internalRhymesFinal <- rhymeSchemes[indices]
-
 uniqchars <- function(string1){ unique(unlist(strsplit(string1, "")))}
-
 iteration <- 1:length(internalRhymesFinal)
-
 iteration <- cbind(iteration)
-
 findUniqueChars <- apply(iteration, 1, function(x){uniqchars(internalRhymesFinal[[x]])})
-
 removeAmbiguousChars <- apply(iteration, 1, function(x){removeAmbiguousCharsFunc(toString(findUniqueChars[[x]]))})
-
 lengthsOfLetters <- apply(iteration, 1, function(x){return(nchar(removeAmbiguousChars[[x]]))})
-
 saveDifferencesFinal <- apply(iteration, 1, function(x){calcDifferences(internalRhymesFinal[[x]], removeAmbiguousChars[[x]], lengthsOfLetters[x])})
-
 maxDistances <- apply(iteration, 1, function(x){returnMax(saveDifferencesFinal[[x]])})  
-
 findMaxFinal <- max(maxDistances)
-
 findIndexMaxFinal <- which(maxDistances == findMaxFinal)
-
 maxInternalRhymeDifference <- internalRhymesFinal[[findIndexMaxFinal]]
