@@ -71,7 +71,7 @@ recordFreqDifference <- function(table){
   nonRhymingWordFrequency <- df[,1]
   vector <- which(colnames(table$internalRhymesList) != ".")
   if(length(vector) >= 1){
-    maxInternalRhyme <- max(table$internalRhymesList[,vector])
+    maxInternalRhyme <- min(table$internalRhymesList[,vector])
     maxInternalRhymeIndex <- which(table$internalRhymesList == maxInternalRhyme)
     difference <- nonRhymingWordFrequency - maxInternalRhyme
   }
