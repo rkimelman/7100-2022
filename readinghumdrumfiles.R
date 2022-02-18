@@ -225,3 +225,11 @@ maxDistances <- apply(iteration, 1, function(x){returnMax(saveDifferencesFinal[[
 findMaxFinal <- max(maxDistances)
 findIndexMaxFinal <- which(maxDistances == findMaxFinal)
 maxInternalRhymeDifference <- internalRhymesFinal[[findIndexMaxFinal]]
+meanSylb <- mean(unlist(saveDifferencesFinal))
+
+# experiment
+vowelPhonemes <- c("aa", "ae", "ah", "ao", "ax", "eh", "ey", "er", "ih", "iy", "uh", "uw")
+combo2 <- t(combn(vowelPhonemes, 2))
+combo2 <- as.data.frame(combo2)
+combo3 <- t(combn(vowelPhonemes, 3))
+combo3 <- as.data.frame(combo3)
