@@ -312,4 +312,5 @@ getLengths <- apply(length1, 1, function(x){
 #   })
 #     
 # })
-
+library(gtools)
+permutations(8,2)
