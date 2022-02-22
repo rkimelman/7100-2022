@@ -286,6 +286,7 @@ get2Words <- apply(length1, 1, function(x){
   return(sample(singleVowelWords[[x]], size = 2))
 })
 get2Words <- t(get2Words)
+# these are the sets of words we will use for a single vowel internal rhyme
 #-------------------------------------- The above code works -----------------------
 length1 <- 1:length(mappingsToData)
 length1 <- as.data.frame(length1)
