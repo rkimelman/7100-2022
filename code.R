@@ -259,3 +259,17 @@ removeNA_Q <- testIfQ[!is.na(testIfQ)]
 QWords <- sample(removeNA_Q, size = 2)
 QWordsPronunciations <- c("sahnz", "kahskt")
 # saveQ <- apply(iteration, 1, function(x))
+# generalize above
+testFunction <- function(pronunciation){
+  testIfPresent <- apply(iteration, 1, function(x){
+    if(grepl(pronunciation, df[x,2])){
+      return(df[x,2])
+    }
+    else{
+      return(NA)
+    }
+  }
+  )
+  removeNA <- testIfPresent[!is.na(testIfPresent)]
+  return(removeNA)
+}
