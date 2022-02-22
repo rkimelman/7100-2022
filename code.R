@@ -259,6 +259,8 @@ removeNA_Q <- testIfQ[!is.na(testIfQ)]
 QWords <- sample(removeNA_Q, size = 2)
 QWordsPronunciations <- c("sahnz", "kahskt")
 # saveQ <- apply(iteration, 1, function(x))
+# use random configurations to generate words, but always make each word have at least 1 phonological neighbor
+# should each rhyming word have same number of syllables, and vowels occur in same positions? can code for that
 # generalize above
 testFunction <- function(pronunciation){
   testIfPresent <- apply(iteration, 1, function(x){
