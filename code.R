@@ -228,8 +228,8 @@ maxInternalRhymeDifference <- internalRhymesFinal[[findIndexMaxFinal]]
 meanSylb <- mean(unlist(saveDifferencesFinal))
 
 # experiment
-vowelPhonemes <- c("aa", "ae", "ah", "eh", "ey", "ih", "iy", "uh", "uw")
-mappingsToData <- c("Q" , "\\{", "V", "E", "1", "I", "7", "U", "u")
+vowelPhonemes <- c("aa", "ae", "ah", "eh", "ey", "ih", "iy", "uw")
+mappingsToData <- c("Q" , "\\{", "V", "E", "1", "I", "7", "u")
 combo2 <- t(combn(vowelPhonemes, 2))
 combo2 <- as.data.frame(combo2)
 combo3 <- t(combn(vowelPhonemes, 3))
@@ -277,7 +277,16 @@ testFunction3Phonemes <- function(pronunciation){
   removeNA <- testIfPresent[!is.na(testIfPresent)]
   return(removeNA)
 }
-#-------------------------------------- The above 3 sets of code work -----------------------
+length1 <- 1:length(mappingsToData)
+length1 <- as.data.frame(length1)
+singleVowelWords <- apply(length1, 1, function(x){
+  return(testFunction3Phonemes(mappingsToData[x]))
+})
+get2Words <- apply(length1, 1, function(x){
+  return(sample(singleVowelWords[[x]], size = 2))
+})
+get2Words <- t(get2Words)
+#-------------------------------------- The above code works -----------------------
 length1 <- 1:length(mappingsToData)
 length1 <- as.data.frame(length1)
 matches <- apply(length1, 1, function(x){
