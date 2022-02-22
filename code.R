@@ -257,4 +257,5 @@ testIfQ <- apply(iteration, 1, function(x){
 )
 removeNA_Q <- testIfQ[!is.na(testIfQ)]
 QWords <- sample(removeNA_Q, size = 2)
+QWordsPronunciations <- c("sahnz", "kahskt")
 # saveQ <- apply(iteration, 1, function(x))
