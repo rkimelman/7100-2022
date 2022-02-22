@@ -228,8 +228,33 @@ maxInternalRhymeDifference <- internalRhymesFinal[[findIndexMaxFinal]]
 meanSylb <- mean(unlist(saveDifferencesFinal))
 
 # experiment
-vowelPhonemes <- c("aa", "ae", "ah", "ao", "ax", "eh", "ey", "er", "ih", "iy", "uh", "uw")
+vowelPhonemes <- c("aa", "ae", "ah", "eh", "ey", "ih", "iy", "uh", "uw")
+mappingsToData <- c("Q" , "{", "V", "E", "1", "I", "7", "U", "u")
 combo2 <- t(combn(vowelPhonemes, 2))
 combo2 <- as.data.frame(combo2)
 combo3 <- t(combn(vowelPhonemes, 3))
 combo3 <- as.data.frame(combo3)
+
+# obtain two random words with "aa" vowel sound
+
+df <- read.csv(file = "2phonemes1phonologicalneighbor.csv")
+# find all words with "Q" in their pronunciations
+iteration <- 1:nrow(df)
+iteration <- as.data.frame(iteration)
+# find lengths of all pronunciations
+lengths <- apply(iteration, 1, function(x){
+  return(nchar(df[x, 2]))
+})
+# test if Q is inside pronunciation, if not fill with na to be removed later
+testIfQ <- apply(iteration, 1, function(x){
+  if(grepl("Q", df[x,2])){
+    return(df[x,2])
+  }
+  else{
+    return(NA)
+  }
+}
+)
+removeNA_Q <- testIfQ[!is.na(testIfQ)]
+QWords <- sample(removeNA_Q, size = 2)
+# saveQ <- apply(iteration, 1, function(x))
