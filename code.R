@@ -229,7 +229,7 @@ meanSylb <- mean(unlist(saveDifferencesFinal))
 
 # experiment
 vowelPhonemes <- c("aa", "ae", "ah", "eh", "ey", "ih", "iy", "uh", "uw")
-mappingsToData <- c("Q" , "{", "V", "E", "1", "I", "7", "U", "u")
+mappingsToData <- c("Q" , "\\{", "V", "E", "1", "I", "7", "U", "u")
 combo2 <- t(combn(vowelPhonemes, 2))
 combo2 <- as.data.frame(combo2)
 combo3 <- t(combn(vowelPhonemes, 3))
@@ -237,35 +237,37 @@ combo3 <- as.data.frame(combo3)
 
 # obtain two random words with "aa" vowel sound
 
-df <- read.csv(file = "2phonemes1phonologicalneighbor.csv")
-# find all words with "Q" in their pronunciations
-iteration <- 1:nrow(df)
-iteration <- as.data.frame(iteration)
-# find lengths of all pronunciations
-lengths <- apply(iteration, 1, function(x){
-  return(nchar(df[x, 2]))
-})
-# test if Q is inside pronunciation, if not fill with na to be removed later
-testIfQ <- apply(iteration, 1, function(x){
-  if(grepl("Q", df[x,2])){
-    return(df[x,2])
-  }
-  else{
-    return(NA)
-  }
-}
-)
-removeNA_Q <- testIfQ[!is.na(testIfQ)]
-QWords <- sample(removeNA_Q, size = 2)
-QWordsPronunciations <- c("sahnz", "kahskt")
+df <- read.csv(file = "pseudoworddata.csv")
+dfNew <- df[which(df$X.1=="3"),,]
+
+# # find all words with "Q" in their pronunciations
+# iteration <- 1:nrow(df)
+# iteration <- as.data.frame(iteration)
+# # find lengths of all pronunciations
+# lengths <- apply(iteration, 1, function(x){
+#   return(nchar(df[x, 2]))
+# })
+# # test if Q is inside pronunciation, if not fill with na to be removed later
+# testIfQ <- apply(iteration, 1, function(x){
+#   if(grepl("Q", df[x,2])){
+#     return(df[x,2])
+#   }
+#   else{
+#     return(NA)
+#   }
+# }
+# )
+# removeNA_Q <- testIfQ[!is.na(testIfQ)]
+# QWords <- sample(removeNA_Q, size = 2)
+# QWordsPronunciations <- c("sahnz", "kahskt")
 # saveQ <- apply(iteration, 1, function(x))
 # use random configurations to generate words, but always make each word have at least 1 phonological neighbor
 # should each rhyming word have same number of syllables, and vowels occur in same positions? can code for that
 # generalize above
-testFunction <- function(pronunciation){
+testFunction3Phonemes <- function(pronunciation){
   testIfPresent <- apply(iteration, 1, function(x){
-    if(grepl(pronunciation, df[x,2])){
-      return(df[x,2])
+    if(grepl(pronunciation, dfNew[x,2])){
+      return(dfNew[x,2])
     }
     else{
       return(NA)
@@ -275,3 +277,29 @@ testFunction <- function(pronunciation){
   removeNA <- testIfPresent[!is.na(testIfPresent)]
   return(removeNA)
 }
+#-------------------------------------- The above 3 sets of code work -----------------------
+length1 <- 1:length(mappingsToData)
+length1 <- as.data.frame(length1)
+matches <- apply(length1, 1, function(x){
+  save <- testFunction(mappingsToData[x])
+  return(save)
+})
+getLengths <- apply(length1, 1, function(x){
+  return(length(unlist(matches[x])))
+})
+# getLengths <- cbind(getLengths)
+# getLengths <- as.data.frame(getLengths)
+# getOneLength <- apply(getLengths, 1, function(y){
+#   getOneLengthEmbedded <- apply(length1, 1, function(x){
+#     if(!is.na(nchar(matches[[x]][y[x]]))){
+#       if(nchar(matches[[x]][y]) == 3){
+#         return(matches[[x]][y])
+#       }
+#       else{
+#         return(NA)
+#       }
+#     }
+#   })
+#     
+# })
+
