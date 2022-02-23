@@ -313,4 +313,10 @@ getLengths <- apply(length1, 1, function(x){
 #     
 # })
 library(gtools)
-permutations(8,2)
+perms <- permutations(8,2)
+lengthPerms <- 1:56
+iteration <- as.data.frame(lengthPerms)
+permsVowels <- apply(iteration, 1, function(x){
+  return(c(vowelPhonemes[perms[x,1]], vowelPhonemes[perms[x,2]]))
+})
+permsVowels2 <- as.data.frame(t(permsVowels))
