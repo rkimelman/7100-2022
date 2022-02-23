@@ -383,3 +383,4 @@ getWords1 <- as.vector(getWords1)
 getWords2 <- as.vector(getWords2)
 permsWords <- cbind(getWords1, getWords2)
 permsWords <- as.data.frame(permsWords)
+# can also just do all in one with replace in permutations?
