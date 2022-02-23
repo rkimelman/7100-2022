@@ -320,3 +320,66 @@ permsVowels <- apply(iteration, 1, function(x){
   return(c(vowelPhonemes[perms[x,1]], vowelPhonemes[perms[x,2]]))
 })
 permsVowels2 <- as.data.frame(t(permsVowels))
+permsPhonemes <- apply(iteration, 1, function(x){
+  return(c(mappingsToData[perms[x,1]], mappingsToData[perms[x,2]]))
+})
+permsPhonemes2 <- as.data.frame(t(permsPhonemes))
+
+
+# iterationNew <- 1:nrow(dfNew2)
+# iterationNew <- as.data.frame(iterationNew)
+# testFunction4Phonemes <- function(pronunciation){
+#   testIfPresent <- apply(iterationNew, 1, function(x){
+#     if(grepl(pronunciation[1], dfNew2[x,2])){
+#       if(grepl(pronunciation[2], dfNew2[x,2])){
+#         return(dfNew2[x,2])
+#       }
+#     }
+#     else{
+#       return(NA)
+#     }
+#   }
+#   )
+#   removeNA <- testIfPresent[!is.na(testIfPresent)]
+#   return(removeNA)
+# }
+
+
+dfNew2 <- df[which(df$X.1=="3"),,]
+iterationNew <- 1:nrow(dfNew2)
+iterationNew <- as.data.frame(iterationNew)
+testFunction3Phonemes <- function(pronunciation){
+  testIfPresent <- apply(iterationNew, 1, function(x){
+    if(grepl(pronunciation, dfNew2[x,2])){
+      return(dfNew2[x,2])
+    }
+    else{
+      return(NA)
+    }
+  }
+  )
+  removeNA <- testIfPresent[!is.na(testIfPresent)]
+  return(removeNA)
+}
+
+mappingsToData2 <- rep(mappingsToData, 7)
+length2 <- 1:length(mappingsToData2)
+length2 <- as.data.frame(length2)
+words1 <- apply(length2, 1, function(x){
+  return(testFunction3Phonemes(permsPhonemes2$V1[x]))
+})
+words2 <- apply(length2, 1, function(x){
+  return(testFunction3Phonemes(permsPhonemes2$V2[x]))
+})
+getWords1 <- apply(length2, 1, function(x){
+  return(sample(words1[[x]], size = 1))
+})
+getWords2 <- apply(length2, 1, function(x){
+  return(sample(words2[[x]], size = 1))
+})
+getWords1 <- t(getWords1)
+getWords2 <- t(getWords2)
+getWords1 <- as.vector(getWords1)
+getWords2 <- as.vector(getWords2)
+permsWords <- cbind(getWords1, getWords2)
+permsWords <- as.data.frame(permsWords)
