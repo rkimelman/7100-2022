@@ -403,6 +403,6 @@ checkEachLetter <- function(word, letterVector, lengthValue){
 lengthUniqKuSy <- 1:length(uniqKuSy)
 lengthUniqKuSy <- as.data.frame(lengthUniqKuSy)
 value <- checkEachLetter("hello", uniqKuSy, lengthUniqKuSy)
-replaceSymbols <- apply(iteration,1 , function(x){
-  
+replaceSymbols <- apply(iteration, 1 , function(x){
+  checkEachLetter(dfNew2[x,,]$X, )
 })
