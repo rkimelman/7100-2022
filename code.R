@@ -384,3 +384,5 @@ getWords2 <- as.vector(getWords2)
 permsWords <- cbind(getWords1, getWords2)
 permsWords <- as.data.frame(permsWords)
 # can also just do all in one with replace in permutations?
+kuSymbols <- c("p", "t", "k", "b", "d", "g", "C", "J", "s", "S", "z", "Z", "f", "T", "v", "D", "h", "n", "m", "G", "N", "M", "L", "l", "r", 
+               "w", "y", "i", "I", "E", "e", "@", "a", "W", "Y", "^", "c", "O", "o", "U", "u", "R", "x", "|", "X")
