@@ -386,9 +386,23 @@ permsWords <- as.data.frame(permsWords)
 # can also just do all in one with replace in permutations?
 kuSymbols <- c("p", "t", "k", "b", "d", "g", "C", "J", "s", "S", "z", "Z", "f", "T", "v", "D", "h", "n", "m", "G", "l", "w", "y", "i", "I", "E", "e", "@", "a", "W", "Y", "^", "O", "o", "U", "u")
 currentSy <- c("p", "t", "k", "b", "d", "g", "J", "_", "s", "S", "z", "Z", "f", "T", "v", "D", "h", "n", "m", "N", "l", "w", "y", "i", "I", "E",  "E", "\\{","Q", "6", "2", "V","4", "o", "U", "u")
-uniqKuSy <- c("C", "J", "G", "e", "@", "a", "W", "Y", "^", "O")
+uniqKuSy <- c("C", "J", "G", "e", "@", "a", "W", "Y", "\\^", "O")
 uniqCur <-  c("J", "_", "N", "E", "\\{", "Q", "6", "2", "V", "4")
 
-iteration <- 1:length(df)
+iteration <- 1:length(dfNew2)
 iteration <- as.data.frame(iteration)
-replaceSymbols <- apply()
+iteration2 <- 1:length(uniqKuSy)
+iteration2 <- as.data.frame(iteration2)
+checkEachLetter <- function(word, letterVector, lengthValue){
+  save <- apply(lengthValue, 1, function(x){
+    print(letterVector[x])
+    print(word)
+    return(grepl(letterVector[x], word))
+  })
+}
+lengthUniqKuSy <- 1:length(uniqKuSy)
+lengthUniqKuSy <- as.data.frame(lengthUniqKuSy)
+value <- checkEachLetter("hello", uniqKuSy, lengthUniqKuSy)
+replaceSymbols <- apply(iteration,1 , function(x){
+  
+})
