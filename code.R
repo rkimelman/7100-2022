@@ -384,5 +384,11 @@ getWords2 <- as.vector(getWords2)
 permsWords <- cbind(getWords1, getWords2)
 permsWords <- as.data.frame(permsWords)
 # can also just do all in one with replace in permutations?
-kuSymbols <- c("p", "t", "k", "b", "d", "g", "C", "J", "s", "S", "z", "Z", "f", "T", "v", "D", "h", "n", "m", "G", "l", "w", "y", "i", "I", "E", "e", "@", "a", "W", "Y", "^", "c", "O", "o", "U", "u", "R", "x", "|", "X")
-currentSy <- c("p", "t", "k", "b", "d", "g", "J", "_", "s", "S", "z", "Z", "f", "T", "v", "D", "h", "n", "m", "N", "l", "w", "y", "i", "I", "",  "E", "\\{", )
+kuSymbols <- c("p", "t", "k", "b", "d", "g", "C", "J", "s", "S", "z", "Z", "f", "T", "v", "D", "h", "n", "m", "G", "l", "w", "y", "i", "I", "E", "e", "@", "a", "W", "Y", "^", "O", "o", "U", "u")
+currentSy <- c("p", "t", "k", "b", "d", "g", "J", "_", "s", "S", "z", "Z", "f", "T", "v", "D", "h", "n", "m", "N", "l", "w", "y", "i", "I", "E",  "E", "\\{","Q", "6", "2", "V","4", "o", "U", "u")
+uniqKuSy <- c("C", "J", "G", "e", "@", "a", "W", "Y", "^", "O")
+uniqCur <-  c("J", "_", "N", "E", "\\{", "Q", "6", "2", "V", "4")
+
+iteration <- 1:length(df)
+iteration <- as.data.frame(iteration)
+replaceSymbols <- apply()
