@@ -393,7 +393,7 @@ iteration <- 1:length(dfNew2)
 iteration <- as.data.frame(iteration)
 iteration2 <- 1:length(uniqKuSy)
 iteration2 <- as.data.frame(iteration2)
-checkEachLetter <- function(word, letterVector, lengthValue){
+checkEachLetter <- function(word, letterVector, letterReplaceVector, lengthValue){
   save <- apply(lengthValue, 1, function(x){
     print(letterVector[x])
     print(word)
