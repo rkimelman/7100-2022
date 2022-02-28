@@ -369,16 +369,41 @@ iteration <- 1:length(dfNew2)
 iteration <- as.data.frame(iteration)
 iteration2 <- 1:length(uniqKuSy)
 iteration2 <- as.data.frame(iteration2)
-checkEachLetter <- function(word, letterVector, letterReplaceVector, lengthValue){
+checkEachLetter <- function(word, letterVector, letterReplace, lengthValue){
   save <- apply(lengthValue, 1, function(x){
-    print(letterVector[x])
-    print(word)
-    return(grepl(letterVector[x], word))
+    if(grepl(letterVector[x], word)){
+      newWord <- gsub(letterVector[x], letterReplace[x], word)
+      return(newWord)
+    }
+    else{
+      return(word)
+    }
   })
 }
 lengthUniqKuSy <- 1:length(uniqKuSy)
 lengthUniqKuSy <- as.data.frame(lengthUniqKuSy)
-value <- checkEachLetter("hello", uniqKuSy, lengthUniqKuSy)
+# value <- checkEachLetter("hello", uniqKuSy, lengthUniqKuSy)
+iteration <- 1:nrow(dfNew2)
+iteration <- as.data.frame(iteration)
 replaceSymbols <- apply(iteration, 1 , function(x){
-  checkEachLetter(dfNew2[x,,]$X, )
+  checkEachLetter(dfNew2[x,,]$X, uniqKuSy, uniqCur, lengthUniqKuSy)
 })
+
+get2Words <- as.data.frame(get2Words)
+colnames(permsWords) <- c("V1", "V2")
+oneAndTwoVowelWords <- rbind(get2Words, permsWords)
+iteration <- 1:nrow(oneAndTwoVowelWords)
+iteration <- as.data.frame(iteration)
+replaceSymbols <- apply(iteration, 1 , function(x){
+  checkEachLetter(oneAndTwoVowelWords[x,1], uniqCur, uniqKuSy, lengthUniqKuSy)
+})
+replaceSymbols <- as.data.frame(replaceSymbols)
+iteration <- 1:ncol(replaceSymbols)
+replaceSymbolsUniq <- sapply(iteration,  function(x){unique(replaceSymbols[x])})
+# getLetters <- apply(iteration, 1, function(x){
+#   if(length(replaceSymbolsUniq[[x]]) > 1){
+#     for(i in range(2:length(replaceSymbolsUniq[[x]]))){
+#       newWord <- gsub(, "", group)
+#     }
+#   }
+# })
