@@ -215,28 +215,6 @@ combo3 <- as.data.frame(combo3)
 
 df <- read.csv(file = "pseudoworddata.csv")
 dfNew <- df[which(df$X.1=="3"),,]
-
-# # find all words with "Q" in their pronunciations
-# iteration <- 1:nrow(df)
-# iteration <- as.data.frame(iteration)
-# # find lengths of all pronunciations
-# lengths <- apply(iteration, 1, function(x){
-#   return(nchar(df[x, 2]))
-# })
-# # test if Q is inside pronunciation, if not fill with na to be removed later
-# testIfQ <- apply(iteration, 1, function(x){
-#   if(grepl("Q", df[x,2])){
-#     return(df[x,2])
-#   }
-#   else{
-#     return(NA)
-#   }
-# }
-# )
-# removeNA_Q <- testIfQ[!is.na(testIfQ)]
-# QWords <- sample(removeNA_Q, size = 2)
-# QWordsPronunciations <- c("sahnz", "kahskt")
-# saveQ <- apply(iteration, 1, function(x))
 # use random configurations to generate words, but always make each word have at least 1 phonological neighbor
 # should each rhyming word have same number of syllables, and vowels occur in same positions? can code for that
 # generalize above
@@ -273,21 +251,7 @@ matches <- apply(length1, 1, function(x){
 getLengths <- apply(length1, 1, function(x){
   return(length(unlist(matches[x])))
 })
-# getLengths <- cbind(getLengths)
-# getLengths <- as.data.frame(getLengths)
-# getOneLength <- apply(getLengths, 1, function(y){
-#   getOneLengthEmbedded <- apply(length1, 1, function(x){
-#     if(!is.na(nchar(matches[[x]][y[x]]))){
-#       if(nchar(matches[[x]][y]) == 3){
-#         return(matches[[x]][y])
-#       }
-#       else{
-#         return(NA)
-#       }
-#     }
-#   })
-#     
-# })
+
 library(gtools)
 perms <- permutations(8,2)
 lengthPerms <- 1:56
@@ -300,26 +264,6 @@ permsPhonemes <- apply(iteration, 1, function(x){
   return(c(mappingsToData[perms[x,1]], mappingsToData[perms[x,2]]))
 })
 permsPhonemes2 <- as.data.frame(t(permsPhonemes))
-
-
-# iterationNew <- 1:nrow(dfNew2)
-# iterationNew <- as.data.frame(iterationNew)
-# testFunction4Phonemes <- function(pronunciation){
-#   testIfPresent <- apply(iterationNew, 1, function(x){
-#     if(grepl(pronunciation[1], dfNew2[x,2])){
-#       if(grepl(pronunciation[2], dfNew2[x,2])){
-#         return(dfNew2[x,2])
-#       }
-#     }
-#     else{
-#       return(NA)
-#     }
-#   }
-#   )
-#   removeNA <- testIfPresent[!is.na(testIfPresent)]
-#   return(removeNA)
-# }
-
 
 dfNew2 <- df[which(df$X.1=="3"),,]
 iterationNew <- 1:nrow(dfNew2)
@@ -370,19 +314,24 @@ iteration <- as.data.frame(iteration)
 iteration2 <- 1:length(uniqKuSy)
 iteration2 <- as.data.frame(iteration2)
 checkEachLetter <- function(word, letterVector, letterReplace, lengthValue){
+  newWord <- word
   save <- apply(lengthValue, 1, function(x){
     if(grepl(letterVector[x], word)){
       newWord <- gsub(letterVector[x], letterReplace[x], word)
+      # save2 <- apply(lengthValue, 1, function(x){
+      #   if(grepl(letterVector[x], newWord)){
+      #     newWord <- gsub(letterVector[x], letterReplace[x], newWord)
+      #     return(newWord)
+      #   }
+      # })
       return(newWord)
-    }
-    else{
-      return(word)
+      
     }
   })
+  return(save)
 }
 lengthUniqKuSy <- 1:length(uniqKuSy)
 lengthUniqKuSy <- as.data.frame(lengthUniqKuSy)
-# value <- checkEachLetter("hello", uniqKuSy, lengthUniqKuSy)
 iteration <- 1:nrow(dfNew2)
 iteration <- as.data.frame(iteration)
 replaceSymbols <- apply(iteration, 1 , function(x){
@@ -397,13 +346,80 @@ iteration <- as.data.frame(iteration)
 replaceSymbols <- apply(iteration, 1 , function(x){
   checkEachLetter(oneAndTwoVowelWords[x,1], uniqCur, uniqKuSy, lengthUniqKuSy)
 })
+replaceSymbols <- unlist(replaceSymbols)
+replaceSymbols <- as.data.frame(replaceSymbols)
+iteration <- 1:nrow(replaceSymbols)
+iteration <- as.data.frame(iteration)
+checkEachLetterAgain <- function(word, letterVector, letterReplace, lengthValue){
+  newWord <- word
+  save <- apply(lengthValue, 1, function(x){
+    if(grepl(letterVector[x], word)){
+      newWord <- gsub(letterVector[x], letterReplace[x], word)
+      # save2 <- apply(lengthValue, 1, function(x){
+      #   if(grepl(letterVector[x], newWord)){
+      #     newWord <- gsub(letterVector[x], letterReplace[x], newWord)
+      #     return(newWord)
+      #   }
+      # })
+      return(newWord)
+      
+    }
+  })
+}
+  
+checkEachLetter2 <- apply(iteration, 1, function(x){
+  checkEachLetterAgain(replaceSymbols[x,1], uniqCur, uniqKuSy, lengthUniqKuSy)
+})
+iteration <- 1:length(checkEachLetter2)
+iteration <- as.data.frame(iteration)
+checkEachLetter2Indices <- apply(iteration, 1, function(x){
+  if(any(!is.null(checkEachLetter2[x][[1]]))){
+    return(x)
+  }
+  else{
+    return(0)
+  }
+}
+)
+checkEachLetter2Indices <- checkEachLetter2Indices[checkEachLetter2Indices!=0]
+checkEachLetter2 <- unlist(checkEachLetter2)
+dup <- duplicated(checkEachLetter2)
+iteration <- 1:length(dup)
+iteration <- as.data.frame(iteration)
+dupIndices <- which(dup)
+frequenciesOne <- which(countFrequencies(checkEachLetter2) == 1)
+iteration <- 1:length(frequenciesOne)
+iteration <- as.data.frame(iteration)
+data_frequencies_one <- t(as.data.frame(frequenciesOne))
+getIndicesFrequenciesOne <- apply(iteration, 1, function(x){
+  if(which(checkEachLetter2 == colnames(data_frequencies_one)[x]) >= 1){
+    return(which(checkEachLetter2 == colnames(data_frequencies_one)[x]))
+  }
+})
+checkEachLetter2Indices <- unlist(checkEachLetter2Indices)
+checkEachLetter2 <- unlist(checkEachLetter2)
+checkEachLetter2 <- unique(checkEachLetter2)
+iteration <- 1:nrow(replaceSymbols)
+iteration <- as.data.frame(iteration)
+newWordsReplace <- apply(iteration,1,function(x){
+  if(any(checkEachLetter2Indices == x)){
+    return(checkEachLetter2[x])
+  }
+  else{
+    return(replaceSymbols[x,1])
+  }
+})
+# --------- above represents words
+replaceSymbols <- cbind(replaceSymbols)
 replaceSymbols <- as.data.frame(replaceSymbols)
 iteration <- 1:ncol(replaceSymbols)
-replaceSymbolsUniq <- sapply(iteration,  function(x){unique(replaceSymbols[x])})
-# getLetters <- apply(iteration, 1, function(x){
-#   if(length(replaceSymbolsUniq[[x]]) > 1){
-#     for(i in range(2:length(replaceSymbolsUniq[[x]]))){
-#       newWord <- gsub(, "", group)
-#     }
-#   }
-# })
+iteration <- as.data.frame(iteration)
+replaceSymbolsUniq <- sapply(iteration, function(x){unique(replaceSymbols[,x])})
+replaceSymbolsUniq <- cbind(replaceSymbolsUniq)
+replaceSymbolsUniq <- as.data.frame(replaceSymbolsUniq)
+replaceSymbolsUniqFinal <- apply(iteration, 1, function(x){
+  unlisted <- unlist(replaceSymbolsUniq[x,1])
+  uniqueValues <- unique(unlisted)
+  return(uniqueValues)
+})
+
