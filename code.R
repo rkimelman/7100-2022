@@ -314,7 +314,6 @@ iteration <- as.data.frame(iteration)
 iteration2 <- 1:length(uniqKuSy)
 iteration2 <- as.data.frame(iteration2)
 checkEachLetter <- function(word, letterVector, letterReplace, lengthValue){
-  newWord <- word
   save <- apply(lengthValue, 1, function(x){
     if(grepl(letterVector[x], word)){
       newWord <- gsub(letterVector[x], letterReplace[x], word)
@@ -366,17 +365,39 @@ replaceSymbolsNext2 <- apply(iteration, 1, function(x){
   }
 })
 
+replaceSymbolsFinal <- unlist(replaceSymbolsNext2)
+replaceSymbolsNext3 <- replaceSymbolsNext2 %>% replace(.=="NULL", NA)
+
+replaceSymbolsIndices <- apply(iteration, 1, function(x){
+  if(!is.na(replaceSymbolsNext3[x])){
+    return(x)
+  }
+})
+
+replaceSymbolsIndices <- unlist(replaceSymbolsIndices)
+
+iteration <- 1:length(replaceSymbolsFinal)
+iteration <- as.data.frame(iteration)
+replaceSymbolsAgain <- apply(iteration, 1 , function(x){
+  checkEachLetter(replaceSymbolsFinal[x], uniqKuSy, uniqCur, lengthUniqKuSy)
+})
+
+replaceSymbolsAgain2 <- apply(iteration, 1, function(x){
+  if(!is.null(replaceSymbolsAgain[[x]])){
+    save <- unlist(replaceSymbolsAgain[[x]])
+    return(save[1])
+  }
+})
+
+
+
 # ----------- ABOVE CODE WORKS
 
 replaceSymbols <- replaceSymbols %>% replace(.=="NULL", NA)
 replaceSymbols <- unlist(replaceSymbols)
 iteration <- 1:length(replaceSymbols)
 iteration <- as.data.frame(iteration)
-replaceSymbolsIndices <- apply(iteration, 1, function(x){
-  if(!is.na(replaceSymbols[x])){
-    return(x)
-  }
-})
+
 replaceSymbolsIndices <- unlist(replaceSymbolsIndices)
 iteration <- 1:nrow(replaceSymbols)
 iteration <- as.data.frame(iteration)
