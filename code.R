@@ -414,6 +414,18 @@ oneAndTwoVowelWords2[replaceSymbolsAgainIndices,1] <- replaceSymbolsAgainWordsTr
 listofFirstSetOfWords <- oneAndTwoVowelWords2[,1]
 listofFirstSetOfWords <- toString(listofFirstSetOfWords)
 
+iteration <- 1:length(oneAndTwoVowelWords2[,1])
+iteration <- as.data.frame(iteration)
+translateMiscellaneous <- apply(iteration, 1, function(x){
+  if(grepl("1", oneAndTwoVowelWords2[x,1])){
+    return(gsub("1", "ei", oneAndTwoVowelWords2[x,1]))
+  }
+  else{
+    return(oneAndTwoVowelWords2[x,1])
+  }
+})
+
+finalTranslation <- toString(translateMiscellaneous)
 #-----------------
 # ----- above code works
 
