@@ -346,8 +346,38 @@ iteration <- as.data.frame(iteration)
 replaceSymbols <- apply(iteration, 1 , function(x){
   checkEachLetter(oneAndTwoVowelWords[x,1], uniqCur, uniqKuSy, lengthUniqKuSy)
 })
+replaceSymbols2 <- unlist(replaceSymbols)
+replaceSymbols2 <- as.data.frame(cbind(replaceSymbols))
+replaceSymbolsIndices <- apply(iteration, 1, function(x){
+  if(!is.null(replaceSymbols2[x,1][[1]])){
+    return(x)
+  }
+})
+
+replaceSymbolsNext <- apply(iteration, 1, function(x){
+  if(!is.null(replaceSymbols2[x,1][[1]])){
+    return(unlist(replaceSymbols2[x,1][[1]]))
+  }
+})
+
+replaceSymbolsNext2 <- apply(iteration, 1, function(x){
+  if(!is.null(replaceSymbolsNext[[x]])){
+    return(replaceSymbolsNext[[x]][length(replaceSymbolsNext[[x]])])
+  }
+})
+
+# ----------- ABOVE CODE WORKS
+
+replaceSymbols <- replaceSymbols %>% replace(.=="NULL", NA)
 replaceSymbols <- unlist(replaceSymbols)
-replaceSymbols <- as.data.frame(replaceSymbols)
+iteration <- 1:length(replaceSymbols)
+iteration <- as.data.frame(iteration)
+replaceSymbolsIndices <- apply(iteration, 1, function(x){
+  if(!is.na(replaceSymbols[x])){
+    return(x)
+  }
+})
+replaceSymbolsIndices <- unlist(replaceSymbolsIndices)
 iteration <- 1:nrow(replaceSymbols)
 iteration <- as.data.frame(iteration)
 checkEachLetterAgain <- function(word, letterVector, letterReplace, lengthValue){
@@ -409,6 +439,16 @@ newWordsReplace <- apply(iteration,1,function(x){
     return(replaceSymbols[x,1])
   }
 })
+uniqueCheckEachLetter2 <- checkEachLetter2[getIndicesFrequenciesOne]
+uniqueCheckEachLetter2_2 <- checkEachLetter2[which(dup)]
+combine <- c(uniqueCheckEachLetter2, uniqueCheckEachLetter2_2)
+iteration <- 1:length(combine)
+iteration <- as.data.frame(iteration)
+final <- apply(iteration, 1, function(x){
+  checkEachLetterAgain(combine[x], uniqCur, uniqKuSy, lengthUniqKuSy)
+})
+combine[2] <- "CaT"
+combine[3] <- "C^l"
 # --------- above represents words
 replaceSymbols <- cbind(replaceSymbols)
 replaceSymbols <- as.data.frame(replaceSymbols)
