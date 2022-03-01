@@ -118,7 +118,7 @@ getIndicesOfLetters <- function(string){
   }
 }
 
-iteration <- 1:length(indicesOfLetters)
+# iteration <- 1:length(indicesOfLetters)
 iterationForRhymes <- 1:length(rhymeSchemes)
 iterationForRhymes <- cbind(iterationForRhymes)
 letters <- apply(iterationForRhymes, 1, function(x){getIndicesOfLetters(rowRhymeSchemes[x,]$rhymeSchemes)})
@@ -244,13 +244,13 @@ get2Words <- t(get2Words)
 #-------------------------------------- The above code works -----------------------
 length1 <- 1:length(mappingsToData)
 length1 <- as.data.frame(length1)
-matches <- apply(length1, 1, function(x){
-  save <- testFunction(mappingsToData[x])
-  return(save)
-})
-getLengths <- apply(length1, 1, function(x){
-  return(length(unlist(matches[x])))
-})
+# matches <- apply(length1, 1, function(x){
+#   save <- testFunction(mappingsToData[x])
+#   return(save)
+# })
+# getLengths <- apply(length1, 1, function(x){
+#   return(length(unlist(matches[x])))
+# })
 
 library(gtools)
 perms <- permutations(8,2)
@@ -362,7 +362,7 @@ replaceSymbolsAgainIndices <- unlist(replaceSymbolsAgainIndices)
 
 replaceSymbolsAgainWords <- apply(iteration, 1, function(x){
   if(length(unlist(replaceSymbols2[x,1][[1]])) > 1){
-    return(unlist(replaceSymbols2[x,1][[1]])[1])
+    return(unlist(replaceSymbols2[x,1][[1]])[2])
   }
 })
 iteration <- 1:nrow(replaceSymbols2)
@@ -397,18 +397,27 @@ oneAndTwoVowelWords2 <- oneAndTwoVowelWords
 oneAndTwoVowelWords2[replaceSymbolsOnlyOnceWordsIndices,1] <- replaceSymbolsOnlyOnceWords
 
 replaceSymbolsAgainWords <- unlist(replaceSymbolsAgainWords)
+iteration <- 1:length(replaceSymbolsAgainWords)
+iteration <- as.data.frame(iteration)
+replaceSymbolsAgainWordsTranslation <- apply(iteration, 1 , function(x){
+  checkEachLetter(replaceSymbolsAgainWords[x], uniqCur, uniqKuSy, lengthUniqKuSy)
+})
+
+replaceSymbolsAgainWordsTranslation <- unlist(replaceSymbolsAgainWordsTranslation)
 # iteration <- 1:length(replaceSymbolsAgainWords)
 # iteration <- as.data.frame(iteration)
 # replaceSymbolsAgain <- apply(iteration, 1 , function(x){
 #   checkEachLetter(replaceSymbolsAgainWords[x], uniqCur, uniqKuSy, lengthUniqKuSy)
 # })
 # replaceSymbolsAgain <- unlist(replaceSymbolsAgain)
-oneAndTwoVowelWords2[replaceSymbolsAgainIndices,1] <- replaceSymbolsAgainWords
+oneAndTwoVowelWords2[replaceSymbolsAgainIndices,1] <- replaceSymbolsAgainWordsTranslation
 listofFirstSetOfWords <- oneAndTwoVowelWords2[,1]
 listofFirstSetOfWords <- toString(listofFirstSetOfWords)
 
 #-----------------
 # ----- above code works
+
+
 # replaceSymbolsNext <- apply(iteration, 1, function(x){
 #   if(!is.null(replaceSymbols2[x,1][[1]])){
 #     return(unlist(replaceSymbols2[x,1][[1]]))
