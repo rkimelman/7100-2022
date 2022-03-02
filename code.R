@@ -425,7 +425,16 @@ translateMiscellaneous <- apply(iteration, 1, function(x){
   }
 })
 
-finalTranslation <- toString(translateMiscellaneous)
+translateMiscellaneous2 <- apply(iteration, 1, function(x){
+  if(grepl("7", translateMiscellaneous[x])){
+    return(gsub("7", "i", translateMiscellaneous[x]))
+  }
+  else{
+    return(translateMiscellaneous[x])
+  }
+})
+
+finalTranslation <- toString(translateMiscellaneous2)
 #-----------------
 # ----- above code works
 
