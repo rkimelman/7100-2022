@@ -21,7 +21,7 @@ spinePipe(mcf, 2:8, 1) -> mcf[rev(c('Stress', 'Tone', 'Break', 'Rhyme', 'IPA', '
 mcf$Token %hum>% c(~segments(Break %in% c('3', '4','5')), by ~ File) -> mcf$Phrase
 mcf$Token %hum<% c(~list(paste(Lyrics, collapse = ' ')), by ~ File ~ Phrase)
 rhymeSchemes <- mcf$Token %hum<% c(~list(Rhyme), by ~ File ~ Phrase)
-
+lyrics <- mcf$Token %hum<% c(~list(Lyrics), by ~ File ~ Phrase)
 countFrequencies <- function(element){
   frequencyCount <- unlist(element)
   frequencyCount <- table(frequencyCount)
