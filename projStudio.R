@@ -122,3 +122,5 @@ save <- cbind(lyrics)
 lyricsText <- apply(iteration, 1, function(x){
   text(save[x,1]$lyrics, nullTokens = FALSE)}
   )
+lyricsData <- as.data.frame(cbind(lyricsText))
+write.csv(lyricsData,"Path to export the DataFrame\\File Name.csv", row.names = FALSE)
