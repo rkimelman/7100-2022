@@ -507,7 +507,7 @@ first50RhymingStimuliData <- apply(iteration, 1, function(x){
 })
 first50RhymingStimuliData <- t(first50RhymingStimuliData)
 first50RhymingStimuliData <- as.data.frame(first50RhymingStimuliData)
-write.csv(first50RhymingStimuliData,"first50RhymingStimuliData.csv", row.names = FALSE)
+# write.csv(first50RhymingStimuliData,"first50RhymingStimuliData.csv", row.names = FALSE)
 iteration4 <- 1:14
 iteration4 <- as.data.frame(iteration4)
 
