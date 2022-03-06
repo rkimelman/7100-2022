@@ -604,27 +604,28 @@ first100StimuliDataThreeVowelEndRhymesOnly <- t(first100StimuliDataThreeVowelEnd
 first100StimuliDataThreeVowelEndRhymesOnly <- as.data.frame(first100StimuliDataThreeVowelEndRhymesOnly)
 write.csv(first100StimuliDataThreeVowelEndRhymesOnly,"first50EndThreeVowelRhymingStimuliData.csv", row.names = FALSE)
 
+iteration <- 1:400
+iteration <- as.data.frame(iteration)
+first400Stimuli <- apply(iteration, 1, function(x){
+  return(as.data.frame(t(vector(mode = "character", length = 9))))
+})
 iteration3 <- 237:336
 iteration3 <- as.data.frame(iteration3)
-first100StimuliDataThreeVowelInternalRhymesOnly <- apply(iteration3, 1, function(x){
+first100StimuliDataThreeVowelInternalRhymesOnly2 <- apply(iteration3, 1, function(x){
   # get2WordsData, twoVowelRhymes
-  if(x%%2 == 1){
-    first300Stimuli[[x]][7:9] <- threeVowelCombosCombined[x,1:3]
-  }
-  else{
-    first300Stimuli[[x]][7:9] <- threeVowelCombosCombined[x-1,4:6]
-  }
-  return(first300Stimuli[[x]])
+  first400Stimuli[[x]][1:3] <- threeVowelCombosCombined[x,1:3]
+  first400Stimuli[[x]][7:9] <- threeVowelCombosCombined[x,4:6]
+  return(first400Stimuli[[x]])
 })
-first100StimuliDataThreeVowelEndRhymesOnly <- cbind(first100StimuliDataThreeVowelEndRhymesOnly)
+first100StimuliDataThreeVowelInternalRhymesOnly2 <- cbind(first100StimuliDataThreeVowelInternalRhymesOnly2)
 iteration3 <- 1:100
 iteration3 <- as.data.frame(iteration3)
-first100StimuliDataThreeVowelEndRhymesOnly <- apply(iteration3, 1, function(x){
-  return(unlist(first100StimuliDataThreeVowelEndRhymesOnly[x]))
+first100StimuliDataThreeVowelInternalRhymesOnly2 <- apply(iteration3, 1, function(x){
+  return(unlist(first100StimuliDataThreeVowelInternalRhymesOnly2[x]))
 })
-first100StimuliDataThreeVowelEndRhymesOnly <- t(first100StimuliDataThreeVowelEndRhymesOnly)
-first100StimuliDataThreeVowelEndRhymesOnly <- as.data.frame(first100StimuliDataThreeVowelEndRhymesOnly)
-write.csv(first100StimuliDataThreeVowelEndRhymesOnly,"first50EndThreeVowelRhymingStimuliData.csv", row.names = FALSE)
+first100StimuliDataThreeVowelInternalRhymesOnly2 <- t(first100StimuliDataThreeVowelInternalRhymesOnly2)
+first100StimuliDataThreeVowelInternalRhymesOnly2 <- as.data.frame(first100StimuliDataThreeVowelInternalRhymesOnly2)
+write.csv(first100StimuliDataThreeVowelInternalRhymesOnly2,"second50InternalThreeVowelRhymingStimuliData.csv", row.names = FALSE)
 threeVowelCombosDF1
 threeVowelCombosDF2
 
