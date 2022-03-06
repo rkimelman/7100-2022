@@ -13,9 +13,10 @@ dfNew <- df[which(df$X.1=="4"),,]
 # use random configurations to generate words, but always make each word have at least 1 phonological neighbor
 # should each rhyming word have same number of syllables, and vowels occur in same positions? can code for that
 # generalize above
-
-testFunction3Phonemes <- function(pronunciation, iteration){
-  testIfPresent <- apply(iteration, 1, function(x){
+iterationValue <- 1:56
+iterationValue <- as.data.frame(iterationValue)
+testFunction3Phonemes <- function(pronunciation){
+  testIfPresent <- apply(iterationValue, 1, function(x){
     if(grepl(pronunciation, dfNew[x,2])){
       return(dfNew[x,2])
     }
@@ -84,7 +85,7 @@ mappingsToData2 <- rep(mappingsToData, 7)
 length2 <- 1:length(mappingsToData2)
 length2 <- as.data.frame(length2)
 words1 <- apply(iteration, 1, function(x){
-  return(testFunction3Phonemes(permsPhonemes2$V1[x]))
+  return(testFunction4Phonemes(permsPhonemes2$V1[x]))
 })
 words2 <- apply(iteration, 1, function(x){
   return(testFunction4Phonemes(permsPhonemes2$V2[x]))
@@ -262,3 +263,5 @@ translateMiscellaneous2 <- apply(iteration, 1, function(x){
 })
 
 finalTranslation <- toString(translateMiscellaneous2)
+threeVowelCombos2 <- threeVowelCombos2[-(1:8),,]
+#write.csv(threeVowelCombos2,"threeVowelCombos2.csv", row.names = FALSE)

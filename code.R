@@ -338,6 +338,9 @@ replaceSymbols <- apply(iteration, 1 , function(x){
 })
 
 get2Words <- as.data.frame(get2Words)
+get2WordsData <- as.data.frame(get2Words)
+get2WordsData <- as.data.frame(t(get2WordsData))
+#write.csv(get2WordsData,"oneVowelRhymeCombos.csv", row.names = FALSE)
 colnames(permsWords) <- c("V1", "V2")
 oneAndTwoVowelWords <- rbind(get2Words, permsWords)
 iteration <- 1:nrow(oneAndTwoVowelWords)
@@ -440,11 +443,13 @@ finalTranslation <- toString(translateMiscellaneous2)
 
 allPossibleWords <- df[7:nrow(df),,]$X
 oneSetOfTwoVowelWords <- permsWords
+
 # after the above, run again to get second set for rhyming
 # after running relevant chunk, get second set below
 # -------------------------------------------------------------        RUN BELOW SEPARATELY            -----------------------------------------------------------------------
 secondSetOfTwoVowelWords <- permsWords
 twoVowelRhymes <- cbind(oneSetOfTwoVowelWords, secondSetOfTwoVowelWords)
+#write.csv(twoVowelRhymes,"twoVowelRhymeCombos.csv", row.names = FALSE)
 #-----------------
 # ----- above code works
 
