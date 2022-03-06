@@ -521,6 +521,17 @@ first100StimuliDataTwoVowelRhymesOnlyEndRhyme <- apply(iteration4, 1, function(x
   }
   return(first100Stimuli[[x]])
 })
+first100StimuliDataTwoVowelRhymesOnlyEndRhymeData <- cbind(first100StimuliDataTwoVowelRhymesOnlyEndRhyme)
+first100StimuliDataTwoVowelRhymesOnlyEndRhymeData <- as.data.frame(first100StimuliDataTwoVowelRhymesOnlyEndRhymeData)
+iteration <- 1:14
+iteration <- as.data.frame(iteration)
+first100StimuliDataTwoVowelRhymesOnlyEndRhymeData <- apply(iteration, 1, function(x){
+  return(unlist(first100StimuliDataTwoVowelRhymesOnlyEndRhymeData[x,]))
+})
+first100StimuliDataTwoVowelRhymesOnlyEndRhymeData <- t(first100StimuliDataTwoVowelRhymesOnlyEndRhymeData)
+write.csv(first100StimuliDataTwoVowelRhymesOnlyEndRhymeData,"first14EndTwoVowelRhymingStimuliData.csv", row.names = FALSE)
+
+
 
 # replaceSymbolsNext <- apply(iteration, 1, function(x){
 #   if(!is.null(replaceSymbols2[x,1][[1]])){
