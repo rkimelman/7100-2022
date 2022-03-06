@@ -261,8 +261,52 @@ translateMiscellaneous2 <- apply(iteration, 1, function(x){
     return(translateMiscellaneous[x])
   }
 })
+translateMiscellaneous3 <- apply(iteration, 1, function(x){
+  if(grepl("1", threeVowelCombos2[x,2])){
+    return(gsub("1", "ei", threeVowelCombos2[x,2]))
+  }
+  else{
+    return(threeVowelCombos2[x,2])
+  }
+})
+
+translateMiscellaneous4 <- apply(iteration, 1, function(x){
+  if(grepl("7", translateMiscellaneous3[x])){
+    return(gsub("7", "i", translateMiscellaneous3[x]))
+  }
+  else{
+    return(translateMiscellaneous3[x])
+  }
+})
+translateMiscellaneous5 <- apply(iteration, 1, function(x){
+  if(grepl("1", threeVowelCombos2[x,3])){
+    return(gsub("1", "ei", threeVowelCombos2[x,3]))
+  }
+  else{
+    return(threeVowelCombos2[x,3])
+  }
+})
+
+translateMiscellaneous6 <- apply(iteration, 1, function(x){
+  if(grepl("7", translateMiscellaneous5[x])){
+    return(gsub("7", "i", translateMiscellaneous5[x]))
+  }
+  else{
+    return(translateMiscellaneous5[x])
+  }
+})
 
 finalTranslation <- toString(translateMiscellaneous2)
-threeVowelCombos2 <- threeVowelCombos2[-(1:8),,]
-threeVowelCombos2 <- threeVowelCombos2[,-1,]
-#write.csv(threeVowelCombos2,"threeVowelCombos2.csv", row.names = FALSE)
+finalTranslation2 <- toString(translateMiscellaneous4)
+finalTranslation3 <- toString(translateMiscellaneous6)
+
+threeVowelCombosDFFirstColumn <- as.data.frame(translateMiscellaneous2)
+threeVowelCombosDFSecondColumn <- as.data.frame(translateMiscellaneous4)
+threeVowelCombosDFThirdColumn <- as.data.frame(translateMiscellaneous6)
+
+threeVowelCombosDF1 <- cbind(threeVowelCombosDFFirstColumn, threeVowelCombosDFSecondColumn, threeVowelCombosDFThirdColumn)
+#write.csv(threeVowelCombosDF1,"threeVowelCombos1.csv", row.names = FALSE)
+
+
+threeVowelCombosDF1 <- read.csv(file = 'threeVowelCombos1.csv')
+threeVowelCombosDF2 <- read.csv(file = 'threeVowelCombos2.csv')
