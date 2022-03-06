@@ -306,6 +306,7 @@ threeVowelCombosDFThirdColumn <- as.data.frame(translateMiscellaneous6)
 
 threeVowelCombosDF1 <- cbind(threeVowelCombosDFFirstColumn, threeVowelCombosDFSecondColumn, threeVowelCombosDFThirdColumn)
 write.csv(threeVowelCombosDF1,"threeVowelCombos1.csv", row.names = FALSE)
+# saved the one below in a previous run (below when we set permsPhonemes2)
 write.csv(threeVowelCombosDF2,"threeVowelCombos2.csv", row.names = FALSE)
 
 
