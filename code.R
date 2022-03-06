@@ -482,7 +482,9 @@ first100StimuliDataOneVowelRhymesOnly <- apply(iteration2, 1, function(x){
   first100Stimuli[[x]][9] <- oneAndTwoVowelRhymesComboDf[x,2]
   return(first100Stimuli[[x]])
 })
-iteration3 <- 1:56
+first100StimuliDataOneVowelRhymesOnlyData <- cbind(first100StimuliDataOneVowelRhymesOnly)
+first100StimuliDataOneVowelRhymesOnlyData2 <- as.data.frame(first100StimuliDataOneVowelRhymesOnlyData)
+iteration3 <- 1:42
 iteration3 <- as.data.frame(iteration3)
 saveVector3 <- twoVowelRhymes[floor(runif(56, min=1, max=56)),]
 names(saveVector3)[names(saveVector3) == 'getWords1'] <- 'V3'
@@ -493,6 +495,26 @@ first100StimuliDataTwoVowelRhymesOnly <- apply(iteration3, 1, function(x){
   first100Stimuli[[x]][8:9] <- saveVector3[x,3:4]
   return(first100Stimuli[[x]])
 })
+first100StimuliDataTwoVowelRhymesOnlyData <- cbind(first100StimuliDataTwoVowelRhymesOnly)
+first100StimuliDataTwoVowelRhymesOnlyData2 <- as.data.frame(first100StimuliDataTwoVowelRhymesOnlyData)
+names(first100StimuliDataOneVowelRhymesOnlyData2)[names(first100StimuliDataOneVowelRhymesOnlyData2) == 'first100StimuliDataOneVowelRhymesOnly'] <- 'V1'
+names(first100StimuliDataTwoVowelRhymesOnlyData2)[names(first100StimuliDataTwoVowelRhymesOnlyData2) == 'first100StimuliDataTwoVowelRhymesOnly'] <- 'V1'
+first50RhymingStimuli <- rbind(first100StimuliDataOneVowelRhymesOnlyData2, first100StimuliDataTwoVowelRhymesOnlyData2)
+write.csv(twoVowelRhymes,"twoVowelRhymeCombos.csv", row.names = FALSE)
+iteration4 <- 1:14
+iteration4 <- as.data.frame(iteration4)
+
+first100StimuliDataTwoVowelRhymesOnlyEndRhyme <- apply(iteration4, 1, function(x){
+  # get2WordsData, twoVowelRhymes
+  if(x%%2 == 1){
+    first100Stimuli[[x]][8:9] <- saveVector3[x,1:2]
+  }
+  else{
+    first100Stimuli[[x]][8:9] <- saveVector3[x-1,3:4]
+  }
+  return(first100Stimuli[[x]])
+})
+
 # replaceSymbolsNext <- apply(iteration, 1, function(x){
 #   if(!is.null(replaceSymbols2[x,1][[1]])){
 #     return(unlist(replaceSymbols2[x,1][[1]]))
