@@ -435,9 +435,30 @@ translateMiscellaneous2 <- apply(iteration, 1, function(x){
 })
 
 finalTranslation <- toString(translateMiscellaneous2)
+
+# stimuli
+
+allPossibleWords <- df[7:nrow(df),,]$X
+oneSetOfTwoVowelWords <- permsWords
+# after the above, run again to get second set for rhyming
+# after running relevant chunk, get second set below
+# -------------------------------------------------------------        RUN BELOW SEPARATELY            -----------------------------------------------------------------------
+secondSetOfTwoVowelWords <- permsWords
+twoVowelRhymes <- cbind(oneSetOfTwoVowelWords, secondSetOfTwoVowelWords)
 #-----------------
 # ----- above code works
 
+iteration <- 1:100
+iteration <- as.data.frame(iteration)
+first100Stimuli <- apply(iteration, 1, function(x){
+  return(as.data.frame(t(vector(mode = "character", length = 9))))
+})
+
+second100Stimuli <- apply(iteration, 1, function(x){
+  vector1 <- vector(mode = "character", length = 9)
+  vector2 <- vector(mode = "character", length = 9)
+  return(as.data.frame(rbind(vector1, vector2)))
+})
 
 # replaceSymbolsNext <- apply(iteration, 1, function(x){
 #   if(!is.null(replaceSymbols2[x,1][[1]])){
