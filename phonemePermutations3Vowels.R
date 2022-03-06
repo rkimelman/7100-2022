@@ -144,9 +144,9 @@ replaceSymbols <- apply(iteration, 1 , function(x){
   checkEachLetter(dfNew2[x,,]$X, uniqCur, uniqKuSy, lengthUniqKuSy)
 })
 
-get3Words <- as.data.frame(get3Words)
+getWords3 <- as.data.frame(getWords3)
 colnames(permsWords) <- c("V1", "V2", "V3")
-threeVowelCombos <- rbind(get3Words, permsWords)
+threeVowelCombos <- cbind(getWords3, permsWords)
 iteration <- 1:nrow(threeVowelCombos)
 iteration <- as.data.frame(iteration)
 replaceSymbols <- apply(iteration, 1 , function(x){
@@ -264,4 +264,5 @@ translateMiscellaneous2 <- apply(iteration, 1, function(x){
 
 finalTranslation <- toString(translateMiscellaneous2)
 threeVowelCombos2 <- threeVowelCombos2[-(1:8),,]
+threeVowelCombos2 <- threeVowelCombos2[,-1,]
 #write.csv(threeVowelCombos2,"threeVowelCombos2.csv", row.names = FALSE)
