@@ -500,7 +500,14 @@ first100StimuliDataTwoVowelRhymesOnlyData2 <- as.data.frame(first100StimuliDataT
 names(first100StimuliDataOneVowelRhymesOnlyData2)[names(first100StimuliDataOneVowelRhymesOnlyData2) == 'first100StimuliDataOneVowelRhymesOnly'] <- 'V1'
 names(first100StimuliDataTwoVowelRhymesOnlyData2)[names(first100StimuliDataTwoVowelRhymesOnlyData2) == 'first100StimuliDataTwoVowelRhymesOnly'] <- 'V1'
 first50RhymingStimuli <- rbind(first100StimuliDataOneVowelRhymesOnlyData2, first100StimuliDataTwoVowelRhymesOnlyData2)
-write.csv(twoVowelRhymes,"twoVowelRhymeCombos.csv", row.names = FALSE)
+iteration <- 1:50
+iteration <- as.data.frame(iteration)
+first50RhymingStimuliData <- apply(iteration, 1, function(x){
+  return(unlist(first50RhymingStimuli[x,]))
+})
+first50RhymingStimuliData <- t(first50RhymingStimuliData)
+first50RhymingStimuliData <- as.data.frame(first50RhymingStimuliData)
+write.csv(first50RhymingStimuliData,"first50RhymingStimuliData.csv", row.names = FALSE)
 iteration4 <- 1:14
 iteration4 <- as.data.frame(iteration4)
 
