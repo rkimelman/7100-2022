@@ -465,6 +465,20 @@ second100Stimuli <- apply(iteration, 1, function(x){
   return(as.data.frame(rbind(vector1, vector2)))
 })
 
+first100Stimuli <- apply(iteration, 1, function(x){
+  # get2WordsData, twoVowelRhymes
+  saveVector <- get2WordsData[floor(runif(8, min=1, max=8)),]
+  saveVector2 <- twoVowelRhymes[floor(runif(56, min=1, max=56)),]
+  names(saveVector2)[names(saveVector2) == 'getWords1'] <- 'V3'
+  names(saveVector2)[names(saveVector2) == 'getWords2'] <- 'V4'
+  saveVector2$V5 <- paste(saveVector2$V1, saveVector2$V2)
+  saveVector2$V6 <- paste(saveVector2$V3, saveVector2$V4)
+  saveVector2 <- saveVector2[,-(1:4)]
+  names(saveVector2)[names(saveVector2) == 'V5'] <- 'V1'
+  names(saveVector2)[names(saveVector2) == 'V6'] <- 'V2'
+  oneAndTwoVowelRhymesComboDf <- rbind(saveVector, saveVector2)
+})
+
 # replaceSymbolsNext <- apply(iteration, 1, function(x){
 #   if(!is.null(replaceSymbols2[x,1][[1]])){
 #     return(unlist(replaceSymbols2[x,1][[1]]))
