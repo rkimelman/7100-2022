@@ -305,7 +305,9 @@ threeVowelCombosDFSecondColumn <- as.data.frame(translateMiscellaneous4)
 threeVowelCombosDFThirdColumn <- as.data.frame(translateMiscellaneous6)
 
 threeVowelCombosDF1 <- cbind(threeVowelCombosDFFirstColumn, threeVowelCombosDFSecondColumn, threeVowelCombosDFThirdColumn)
-#write.csv(threeVowelCombosDF1,"threeVowelCombos1.csv", row.names = FALSE)
+write.csv(threeVowelCombosDF1,"threeVowelCombos1.csv", row.names = FALSE)
+write.csv(threeVowelCombosDF2,"threeVowelCombos2.csv", row.names = FALSE)
+
 
 
 threeVowelCombosDF1 <- read.csv(file = 'threeVowelCombos1.csv')
