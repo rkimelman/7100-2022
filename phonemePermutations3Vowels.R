@@ -428,6 +428,7 @@ first50NonRhymingData <- apply(iteration, 1, function(x){
 })
 
 first50NonRhymingData <- as.data.frame(t(first50NonRhymingData))
+#write.csv(first50NonRhymingData,"vowelRhymeCombosAndData/fourth50NonRhymingData.csv", row.names = FALSE)
 
 second50InternalThreeVowelRhymingStimuliData <- read.csv(file = 'vowelRhymeCombosAndData/second50InternalThreeVowelRhymingStimuliData.csv')
 
