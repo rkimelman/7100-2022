@@ -307,10 +307,16 @@ threeVowelCombosDFThirdColumn <- as.data.frame(translateMiscellaneous6)
 threeVowelCombosDF1 <- cbind(threeVowelCombosDFFirstColumn, threeVowelCombosDFSecondColumn, threeVowelCombosDFThirdColumn)
 write.csv(threeVowelCombosDF1,"threeVowelCombos1.csv", row.names = FALSE)
 # saved the one below in a previous run (below when we set permsPhonemes2)
-write.csv(threeVowelCombosDF2,"threeVowelCombos2.csv", row.names = FALSE)
+# write.csv(threeVowelCombosDF2,"threeVowelCombos2.csv", row.names = FALSE)
 
 
+first50RhymingStimuliData <- read.csv(file = 'vowelRhymeCombosAndData/first50RhymingStimuliData.csv')
+first14EndTwoVowelRhymingStimuliData <- read.csv(file = 'vowelRhymeCombosAndData/first14EndTwoVowelRhymingStimuliData.csv')
+first36internalThreeVowelRhymingStimuliData <- read.csv(file = 'vowelRhymeCombosAndData/first36internalThreeVowelRhymingStimuliData.csv')
+first50EndThreeVowelRhymingStimuliData <- read.csv(file = 'vowelRhymeCombosAndData/first50EndThreeVowelRhymingStimuliData.csv')
+first50SplitThreeVowelRhymingStimuliData <- read.csv(file = 'vowelRhymeCombosAndData/first50SplitThreeVowelRhymingStimuliData.csv')
+second50InternalThreeVowelRhymingStimuliData <- read.csv(file = 'vowelRhymeCombosAndData/second50InternalThreeVowelRhymingStimuliData.csv')
 
+oneVowelRhymeCombos <- read.csv(file = 'vowelRhymeCombosAndData/oneVowelRhymeCombos.csv')
 
-threeVowelCombosDF1 <- read.csv(file = 'threeVowelCombos1.csv')
 threeVowelCombosDF2 <- read.csv(file = 'threeVowelCombos2.csv')
