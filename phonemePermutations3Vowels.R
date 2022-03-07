@@ -307,15 +307,118 @@ threeVowelCombosDFThirdColumn <- as.data.frame(translateMiscellaneous6)
 threeVowelCombosDF1 <- cbind(threeVowelCombosDFFirstColumn, threeVowelCombosDFSecondColumn, threeVowelCombosDFThirdColumn)
 write.csv(threeVowelCombosDF1,"threeVowelCombos1.csv", row.names = FALSE)
 # saved the one below in a previous run (below when we set permsPhonemes2)
-# write.csv(threeVowelCombosDF2,"threeVowelCombos2.csv", row.names = FALSE)
+write.csv(threeVowelCombosDF2,"threeVowelCombos2.csv", row.names = FALSE)
 
 
 first50RhymingStimuliData <- read.csv(file = 'vowelRhymeCombosAndData/first50RhymingStimuliData.csv')
+
+iteration <- 1:50
+iteration2 <- 1:9
+iteration <- as.data.frame(iteration)
+iteration2 <- as.data.frame(iteration2)
+replace <- apply(iteration, 1, function(x){
+  returnValue <- apply(iteration2, 1, function(y){
+    if(is.na(first50RhymingStimuliData[x,y]) || first50RhymingStimuliData[x,y] == ""){
+      return(sample(allWords$X,1))
+    }
+    else{
+      return(first50RhymingStimuliData[x,y])
+    }
+  })
+  return(returnValue)
+})
+replaceData1 <- as.data.frame(t(replace))
+
+
+
 first14EndTwoVowelRhymingStimuliData <- read.csv(file = 'vowelRhymeCombosAndData/first14EndTwoVowelRhymingStimuliData.csv')
+
+iteration <- 1:28
+iteration2 <- 1:9
+iteration <- as.data.frame(iteration)
+iteration2 <- as.data.frame(iteration2)
+replace <- apply(iteration, 1, function(x){
+  returnValue <- apply(iteration2, 1, function(y){
+    if(is.na(first14EndTwoVowelRhymingStimuliData[x,y]) || first14EndTwoVowelRhymingStimuliData[x,y] == ""){
+      return(sample(allWords$X,1))
+    }
+    else{
+      return(first14EndTwoVowelRhymingStimuliData[x,y])
+    }
+  })
+  return(returnValue)
+})
+replaceData2 <- as.data.frame(t(replace))
+
 first36internalThreeVowelRhymingStimuliData <- read.csv(file = 'vowelRhymeCombosAndData/first36internalThreeVowelRhymingStimuliData.csv')
+
+iteration <- 1:36
+iteration2 <- 1:9
+iteration <- as.data.frame(iteration)
+iteration2 <- as.data.frame(iteration2)
+replace <- apply(iteration, 1, function(x){
+  returnValue <- apply(iteration2, 1, function(y){
+    if(is.na(first36internalThreeVowelRhymingStimuliData[x,y]) || first36internalThreeVowelRhymingStimuliData[x,y] == ""){
+      return(sample(allWords$X,1))
+    }
+    else{
+      return(first36internalThreeVowelRhymingStimuliData[x,y])
+    }
+  })
+  return(returnValue)
+})
+replaceData3 <- as.data.frame(t(replace))
+
+first100Rhymes <- rbind(replaceData1, replaceData2, replaceData3)
+
+write.csv(first100Rhymes,"vowelRhymeCombosAndData/first100RhymesFinal.csv", row.names = FALSE)
+
 first50EndThreeVowelRhymingStimuliData <- read.csv(file = 'vowelRhymeCombosAndData/first50EndThreeVowelRhymingStimuliData.csv')
+
+iteration <- 1:100
+iteration2 <- 1:9
+iteration <- as.data.frame(iteration)
+iteration2 <- as.data.frame(iteration2)
+replace <- apply(iteration, 1, function(x){
+  returnValue <- apply(iteration2, 1, function(y){
+    if(is.na(first50EndThreeVowelRhymingStimuliData[x,y]) || first50EndThreeVowelRhymingStimuliData[x,y] == ""){
+      return(sample(allWords$X,1))
+    }
+    else{
+      return(first50EndThreeVowelRhymingStimuliData[x,y])
+    }
+  })
+  return(returnValue)
+})
+replaceData4 <- as.data.frame(t(replace))
+
 first50SplitThreeVowelRhymingStimuliData <- read.csv(file = 'vowelRhymeCombosAndData/first50SplitThreeVowelRhymingStimuliData.csv')
+
+iteration <- 1:100
+iteration2 <- 1:9
+iteration <- as.data.frame(iteration)
+iteration2 <- as.data.frame(iteration2)
+replace <- apply(iteration, 1, function(x){
+  returnValue <- apply(iteration2, 1, function(y){
+    if(is.na(first50SplitThreeVowelRhymingStimuliData[x,y]) || first50SplitThreeVowelRhymingStimuliData[x,y] == ""){
+      return(sample(allWords$X,1))
+    }
+    else{
+      return(first50SplitThreeVowelRhymingStimuliData[x,y])
+    }
+  })
+  return(returnValue)
+})
+replaceData5 <- as.data.frame(t(replace))
+
+second100Rhymes <- rbind(replaceData4, replaceData5)
+
+write.csv(second100Rhymes,"vowelRhymeCombosAndData/second100RhymesFinal.csv", row.names = FALSE)
+
+
 second50InternalThreeVowelRhymingStimuliData <- read.csv(file = 'vowelRhymeCombosAndData/second50InternalThreeVowelRhymingStimuliData.csv')
+
+allWords <- df[-(1:7),,]
 
 oneVowelRhymeCombos <- read.csv(file = 'vowelRhymeCombosAndData/oneVowelRhymeCombos.csv')
 
