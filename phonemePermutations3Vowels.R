@@ -413,8 +413,21 @@ replaceData5 <- as.data.frame(t(replace))
 
 second100Rhymes <- rbind(replaceData4, replaceData5)
 
-write.csv(second100Rhymes,"vowelRhymeCombosAndData/second100RhymesFinal.csv", row.names = FALSE)
+# write.csv(second100Rhymes,"vowelRhymeCombosAndData/second100RhymesFinal.csv", row.names = FALSE)
 
+iteration <- 1:(50)
+iteration2 <- 1:9
+iteration <- as.data.frame(iteration)
+iteration2 <- as.data.frame(iteration2)
+
+first50NonRhymingData <- apply(iteration, 1, function(x){
+  returnValue <- apply(iteration2, 1, function(x){
+    return(sample(df[,1,],1))
+  })
+  return(returnValue)  
+})
+
+first50NonRhymingData <- as.data.frame(t(first50NonRhymingData))
 
 second50InternalThreeVowelRhymingStimuliData <- read.csv(file = 'vowelRhymeCombosAndData/second50InternalThreeVowelRhymingStimuliData.csv')
 
