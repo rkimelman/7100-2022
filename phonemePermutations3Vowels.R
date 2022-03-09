@@ -305,9 +305,9 @@ threeVowelCombosDFSecondColumn <- as.data.frame(translateMiscellaneous4)
 threeVowelCombosDFThirdColumn <- as.data.frame(translateMiscellaneous6)
 
 threeVowelCombosDF1 <- cbind(threeVowelCombosDFFirstColumn, threeVowelCombosDFSecondColumn, threeVowelCombosDFThirdColumn)
-write.csv(threeVowelCombosDF1,"threeVowelCombos1.csv", row.names = FALSE)
+#write.csv(threeVowelCombosDF1,"threeVowelCombos1.csv", row.names = FALSE)
 # saved the one below in a previous run (below when we set permsPhonemes2)
-write.csv(threeVowelCombosDF2,"threeVowelCombos2.csv", row.names = FALSE)
+#write.csv(threeVowelCombosDF2,"threeVowelCombos2.csv", row.names = FALSE)
 
 
 first50RhymingStimuliData <- read.csv(file = 'vowelRhymeCombosAndData/first50RhymingStimuliData.csv')
@@ -371,7 +371,7 @@ replaceData3 <- as.data.frame(t(replace))
 
 first100Rhymes <- rbind(replaceData1, replaceData2, replaceData3)
 
-write.csv(first100Rhymes,"vowelRhymeCombosAndData/first100RhymesFinal.csv", row.names = FALSE)
+#write.csv(first100Rhymes,"vowelRhymeCombosAndData/first100RhymesFinal.csv", row.names = FALSE)
 
 first50EndThreeVowelRhymingStimuliData <- read.csv(file = 'vowelRhymeCombosAndData/first50EndThreeVowelRhymingStimuliData.csv')
 
@@ -437,3 +437,9 @@ allWords <- df[-(1:7),,]
 oneVowelRhymeCombos <- read.csv(file = 'vowelRhymeCombosAndData/oneVowelRhymeCombos.csv')
 
 threeVowelCombosDF2 <- read.csv(file = 'threeVowelCombos2.csv')
+
+# convert current configuration to IPA and then read in to https://itinerarium.github.io/phoneme-synthesis/
+
+kuSymbolsAll <- c("C", "J", "G", "e", "@", "a", "W", "Y", "\\^", "O", "p", "t", "k", "b", "d",
+                  "g", "C", "J", "s", "S", "z", "Z", "f", "T", "v", "D", "h", "n", "m", "G", "l", "w", "y", "i", "I", "E", "e", "@", "a", "W", "Y", "^", "O", "o", "U", "u")
+IPASameSymbo <- c("tS", "dZ", "N", )

@@ -317,12 +317,6 @@ checkEachLetter <- function(word, letterVector, letterReplace, lengthValue){
   save <- apply(lengthValue, 1, function(x){
     if(grepl(letterVector[x], word)){
       newWord <- gsub(letterVector[x], letterReplace[x], word)
-      # save2 <- apply(lengthValue, 1, function(x){
-      #   if(grepl(letterVector[x], newWord)){
-      #     newWord <- gsub(letterVector[x], letterReplace[x], newWord)
-      #     return(newWord)
-      #   }
-      # })
       return(newWord)
       
     }
