@@ -536,8 +536,47 @@ replaceKuSymbolsIPADf3 <- apply(iteration, 1, function(x){
   return(save)
 })
 replaceKuSymbolsIPADf3 <- t(replaceKuSymbolsIPADf3)
-replaceKuSymbolsIPADf3 <- as.data.frame(replaceKuSymbolsIPADf3)
+replaceKuSymbolsIPADfNumberOne <- as.data.frame(replaceKuSymbolsIPADf3)
 
+# ------------- do the above again to replace for a second time but beginning data is dfNumberOne and ending function is dfNumberTwo
+replaceKuSymbolsIPA <- apply(iteration, 1 , function(x){
+  save <- apply(iteration2, 1, function(y){
+    return(checkEachLetter(replaceKuSymbolsIPADf3[x,y], kuUniq, IPAUniq, iteration2))
+  })
+  return(save)
+})
+replaceKuSymbolsIPADf <- cbind(replaceKuSymbolsIPA)
+
+replaceKuSymbolsIPADf2 <- apply(iteration, 1, function(x){
+  save <- apply(iteration2, 1, function(y){
+    if(is.null(unlist(replaceKuSymbolsIPADf[x,]$replaceKuSymbolsIPA[[y]]))){
+      return(NA)
+    }
+    else{
+      return(unlist(replaceKuSymbolsIPADf[x,]$replaceKuSymbolsIPA[[y]]))
+    }
+  })
+  return(save)
+})
+
+replaceKuSymbolsIPADf2 <- cbind(replaceKuSymbolsIPADf2)
+replaceKuSymbolsIPADf2 <- t(replaceKuSymbolsIPADf2)
+replaceKuSymbolsIPADf2 <- as.data.frame(replaceKuSymbolsIPADf2)
+
+replaceKuSymbolsIPADf3 <- apply(iteration, 1, function(x){
+  save <- apply(iteration2, 1, function(y){
+    if(is.null(unlist(replaceKuSymbolsIPADf2[x,]$replaceKuSymbolsIPADf2[[y]]))){
+      return(NA)
+    }
+    else{
+      return(unlist(replaceKuSymbolsIPADf2[x,]$replaceKuSymbolsIPADf2[[y]][1]))
+    }
+  })
+  return(save)
+})
+replaceKuSymbolsIPADf3 <- t(replaceKuSymbolsIPADf3)
+replaceKuSymbolsIPADfNumberTwo <- as.data.frame(replaceKuSymbolsIPADf3)
+# ----------
 iteration3 <- 0:5
 iteration3 <- as.data.frame(iteration3)
 replaceKuSymbolsIPADf4 <- apply(iteration, 1, function(x){
