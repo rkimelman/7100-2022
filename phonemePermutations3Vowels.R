@@ -442,4 +442,22 @@ threeVowelCombosDF2 <- read.csv(file = 'threeVowelCombos2.csv')
 
 kuSymbolsAll <- c("C", "J", "G", "e", "@", "a", "W", "Y", "\\^", "O", "p", "t", "k", "b", "d",
                   "g", "C", "J", "s", "S", "z", "Z", "f", "T", "v", "D", "h", "n", "m", "G", "l", "w", "y", "i", "I", "E", "e", "@", "a", "W", "Y", "^", "O", "o", "U", "u")
-IPASameSymbo <- c("tS", "dZ", "N", )
+kuSymbols <- c("p", "t", "k", "b", "d", "g", "C", "J", "s", "S", "z", "Z", "f", "T", "v", "D", "h", "n", "m", "G", "l", "w", "y", "i", "I", "E", "e", "@", "a", "W", "Y", "^", "O", "o", "U", "u")
+
+kuIPAMapping <- c("p", "t", "k", "b", "d", "g", "tS", "dZ", "s", "S","z", "Z", "f", "T", "v", "D", "h", "n", "m", "N", "l", "w", "j", "i", "I", "E", "e", "aa", "a", "aU", "aI", "V", "OI", "o", "U", "u")
+
+replaceCount <- function(word, letterVector, letterReplace, lengthValue){
+  save <- apply(lengthValue, 1, function(x){
+    if(grepl(letterVector[x], word)){
+      # save2 <- apply(lengthValue, 1, function(x){
+      #   if(grepl(letterVector[x], newWord)){
+      #     newWord <- gsub(letterVector[x], letterReplace[x], newWord)
+      #     return(newWord)
+      #   }
+      # })
+      return(1)
+      
+    }
+  })
+  return(save)
+}
