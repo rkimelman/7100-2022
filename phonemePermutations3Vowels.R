@@ -499,8 +499,57 @@ iteration <- as.data.frame(iteration)
 replaceKuSymbolsIPA <- apply(iteration, 1 , function(x){
   checkEachLetter(second50InternalThreeVowelRhymingStimuliDataList[[x]], kuUniq, IPAUniq, iteration2)
 })
+iteration <- 1:100
+iteration <- as.data.frame(iteration)
+# function right below is fixed
+replaceKuSymbolsIPA <- apply(iteration, 1 , function(x){
+  save <- apply(iteration2, 1, function(y){
+    return(checkEachLetter(second50InternalThreeVowelRhymingStimuliData[x,y], kuUniq, IPAUniq, iteration2))
+  })
+  return(save)
+})
 replaceKuSymbolsIPADf <- cbind(replaceKuSymbolsIPA)
 
 replaceKuSymbolsIPADf2 <- apply(iteration, 1, function(x){
-  return(unlist(replaceKuSymbolsIPADf[x,])[1])
+  save <- apply(iteration2, 1, function(y){
+    if(is.null(unlist(replaceKuSymbolsIPADf[x,]$replaceKuSymbolsIPA[[y]]))){
+      return(NA)
+    }
+    else{
+      return(unlist(replaceKuSymbolsIPADf[x,]$replaceKuSymbolsIPA[[y]]))
+    }
+  })
+  return(save)
+})
+
+replaceKuSymbolsIPADf2 <- cbind(replaceKuSymbolsIPADf2)
+
+replaceKuSymbolsIPADf3 <- apply(iteration, 1, function(x){
+  save <- apply(iteration2, 1, function(y){
+    if(is.null(unlist(replaceKuSymbolsIPADf2[x,]$replaceKuSymbolsIPADf2[[y]]))){
+      return(NA)
+    }
+    else{
+      return(unlist(replaceKuSymbolsIPADf2[x,]$replaceKuSymbolsIPADf2[[y]][1]))
+    }
+  })
+  return(save)
+})
+replaceKuSymbolsIPADf3 <- t(replaceKuSymbolsIPADf3)
+replaceKuSymbolsIPADf3 <- as.data.frame(replaceKuSymbolsIPADf3)
+
+iteration3 <- 0:5
+iteration3 <- as.data.frame(iteration3)
+replaceKuSymbolsIPADf4 <- apply(iteration, 1, function(x){
+  save <- apply(iteration3, 1, function(y){
+    return(replaceKuSymbolsIPADf3[x+y])
+  })
+  return(save)
+})
+
+replaceKuSymbolsIPADf4 <- cbind(replaceKuSymbolsIPADf4)
+replaceKuSymbolsIPADf4 <- apply(iteration, 1, function(x){
+  if(!is.null(unlist(replaceKuSymbolsIPADf4[x,]$replaceKuSymbolsIPADf4))){
+    return(unlist(replaceKuSymbolsIPADf4[x,]))
+  }
 })
