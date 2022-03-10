@@ -500,3 +500,7 @@ replaceKuSymbolsIPA <- apply(iteration, 1 , function(x){
   checkEachLetter(second50InternalThreeVowelRhymingStimuliDataList[[x]], kuUniq, IPAUniq, iteration2)
 })
 replaceKuSymbolsIPADf <- cbind(replaceKuSymbolsIPA)
+
+replaceKuSymbolsIPADf2 <- apply(iteration, 1, function(x){
+  return(unlist(replaceKuSymbolsIPADf[x,])[1])
+})
