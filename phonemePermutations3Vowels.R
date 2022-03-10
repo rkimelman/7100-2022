@@ -446,7 +446,7 @@ kuSymbols <- c("p", "t", "k", "b", "d", "g", "C", "J", "s", "S", "z", "Z", "f", 
 
 kuIPAMapping <- c("p", "t", "k", "b", "d", "g", "tS", "dZ", "s", "S", "z", "Z", "f", "T", "v", "D", "h", "n", "m", "N", "l", "w", "j", "i", "I", "E", "e", "aa", "a", "aU", "aI", "V", "OI", "o", "U", "u")
 
-kuUniq <- c("C", "J", "G", "y", "@", "W", "Y", "^", "O")
+kuUniq <- c("C", "J", "G", "y", "@", "W", "Y", "\\^", "O")
 IPAUniq <- c("tS", "dZ", "N", "j", "aa", "aU", "aI", "V", "OI")
 
 replaceCount <- function(word, letterVector, lengthValue){
@@ -523,25 +523,37 @@ replaceKuSymbolsIPADf2 <- apply(iteration, 1, function(x){
 })
 
 replaceKuSymbolsIPADf2 <- cbind(replaceKuSymbolsIPADf2)
+replaceKuSymbolsIPADf2 <- t(replaceKuSymbolsIPADf2)
+replaceKuSymbolsIPADf2 <- as.data.frame(replaceKuSymbolsIPADf2)
 
 replaceKuSymbolsIPADf3 <- apply(iteration, 1, function(x){
   save <- apply(iteration2, 1, function(y){
-    if(is.null(unlist(replaceKuSymbolsIPADf2[x,]$replaceKuSymbolsIPADf2[[y]]))){
+    if(is.na(replaceKuSymbolsIPADf2[x,y])){
       return(NA)
     }
     else{
-      return(unlist(replaceKuSymbolsIPADf2[x,]$replaceKuSymbolsIPADf2[[y]][1]))
+      return(c(x,y))
     }
   })
   return(save)
 })
+replaceKuSymbolsIPADf4 <- apply(iteration, 1, function(x){
+  if(any(is.na(replaceKuSymbolsIPADf3[[x]]) == FALSE)){
+    return(x)
+  }
+  else{
+    return(0)
+  }
+})
+  indices <- which(!is.na(replaceKuSymbolsIPADf3))
+indicesReplace <- replaceKuSymbolsIPADf3[[indices]]
 replaceKuSymbolsIPADf3 <- t(replaceKuSymbolsIPADf3)
 replaceKuSymbolsIPADfNumberOne <- as.data.frame(replaceKuSymbolsIPADf3)
 
 # ------------- do the above again to replace for a second time but beginning data is dfNumberOne and ending function is dfNumberTwo
 replaceKuSymbolsIPA <- apply(iteration, 1 , function(x){
   save <- apply(iteration2, 1, function(y){
-    return(checkEachLetter(replaceKuSymbolsIPADf3[x,y], kuUniq, IPAUniq, iteration2))
+    return(checkEachLetter(replaceKuSymbolsIPADNumberOne[x,y], kuUniq, IPAUniq, iteration2))
   })
   return(save)
 })
