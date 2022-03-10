@@ -444,9 +444,12 @@ kuSymbolsAll <- c("C", "J", "G", "e", "@", "a", "W", "Y", "\\^", "O", "p", "t", 
                   "g", "C", "J", "s", "S", "z", "Z", "f", "T", "v", "D", "h", "n", "m", "G", "l", "w", "y", "i", "I", "E", "e", "@", "a", "W", "Y", "^", "O", "o", "U", "u")
 kuSymbols <- c("p", "t", "k", "b", "d", "g", "C", "J", "s", "S", "z", "Z", "f", "T", "v", "D", "h", "n", "m", "G", "l", "w", "y", "i", "I", "E", "e", "@", "a", "W", "Y", "^", "O", "o", "U", "u")
 
-kuIPAMapping <- c("p", "t", "k", "b", "d", "g", "tS", "dZ", "s", "S","z", "Z", "f", "T", "v", "D", "h", "n", "m", "N", "l", "w", "j", "i", "I", "E", "e", "aa", "a", "aU", "aI", "V", "OI", "o", "U", "u")
+kuIPAMapping <- c("p", "t", "k", "b", "d", "g", "tS", "dZ", "s", "S", "z", "Z", "f", "T", "v", "D", "h", "n", "m", "N", "l", "w", "j", "i", "I", "E", "e", "aa", "a", "aU", "aI", "V", "OI", "o", "U", "u")
 
-replaceCount <- function(word, letterVector, letterReplace, lengthValue){
+kuUniq <- c("C", "J", "G", "y", "@", "W", "Y", "^", "O")
+IPAUniq <- c("tS", "dZ", "N", "j", "aa", "aU", "aI", "V", "OI")
+
+replaceCount <- function(word, letterVector, lengthValue){
   save <- apply(lengthValue, 1, function(x){
     if(grepl(letterVector[x], word)){
       # save2 <- apply(lengthValue, 1, function(x){
@@ -461,3 +464,39 @@ replaceCount <- function(word, letterVector, letterReplace, lengthValue){
   })
   return(save)
 }
+iteration <- 1:(900)
+iteration <- as.data.frame(iteration)
+iteration2 <- 1:length(kuUniq)
+iteration2 <- as.data.frame(iteration2)
+second50InternalThreeVowelRhymingStimuliDataList <- unlist(second50InternalThreeVowelRhymingStimuliData)
+replaceKuWithIPAIndicesTotals <- apply(iteration, 1, function(x){
+  return(replaceCount(second50InternalThreeVowelRhymingStimuliDataList[x], kuUniq, iteration2))
+})
+findTotalsEachWord <- apply(iteration, 1, function(x){
+  return(unlist(replaceKuWithIPAIndicesTotals[[x]]))
+})
+iteration <- 1:100
+iteration <- as.data.frame(iteration)
+findTotalsEachWord2 <- apply(iteration, 1, function(x){
+  save <- apply(iteration2, 1, function(y){
+    return(findTotalsEachWord[[x+y]])
+  })
+  return(save)
+})
+
+findTotalsEachWord3 <- apply(iteration, 1, function(x){
+  save <- apply(iteration2, 1, function(y){
+    if(y == 1 || y == 2 || y == 3 || y == 7 || y == 8 || y == 9){
+      return(findTotalsEachWord2[[x]][[y]])
+    }
+  })
+})
+
+findTotalsEachWordDf <- cbind(findTotalsEachWord3)
+
+iteration <- 1:900
+iteration <- as.data.frame(iteration)
+replaceKuSymbolsIPA <- apply(iteration, 1 , function(x){
+  checkEachLetter(second50InternalThreeVowelRhymingStimuliDataList[[x]], kuUniq, IPAUniq, iteration2)
+})
+replaceKuSymbolsIPADf <- cbind(replaceKuSymbolsIPA)
