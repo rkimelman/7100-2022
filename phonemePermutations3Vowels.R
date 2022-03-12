@@ -756,4 +756,27 @@ replaceKuSymbolsIPA8 <- cbind(replaceKuSymbolsIPA2)
 replaceKuSymbolsIPA8 <- t(replaceKuSymbolsIPA2)
 replaceKuSymbolsIPA8 <- as.data.frame(replaceKuSymbolsIPA8)
 
-write.csv(replaceKuSymbolsIPA8,"IPAFORMAT_second50InternalThreeVowelRhymingStimuliData.csv", row.names = FALSE)
+#write.csv(replaceKuSymbolsIPA8,"IPAFORMAT_second50InternalThreeVowelRhymingStimuliData.csv", row.names = FALSE)
+
+# ----------------------------------------      the above takes care of first 50 rhyming stimuli          --------------------------------------------------
+
+first50SplitThreeVowelRhymingStimuliData
+
+replaceKuSymbolsIPA <- apply(iteration, 1 , function(x){
+  save <- apply(iteration2, 1, function(y){
+    return(checkEachLetter2(first50SplitThreeVowelRhymingStimuliData[x,y], kuUniq, IPAUniq, iteration2))
+  })
+  return(save)
+})
+replaceKuSymbolsIPADf <- cbind(replaceKuSymbolsIPA)
+replaceKuSymbolsIPADf <- as.data.frame(replaceKuSymbolsIPADf)
+
+replaceKuSymbolsIPADf2 <- apply(iteration, 1, function(x){
+  return(unlist(replaceKuSymbolsIPADf[x,][[1]]))
+})
+
+replaceKuSymbolsIPADf2 <- cbind(replaceKuSymbolsIPADf2)
+replaceKuSymbolsIPADf2 <- t(replaceKuSymbolsIPADf2)
+replaceKuSymbolsIPADf2 <- as.data.frame(replaceKuSymbolsIPADf2)
+
+# write.csv(replaceKuSymbolsIPADf2,"IPAFORMAT_first50SplitThreeVowelRhymingStimuliData.csv", row.names = FALSE)
