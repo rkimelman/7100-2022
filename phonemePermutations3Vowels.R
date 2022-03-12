@@ -793,13 +793,44 @@ replaceKuSymbolsIPA <- apply(iteration, 1 , function(x){
   return(save)
 })
 replaceKuSymbolsIPADf <- cbind(replaceKuSymbolsIPA)
-replaceKuSymbolsIPADf <- t(replaceKuSymbolsIPA)
+replaceKuSymbolsIPADf <- t(replaceKuSymbolsIPADf)
 replaceKuSymbolsIPADf <- as.data.frame(replaceKuSymbolsIPADf)
 
 replaceKuSymbolsIPADf2 <- apply(iteration, 1, function(x){
-  return(unlist(replaceKuSymbolsIPADf[x,][[1]]))
+  save <- apply(iteration2, 1, function(y){
+    return(unlist(replaceKuSymbolsIPADf[x,y][[1]]))
+  })
+  return(save) 
 })
 
 replaceKuSymbolsIPADf2 <- cbind(replaceKuSymbolsIPADf2)
 replaceKuSymbolsIPADf2 <- t(replaceKuSymbolsIPADf2)
 replaceKuSymbolsIPADf2 <- as.data.frame(replaceKuSymbolsIPADf2)
+
+#write.csv(replaceKuSymbolsIPADf2,"IPAFORMAT_first14EndTwoVowelRhymingStimuliData.csv", row.names = FALSE)
+
+first36internalThreeVowelRhymingStimuliData <- read.csv("vowelRhymeCombosAndData/first36internalThreeVowelRhymingStimuliData.csv")
+
+iteration <- 1:36
+iteration <- as.data.frame(iteration)
+replaceKuSymbolsIPA <- apply(iteration, 1 , function(x){
+  save <- apply(iteration2, 1, function(y){
+    return(checkEachLetter2(first36internalThreeVowelRhymingStimuliData[x,y], kuUniq, IPAUniq, iteration2))
+  })
+  return(save)
+})
+
+replaceKuSymbolsIPADf <- cbind(replaceKuSymbolsIPA)
+
+replaceKuSymbolsIPA2 <- apply(iteration, 1, function(x){
+  return(unlist(replaceKuSymbolsIPADf[x,]))
+})
+
+replaceKuSymbolsIPADf2 <- cbind(replaceKuSymbolsIPA2)
+replaceKuSymbolsIPADf2[32,]$replaceKuSymbolsIPA2[7] <- "kVndZ"
+replaceKuSymbolsIPADf2[32,]$replaceKuSymbolsIPA2 <- replaceKuSymbolsIPADf2[32,]$replaceKuSymbolsIPA2[-8]
+replaceKuSymbolsIPADf <- as.data.frame(replaceKuSymbolsIPADf)
+
+
+
+
