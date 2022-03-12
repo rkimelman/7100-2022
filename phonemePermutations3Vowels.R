@@ -604,3 +604,87 @@ replaceKuSymbolsIPADf4 <- apply(iteration, 1, function(x){
     return(unlist(replaceKuSymbolsIPADf4[x,]))
   }
 })
+
+
+indices <- replaceKuSymbolsIPADf4
+
+NAtoNull <- function(x) {
+  x <- NULL
+  return(x)
+}
+
+replaceKuSymbolsIPADf5 <- apply(iteration, 1, function(x){
+    if(all(is.na(replaceKuSymbolsIPADf2[x,]))){
+      save <- apply(iteration2, 1, function(y){
+        NAtoNull(replaceKuSymbolsIPADf2[x,y])
+      })
+    }
+    else{
+      save <- apply(iteration2, 1, function(y){
+        return(replaceKuSymbolsIPADf2[x,y])
+      })
+    }
+  return(save)
+})
+
+replaceKuSymbolsIPADf5 <- cbind(replaceKuSymbolsIPADf5)
+
+replaceKuSymbolsIPADf6 <- apply(iteration, 1, function(x){
+  save <- apply(iteration2, 1, function(y){
+    if(is.null(replaceKuSymbolsIPADf5[x,]$replaceKuSymbolsIPADf5)){
+      return("z")
+    }
+    else{
+      return(replaceKuSymbolsIPADf5[[x]][y])
+    }
+  })
+    
+})
+
+replaceKuSymbolsIPADf6 <- apply(iteration, 1 , function(x){
+  if(indices[x] != 0){
+    save <- apply(iteration2, 1, function(y){
+    if(all(is.na(replaceKuSymbolsIPADf2[x,y]))){
+      if(length(unlist(replaceKuSymbolsIPADf2[x,y])) > 1){
+        checkEachLetter(replaceKuSymbolsIPADf2[x,y][[1]][2], kuUniq, IPAUniq, iteration2)
+      }
+      if(is.na(replaceKuSymbolsIPADf2[x,y])){
+        return(second50InternalThreeVowelRhymingStimuliData[x,y])
+      }
+      else{
+        return(replaceKuSymbolsIPADf2[x,y])
+      }
+    }
+    else{
+      return(second50InternalThreeVowelRhymingStimuliData[x,y])
+    }
+    })
+  }
+  else{
+    save <- apply(iteration2, 1, function(y){
+      return(second50InternalThreeVowelRhymingStimuliData[x,y])
+    })
+  }
+  return(save)
+})
+
+replaceKuSymbolsIPADf6 <- cbind(replaceKuSymbolsIPADf6)
+replaceKuSymbolsIPADf6 <- as.data.frame(replaceKuSymbolsIPADf6)
+replaceKuSymbolsIPADf6 <- t(replaceKuSymbolsIPADf6)
+
+replace <- apply(iteration, 1, function(x){
+  returnValue <- apply(iteration2, 1, function(y){
+    if(is.na(replaceKuSymbolsIPADf6[x,y])){
+      return(sample(allWords$X,1))
+    }
+    else{
+      return(replaceKuSymbolsIPADf6[x,y])
+    }
+  })
+  return(returnValue)
+})
+
+replace <- t(replace)
+replace <- as.data.frame(replace)
+  
+write.csv(replaceKuSymbolsIPADf6,"IPAFORMAT_second50InternalThreeVowelRhymingStimuliData.csv", row.names = FALSE)
