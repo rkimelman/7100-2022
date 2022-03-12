@@ -870,5 +870,31 @@ replaceKuSymbolsIPA2 <- apply(iteration, 1, function(x){
   return(unlist(replaceKuSymbolsIPADf[x,]))
 })
 
-write.csv(replaceKuSymbolsIPADf,"IPAFORMAT_first50EndThreeVowelRhymingStimuliData.csv", row.names = FALSE)
+replaceKuSymbolsIPA2 <- cbind(replaceKuSymbolsIPA2)
+replaceKuSymbolsIPA2 <- t(replaceKuSymbolsIPA2)
+replaceKuSymbolsIPA2 <- as.data.frame(replaceKuSymbolsIPA2)
 
+#write.csv(replaceKuSymbolsIPA2,"IPAFORMAT_first50EndThreeVowelRhymingStimuliData.csv", row.names = FALSE)
+
+# --------------------------------------------------------------------------------------------------------
+
+first50NonRhymingData <- read.csv(file = "vowelRhymeCombosAndData/first50NonRhymingData.csv")
+iteration <- 1:50
+iteration <- as.data.frame(iteration)
+replaceKuSymbolsIPA <- apply(iteration, 1 , function(x){
+  save <- apply(iteration2, 1, function(y){
+    return(checkEachLetter2(first50NonRhymingData[x,y], kuUniq, IPAUniq, iteration2))
+  })
+  return(save)
+})
+
+replaceKuSymbolsIPADf <- cbind(replaceKuSymbolsIPA)
+
+replaceKuSymbolsIPADf2 <- apply(iteration, 1, function(x){
+  return(unlist(replaceKuSymbolsIPADf[x,]))
+})
+
+replaceKuSymbolsIPADf3 <- t(replaceKuSymbolsIPADf2)
+replaceKuSymbolsIPADf3 <- cbind(replaceKuSymbolsIPADf3)
+replaceKuSymbolsIPADf4 <- as.data.frame(replaceKuSymbolsIPADf3)
+replaceKuSymbolsIPADf4[16,9] <- sample(df$X,1)
