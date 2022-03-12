@@ -829,8 +829,16 @@ replaceKuSymbolsIPA2 <- apply(iteration, 1, function(x){
 replaceKuSymbolsIPADf2 <- cbind(replaceKuSymbolsIPA2)
 replaceKuSymbolsIPADf2[32,]$replaceKuSymbolsIPA2[7] <- "kVndZ"
 replaceKuSymbolsIPADf2[32,]$replaceKuSymbolsIPA2 <- replaceKuSymbolsIPADf2[32,]$replaceKuSymbolsIPA2[-8]
-replaceKuSymbolsIPADf <- as.data.frame(replaceKuSymbolsIPADf)
+replaceKuSymbolsIPADf2 <- as.data.frame(replaceKuSymbolsIPADf2)
 
+replaceKuSymbolsIPA3 <- apply(iteration, 1, function(x){
+  return(unlist(replaceKuSymbolsIPADf2[x,]))
+})
+
+replaceKuSymbolsIPA3 <- t(replaceKuSymbolsIPA3)
+replaceKuSymbolsIPA3 <- as.data.frame(replaceKuSymbolsIPA3)
+
+write.csv(replaceKuSymbolsIPA3,"IPAFORMAT_first36internalThreeVowelRhymingStimuliData.csv", row.names = FALSE)
 
 
 
