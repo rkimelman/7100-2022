@@ -898,3 +898,7 @@ replaceKuSymbolsIPADf3 <- t(replaceKuSymbolsIPADf2)
 replaceKuSymbolsIPADf3 <- cbind(replaceKuSymbolsIPADf3)
 replaceKuSymbolsIPADf4 <- as.data.frame(replaceKuSymbolsIPADf3)
 replaceKuSymbolsIPADf4[16,9] <- sample(df$X,1)
+
+write.csv(replaceKuSymbolsIPADf4,"IPAFORMAT_first50NonRhymingStimuliData.csv", row.names = FALSE)
+
+
