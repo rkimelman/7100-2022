@@ -756,4 +756,4 @@ replaceKuSymbolsIPA8 <- cbind(replaceKuSymbolsIPA2)
 replaceKuSymbolsIPA8 <- t(replaceKuSymbolsIPA2)
 replaceKuSymbolsIPA8 <- as.data.frame(replaceKuSymbolsIPA8)
 
-write.csv(replaceKuSymbolsIPA,"IPAFORMAT_second50InternalThreeVowelRhymingStimuliData.csv", row.names = FALSE)
+write.csv(replaceKuSymbolsIPA8,"IPAFORMAT_second50InternalThreeVowelRhymingStimuliData.csv", row.names = FALSE)
