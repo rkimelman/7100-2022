@@ -838,7 +838,37 @@ replaceKuSymbolsIPA3 <- apply(iteration, 1, function(x){
 replaceKuSymbolsIPA3 <- t(replaceKuSymbolsIPA3)
 replaceKuSymbolsIPA3 <- as.data.frame(replaceKuSymbolsIPA3)
 
-write.csv(replaceKuSymbolsIPA3,"IPAFORMAT_first36internalThreeVowelRhymingStimuliData.csv", row.names = FALSE)
+#write.csv(replaceKuSymbolsIPA3,"IPAFORMAT_first36internalThreeVowelRhymingStimuliData.csv", row.names = FALSE)
 
+# ------------------------------------------------------------------------------------
 
+first50EndThreeVowelRhymingStimuliData <- read.csv(file = "vowelRhymeCombosAndData/first50EndThreeVowelRhymingStimuliData.csv")
+
+iteration <- 1:100
+iteration <- as.data.frame(iteration)
+replaceKuSymbolsIPA <- apply(iteration, 1 , function(x){
+  save <- apply(iteration2, 1, function(y){
+    return(checkEachLetter2(first50EndThreeVowelRhymingStimuliData[x,y], kuUniq, IPAUniq, iteration2))
+  })
+  return(save)
+})
+
+replaceKuSymbolsIPADf <- cbind(replaceKuSymbolsIPA)
+replaceKuSymbolsIPADf <- t(replaceKuSymbolsIPADf)
+replaceKuSymbolsIPADf <- as.data.frame(replaceKuSymbolsIPADf)
+
+replaceKuSymbolsIPADf[24,7] <- "brVtS"
+replaceKuSymbolsIPADf
+
+replaceKuSymbolsIPADf[34,7] <- "daaldZ"
+replaceKuSymbolsIPADf
+
+replaceKuSymbolsIPADf[66,7] <- "kVldZ"
+replaceKuSymbolsIPADf
+
+replaceKuSymbolsIPA2 <- apply(iteration, 1, function(x){
+  return(unlist(replaceKuSymbolsIPADf[x,]))
+})
+
+write.csv(replaceKuSymbolsIPADf,"IPAFORMAT_first50EndThreeVowelRhymingStimuliData.csv", row.names = FALSE)
 
