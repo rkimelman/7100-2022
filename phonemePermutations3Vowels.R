@@ -494,6 +494,8 @@ findTotalsEachWord3 <- apply(iteration, 1, function(x){
 
 findTotalsEachWordDf <- cbind(findTotalsEachWord3)
 
+
+
 iteration <- 1:900
 iteration <- as.data.frame(iteration)
 replaceKuSymbolsIPA <- apply(iteration, 1 , function(x){
@@ -684,7 +686,39 @@ replace <- apply(iteration, 1, function(x){
   return(returnValue)
 })
 
+findTotalsEachWord4 <- apply(iteration, 1, function(x){
+  save <- apply(iteration2, 1, function(y){
+    if(length(findTotalsEachWordDf[x,]$findTotalsEachWord3[[1]] > 1)){
+      return()
+    }
+  }
+  )})
+
 replace <- t(replace)
 replace <- as.data.frame(replace)
-  
+checkEachLetter2 <- function(word, letterVector, letterReplace, lengthValue){
+  save <- apply(lengthValue, 1, function(x){
+    if(grepl(letterVector[x], word)){
+      newWord <- gsub(letterVector[x], letterReplace[x], word)
+      # save2 <- apply(lengthValue, 1, function(x){
+      #   if(grepl(letterVector[x], newWord)){
+      #     newWord <- gsub(letterVector[x], letterReplace[x], newWord)
+      #     return(newWord)
+      #   }
+      # })
+      return(newWord)
+      break
+    }
+  }
+  )
+  if(is.nullsave )
+}
+replaceKuSymbolsIPA <- apply(iteration, 1 , function(x){
+  save <- apply(iteration2, 1, function(y){
+    return(checkEachLetter2(replace[x,y], kuUniq, IPAUniq, iteration2))
+  })
+  return(save)
+})
+replaceKuSymbolsIPA <- cbind(replaceKuSymbolsIPA)
+replaceKuSymbolsIPA <- as.data.frame(replaceKuSymbolsIPA)
 write.csv(replaceKuSymbolsIPADf6,"IPAFORMAT_second50InternalThreeVowelRhymingStimuliData.csv", row.names = FALSE)
