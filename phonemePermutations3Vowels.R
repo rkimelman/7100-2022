@@ -697,6 +697,24 @@ findTotalsEachWord4 <- apply(iteration, 1, function(x){
 replace <- t(replace)
 replace <- as.data.frame(replace)
 checkEachLetter2 <- function(word, letterVector, letterReplace, lengthValue){
+  index <- apply(lengthValue, 1, function(x){
+    if(grepl(letterVector[x], word)){
+      newWord <- gsub(letterVector[x], letterReplace[x], word)
+      # save2 <- apply(lengthValue, 1, function(x){
+      #   if(grepl(letterVector[x], newWord)){
+      #     newWord <- gsub(letterVector[x], letterReplace[x], newWord)
+      #     return(newWord)
+      #   }
+      # })
+      return(x)
+    }
+  })
+  index <- unlist(index)
+  # index2 <- lapply(iteration2,1, function(x){
+  #   if(!is.null(index[[x]])){
+  #     
+  #   }
+  # })
   save <- apply(lengthValue, 1, function(x){
     if(grepl(letterVector[x], word)){
       newWord <- gsub(letterVector[x], letterReplace[x], word)
@@ -707,18 +725,35 @@ checkEachLetter2 <- function(word, letterVector, letterReplace, lengthValue){
       #   }
       # })
       return(newWord)
-      break
     }
+  })
+  # save <- as.character(save)
+  if(is.null(save) ){
+    save <- word
+    index <- 1
   }
-  )
-  if(is.nullsave )
+  return(save[index])
 }
 replaceKuSymbolsIPA <- apply(iteration, 1 , function(x){
-  save <- apply(iteration2, 1, function(y){
-    return(checkEachLetter2(replace[x,y], kuUniq, IPAUniq, iteration2))
+  save2 <- apply(iteration2, 1, function(y){
+    checkEachLetter2(replace[x,y], kuUniq, IPAUniq, iteration2)
   })
-  return(save)
+  return(save2)
 })
 replaceKuSymbolsIPA <- cbind(replaceKuSymbolsIPA)
 replaceKuSymbolsIPA <- as.data.frame(replaceKuSymbolsIPA)
-write.csv(replaceKuSymbolsIPADf6,"IPAFORMAT_second50InternalThreeVowelRhymingStimuliData.csv", row.names = FALSE)
+
+replaceKuSymbolsIPA2 <- apply(iteration, 1 , function(x){
+  if(is.list(replaceKuSymbolsIPA[x,][[1]])){
+    return(as.character(replaceKuSymbolsIPA[x,][[1]]))
+  }
+  else{
+    return(replaceKuSymbolsIPA[x,][[1]])
+  }
+})
+
+replaceKuSymbolsIPA8 <- cbind(replaceKuSymbolsIPA2)
+replaceKuSymbolsIPA8 <- t(replaceKuSymbolsIPA2)
+replaceKuSymbolsIPA8 <- as.data.frame(replaceKuSymbolsIPA8)
+
+write.csv(replaceKuSymbolsIPA,"IPAFORMAT_second50InternalThreeVowelRhymingStimuliData.csv", row.names = FALSE)
