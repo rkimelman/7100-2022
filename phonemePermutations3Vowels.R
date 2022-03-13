@@ -1047,7 +1047,7 @@ first14EndTwoVowelRhymingStimuliData5 <- t(replaceKuSymbolsIPA3)
 first14EndTwoVowelRhymingStimuliData5 <- as.data.frame(first14EndTwoVowelRhymingStimuliData5)
 #write.csv(replaceKuSymbolsIPADf5,"vowelRhymeCombosAndData/first14EndTwoVowelRhymingStimuliData.csv", row.names = FALSE)
 
-first36InternalThreeVowelRhymingStimuliData <- read.csv(file = "vowelRhymeCombosAndData/first36InternalThreeVowelRhymingStimuliData.csv")
+first36InternalThreeVowelRhymingStimuliData <- read.csv(file = "vowelRhymeCombosAndData/IPAFORMAT_first36internalThreeVowelRhymingStimuliData.csv")
 iteration <- 1:36
 iteration <- as.data.frame(iteration)
 iteration2 <- 1:9
@@ -1069,7 +1069,7 @@ first36InternalThreeVowelRhymingStimuliData <- as.data.frame(first36InternalThre
 
 first36InternalThreeVowelRhymingStimuliData <- apply(iteration, 1, function(x){
   save <- apply(iteration2, 1, function(y){
-    if(y < 7){
+    if(y < 7 || y > 3){
       return(checkEachLetter2(first36InternalThreeVowelRhymingStimuliData[x,y], kuUniq, IPAUniq, iteration2))
     }
     else{
@@ -1081,15 +1081,13 @@ first36InternalThreeVowelRhymingStimuliData <- apply(iteration, 1, function(x){
 
 first36InternalThreeVowelRhymingStimuliData <- cbind(first36InternalThreeVowelRhymingStimuliData)
 first36InternalThreeVowelRhymingStimuliData <- t(first36InternalThreeVowelRhymingStimuliData)
-first36InternalThreeVowelRhymingStimuliData <- as.data.frame(first36InternalThreeVowelRhymingStimuliData)
 
 replaceKuSymbolsIPA3 <- apply(iteration, 1, function(x){
   return(unlist(first36InternalThreeVowelRhymingStimuliData[x,]))
 })
+first36InternalThreeVowelRhymingStimuliData <- t(replaceKuSymbolsIPA3)
+first36InternalThreeVowelRhymingStimuliData <- as.data.frame(first36InternalThreeVowelRhymingStimuliData)
 
-replaceKuSymbolsIPA3 <- cbind(replaceKuSymbolsIPA3)
-replaceKuSymbolsIPA3 <- t(replaceKuSymbolsIPA3)
-replaceKuSymbolsIPA3 <- as.data.frame(replaceKuSymbolsIPA3)
-write.csv(replaceKuSymbolsIPA3,"vowelRhymeCombosAndData/IPAfirst36InternalThreeVowelRhymingStimuliData.csv", row.names = FALSE)
+write.csv(first36InternalThreeVowelRhymingStimuliData,"vowelRhymeCombosAndData/IPAfirst36InternalThreeVowelRhymingStimuliData.csv", row.names = FALSE)
 
 
