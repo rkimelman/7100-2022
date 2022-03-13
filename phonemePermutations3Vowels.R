@@ -1047,7 +1047,7 @@ first14EndTwoVowelRhymingStimuliData5 <- t(replaceKuSymbolsIPA3)
 first14EndTwoVowelRhymingStimuliData5 <- as.data.frame(first14EndTwoVowelRhymingStimuliData5)
 #write.csv(replaceKuSymbolsIPADf5,"vowelRhymeCombosAndData/first14EndTwoVowelRhymingStimuliData.csv", row.names = FALSE)
 
-first50EndThreeVowelRhymingStimuliData <- read.csv(file = "vowelRhymeCombosAndData/IPAFORMAT_second50EndThreeVowelRhymingStimuliData.csv")
+first50EndThreeVowelRhymingStimuliData <- read.csv(file = "vowelRhymeCombosAndData/IPAFORMAT_first50EndThreeVowelRhymingStimuliData.csv")
 iteration <- 1:100
 iteration <- as.data.frame(iteration)
 iteration2 <- 1:9
@@ -1069,7 +1069,7 @@ first50EndThreeVowelRhymingStimuliData <- as.data.frame(first50EndThreeVowelRhym
 
 first50EndThreeVowelRhymingStimuliData <- apply(iteration, 1, function(x){
   save <- apply(iteration2, 1, function(y){
-    if(y < 7 || y > 3){
+    if(y < 7){
       return(checkEachLetter2(first50EndThreeVowelRhymingStimuliData[x,y], kuUniq, IPAUniq, iteration2))
     }
     else{
@@ -1080,7 +1080,6 @@ first50EndThreeVowelRhymingStimuliData <- apply(iteration, 1, function(x){
 })
 
 first50EndThreeVowelRhymingStimuliData <- cbind(first50EndThreeVowelRhymingStimuliData)
-first50EndThreeVowelRhymingStimuliData <- t(first50EndThreeVowelRhymingStimuliData)
 
 replaceKuSymbolsIPA3 <- apply(iteration, 1, function(x){
   return(unlist(first50EndThreeVowelRhymingStimuliData[x,]))
