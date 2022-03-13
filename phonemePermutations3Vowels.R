@@ -1047,47 +1047,47 @@ first14EndTwoVowelRhymingStimuliData5 <- t(replaceKuSymbolsIPA3)
 first14EndTwoVowelRhymingStimuliData5 <- as.data.frame(first14EndTwoVowelRhymingStimuliData5)
 #write.csv(replaceKuSymbolsIPADf5,"vowelRhymeCombosAndData/first14EndTwoVowelRhymingStimuliData.csv", row.names = FALSE)
 
-first36InternalThreeVowelRhymingStimuliData <- read.csv(file = "vowelRhymeCombosAndData/IPAFORMAT_first36internalThreeVowelRhymingStimuliData.csv")
-iteration <- 1:36
+first50EndThreeVowelRhymingStimuliData <- read.csv(file = "vowelRhymeCombosAndData/IPAFORMAT_second50EndThreeVowelRhymingStimuliData.csv")
+iteration <- 1:100
 iteration <- as.data.frame(iteration)
 iteration2 <- 1:9
 iteration2 <- as.data.frame(iteration2)
-first36InternalThreeVowelRhymingStimuliData <- apply(iteration, 1, function(x){
+first50EndThreeVowelRhymingStimuliData <- apply(iteration, 1, function(x){
   save <- apply(iteration2, 1, function(y){
-    if(is.na(first36InternalThreeVowelRhymingStimuliData[x,y])){
+    if(is.na(first50EndThreeVowelRhymingStimuliData[x,y])){
       return(sample(df[,,]$X,1))
     }
     else{
-      return(first36InternalThreeVowelRhymingStimuliData[x,y])
+      return(first50EndThreeVowelRhymingStimuliData[x,y])
     }
   })
 })
 
-first36InternalThreeVowelRhymingStimuliData <- cbind(first36InternalThreeVowelRhymingStimuliData)
-first36InternalThreeVowelRhymingStimuliData <- t(first36InternalThreeVowelRhymingStimuliData)
-first36InternalThreeVowelRhymingStimuliData <- as.data.frame(first36InternalThreeVowelRhymingStimuliData)
+first50EndThreeVowelRhymingStimuliData <- cbind(first50EndThreeVowelRhymingStimuliData)
+first50EndThreeVowelRhymingStimuliData <- t(first50EndThreeVowelRhymingStimuliData)
+first50EndThreeVowelRhymingStimuliData <- as.data.frame(first50EndThreeVowelRhymingStimuliData)
 
-first36InternalThreeVowelRhymingStimuliData <- apply(iteration, 1, function(x){
+first50EndThreeVowelRhymingStimuliData <- apply(iteration, 1, function(x){
   save <- apply(iteration2, 1, function(y){
     if(y < 7 || y > 3){
-      return(checkEachLetter2(first36InternalThreeVowelRhymingStimuliData[x,y], kuUniq, IPAUniq, iteration2))
+      return(checkEachLetter2(first50EndThreeVowelRhymingStimuliData[x,y], kuUniq, IPAUniq, iteration2))
     }
     else{
-      return(first36InternalThreeVowelRhymingStimuliData[x,y])
+      return(first50EndThreeVowelRhymingStimuliData[x,y])
     }
   })
   return(save)
 })
 
-first36InternalThreeVowelRhymingStimuliData <- cbind(first36InternalThreeVowelRhymingStimuliData)
-first36InternalThreeVowelRhymingStimuliData <- t(first36InternalThreeVowelRhymingStimuliData)
+first50EndThreeVowelRhymingStimuliData <- cbind(first50EndThreeVowelRhymingStimuliData)
+first50EndThreeVowelRhymingStimuliData <- t(first50EndThreeVowelRhymingStimuliData)
 
 replaceKuSymbolsIPA3 <- apply(iteration, 1, function(x){
-  return(unlist(first36InternalThreeVowelRhymingStimuliData[x,]))
+  return(unlist(first50EndThreeVowelRhymingStimuliData[x,]))
 })
-first36InternalThreeVowelRhymingStimuliData <- t(replaceKuSymbolsIPA3)
-first36InternalThreeVowelRhymingStimuliData <- as.data.frame(first36InternalThreeVowelRhymingStimuliData)
+first50EndThreeVowelRhymingStimuliData <- t(replaceKuSymbolsIPA3)
+first50EndThreeVowelRhymingStimuliData <- as.data.frame(first50EndThreeVowelRhymingStimuliData)
 
-write.csv(first36InternalThreeVowelRhymingStimuliData,"vowelRhymeCombosAndData/IPAfirst36InternalThreeVowelRhymingStimuliData.csv", row.names = FALSE)
+write.csv(first50EndThreeVowelRhymingStimuliData,"vowelRhymeCombosAndData/IPAfirst50EndThreeVowelRhymingStimuliData.csv", row.names = FALSE)
 
 
