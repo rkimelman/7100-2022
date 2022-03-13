@@ -980,7 +980,31 @@ first14EndTwoVowelRhymingStimuliData2 <- apply(iteration, 1, function(x){
   })
 })
 
+first14EndTwoVowelRhymingStimuliData2 <- cbind(first14EndTwoVowelRhymingStimuliData2)
 first14EndTwoVowelRhymingStimuliData2 <- t(first14EndTwoVowelRhymingStimuliData2)
 first14EndTwoVowelRhymingStimuliData2 <- as.data.frame(first14EndTwoVowelRhymingStimuliData2)
+
+first14EndTwoVowelRhymingStimuliData3 <- apply(iteration, 1, function(x){
+  save <- apply(iteration2, 1, function(y){
+    if(y < 7){
+      return(checkEachLetter2(third50NonRhymingData[x,y], kuUniq, IPAUniq, iteration2))
+    }
+    else{
+      return(first14EndTwoVowelRhymingStimuliData2[x,y])
+    }
+  })
+  return(save)
+})
+
+first14EndTwoVowelRhymingStimuliData4 <- cbind(first14EndTwoVowelRhymingStimuliData3)
+
+replaceKuSymbolsIPA3 <- apply(iteration, 1, function(x){
+  return(unlist(first14EndTwoVowelRhymingStimuliData4[x,]))
+})
+
+first14EndTwoVowelRhymingStimuliData5 <- t(replaceKuSymbolsIPA3)
+first14EndTwoVowelRhymingStimuliData5 <- as.data.frame(first14EndTwoVowelRhymingStimuliData5)
 write.csv(replaceKuSymbolsIPADf5,"vowelRhymeCombosAndData/first14EndTwoVowelRhymingStimuliData.csv", row.names = FALSE)
+
+
 
