@@ -901,4 +901,30 @@ replaceKuSymbolsIPADf4[16,9] <- sample(df$X,1)
 
 #write.csv(replaceKuSymbolsIPADf4,"IPAFORMAT_first50NonRhymingStimuliData.csv", row.names = FALSE)
 
+second50NonRhymingData <- read.csv(file = "vowelRhymeCombosAndData/second50NonRhymingData.csv")
+iteration <- 1:50
+iteration <- as.data.frame(iteration)
+replaceKuSymbolsIPA <- apply(iteration, 1 , function(x){
+  save <- apply(iteration2, 1, function(y){
+    return(checkEachLetter2(second50NonRhymingData[x,y], kuUniq, IPAUniq, iteration2))
+  })
+  return(save)
+})
+
+replaceKuSymbolsIPADf <- cbind(replaceKuSymbolsIPA)
+replaceKuSymbolsIPADf2 <- t(replaceKuSymbolsIPADf)
+
+replaceKuSymbolsIPA3 <- apply(iteration, 1, function(x){
+  save <- apply(iteration2, 1, function(y){
+    return(unlist(replaceKuSymbolsIPADf2[x,y]))
+  })  
+  return(save)
+})
+
+replaceKuSymbolsIPADf4 <- cbind(replaceKuSymbolsIPA3)
+replaceKuSymbolsIPADf5 <- t(replaceKuSymbolsIPADf4)
+replaceKuSymbolsIPADf5 <- as.data.frame(replaceKuSymbolsIPADf5)
+
+write.csv(replaceKuSymbolsIPADf5,"IPAFORMAT_second50NonRhymingStimuliData.csv", row.names = FALSE)
+
 
