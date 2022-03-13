@@ -963,4 +963,24 @@ replaceKuSymbolsIPADf5 <- as.data.frame(replaceKuSymbolsIPADf5)
 
 #write.csv(replaceKuSymbolsIPADf5,"IPAFORMAT_fourth50NonRhymingStimuliData.csv", row.names = FALSE)
 
+first14EndTwoVowelRhymingStimuliData <- read.csv(file = 'vowelRhymeCombosAndData/first14EndTwoVowelRhymingStimuliData.csv')
+
+iteration <- 1:28
+iteration <- as.data.frame(iteration)
+iteration2 <- 1:9
+iteration2 <- as.data.frame(iteration2)
+first14EndTwoVowelRhymingStimuliData2 <- apply(iteration, 1, function(x){
+  save <- apply(iteration2, 1, function(y){
+    if(is.na(first14EndTwoVowelRhymingStimuliData[x,y])){
+      return(sample(df[,,]$X,1))
+    }
+    else{
+      return(first14EndTwoVowelRhymingStimuliData[x,y])
+    }
+  })
+})
+
+first14EndTwoVowelRhymingStimuliData2 <- t(first14EndTwoVowelRhymingStimuliData2)
+first14EndTwoVowelRhymingStimuliData2 <- as.data.frame(first14EndTwoVowelRhymingStimuliData2)
+write.csv(replaceKuSymbolsIPADf5,"vowelRhymeCombosAndData/first14EndTwoVowelRhymingStimuliData.csv", row.names = FALSE)
 
