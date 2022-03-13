@@ -945,12 +945,13 @@ iteration <- 1:50
 iteration <- as.data.frame(iteration)
 replaceKuSymbolsIPA <- apply(iteration, 1 , function(x){
   save <- apply(iteration2, 1, function(y){
-    return(checkEachLetter2(third50NonRhymingData[x,y], kuUniq, IPAUniq, iteration2))
+    return(checkEachLetter2(fourth50NonRhymingData[x,y], kuUniq, IPAUniq, iteration2))
   })
   return(save)
 })
 
 replaceKuSymbolsIPADf <- cbind(replaceKuSymbolsIPA)
+replaceKuSymbolsIPADf <- t(replaceKuSymbolsIPADf)
 
 replaceKuSymbolsIPA3 <- apply(iteration, 1, function(x){
   return(unlist(replaceKuSymbolsIPADf[x,]))
@@ -960,6 +961,6 @@ replaceKuSymbolsIPADf4 <- cbind(replaceKuSymbolsIPA3)
 replaceKuSymbolsIPADf5 <- t(replaceKuSymbolsIPADf4)
 replaceKuSymbolsIPADf5 <- as.data.frame(replaceKuSymbolsIPADf5)
 
-#write.csv(replaceKuSymbolsIPADf5,"IPAFORMAT_third50NonRhymingStimuliData.csv", row.names = FALSE)
+#write.csv(replaceKuSymbolsIPADf5,"IPAFORMAT_fourth50NonRhymingStimuliData.csv", row.names = FALSE)
 
 
