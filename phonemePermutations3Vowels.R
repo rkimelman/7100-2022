@@ -359,15 +359,20 @@ replaceKuSymbolsIPA <- t(replaceKuSymbolsIPA)
 replaceKuSymbolsIPA <- as.data.frame(replaceKuSymbolsIPA)
 
 first14EndTwoVowelRhymingStimuliData[1:28,1:7] <- replaceKuSymbolsIPA
-
+iteration2 <- 1:9
+iteration2 <- as.data.frame(iteration2)
 first14EndTwoVowelRhymingStimuliData <- apply(iteration, 1, function(x){
   save <- apply(iteration2, 1, function(y){
-    
+    return(unlist(first14EndTwoVowelRhymingStimuliData[x,y]))
   })
 })
 
+first14EndTwoVowelRhymingStimuliData <- cbind(first14EndTwoVowelRhymingStimuliData)
+first14EndTwoVowelRhymingStimuliData <- t(first14EndTwoVowelRhymingStimuliData)
+first14EndTwoVowelRhymingStimuliData <- as.data.frame(first14EndTwoVowelRhymingStimuliData)
 
-write.csv(first14EndTwoVowelRhymingStimuliData,"vowelRhymeCombosAndData/first14EndTwoVowelRhymingStimuliData.csv", row.names = FALSE)
+
+#write.csv(first14EndTwoVowelRhymingStimuliData,"vowelRhymeCombosAndData/first14EndTwoVowelRhymingStimuliData.csv", row.names = FALSE)
 
 # iteration <- 1:28
 # iteration2 <- 1:9
