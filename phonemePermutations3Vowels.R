@@ -332,23 +332,59 @@ replaceData1 <- as.data.frame(t(replace))
 
 
 first14EndTwoVowelRhymingStimuliData <- read.csv(file = 'vowelRhymeCombosAndData/first14EndTwoVowelRhymingStimuliData.csv')
-
 iteration <- 1:28
-iteration2 <- 1:9
+iteration2 <- 1:7
 iteration <- as.data.frame(iteration)
 iteration2 <- as.data.frame(iteration2)
-replace <- apply(iteration, 1, function(x){
-  returnValue <- apply(iteration2, 1, function(y){
-    if(is.na(first14EndTwoVowelRhymingStimuliData[x,y]) || first14EndTwoVowelRhymingStimuliData[x,y] == ""){
-      return(sample(allWords$X,1))
-    }
-    else{
-      return(first14EndTwoVowelRhymingStimuliData[x,y])
-    }
+
+addWords <- apply(iteration, 1, function(x){
+  save <- apply(iteration2, 1, function(x){
+    return(sample(df[,,]$X,1))
   })
-  return(returnValue)
 })
-replaceData2 <- as.data.frame(t(replace))
+
+addWords <- cbind(addWords)
+addWords <- t(addWords)
+addWords <- as.data.frame(addWords)
+
+replaceKuSymbolsIPA <- apply(iteration, 1 , function(x){
+  save <- apply(iteration2, 1, function(y){
+    return(checkEachLetter2(addWords[x,y], kuUniq, IPAUniq, iteration2))
+  })
+  return(save)
+})
+
+replaceKuSymbolsIPA <- cbind(replaceKuSymbolsIPA)
+replaceKuSymbolsIPA <- t(replaceKuSymbolsIPA)
+replaceKuSymbolsIPA <- as.data.frame(replaceKuSymbolsIPA)
+
+first14EndTwoVowelRhymingStimuliData[1:28,1:7] <- replaceKuSymbolsIPA
+
+first14EndTwoVowelRhymingStimuliData <- apply(iteration, 1, function(x){
+  save <- apply(iteration2, 1, function(y){
+    
+  })
+})
+
+
+write.csv(first14EndTwoVowelRhymingStimuliData,"vowelRhymeCombosAndData/first14EndTwoVowelRhymingStimuliData.csv", row.names = FALSE)
+
+# iteration <- 1:28
+# iteration2 <- 1:9
+# iteration <- as.data.frame(iteration)
+# iteration2 <- as.data.frame(iteration2)
+# replace <- apply(iteration, 1, function(x){
+#   returnValue <- apply(iteration2, 1, function(y){
+#     if(is.na(first14EndTwoVowelRhymingStimuliData[x,y]) || first14EndTwoVowelRhymingStimuliData[x,y] == ""){
+#       return(sample(allWords$X,1))
+#     }
+#     else{
+#       return(first14EndTwoVowelRhymingStimuliData[x,y])
+#     }
+#   })
+#   return(returnValue)
+# })
+# replaceData2 <- as.data.frame(t(replace))
 
 first36internalThreeVowelRhymingStimuliData <- read.csv(file = 'vowelRhymeCombosAndData/first36internalThreeVowelRhymingStimuliData.csv')
 
