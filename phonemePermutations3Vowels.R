@@ -883,39 +883,40 @@ replaceKuSymbolsIPA3 <- as.data.frame(replaceKuSymbolsIPA3)
 
 # ------------------------------------------------------------------------------------
 
-first50EndThreeVowelRhymingStimuliData <- read.csv(file = "vowelRhymeCombosAndData/first50EndThreeVowelRhymingStimuliData.csv")
+first50EndThreeVowelRhymingStimuliData <- read.csv(file = "vowelRhymeCombosAndData/IPAfirst50EndThreeVowelRhymingStimuliData.csv")
 
 iteration <- 1:100
 iteration <- as.data.frame(iteration)
-replaceKuSymbolsIPA <- apply(iteration, 1 , function(x){
+replaceKuSymbolsKu <- apply(iteration, 1 , function(x){
   save <- apply(iteration2, 1, function(y){
-    return(checkEachLetter2(first50EndThreeVowelRhymingStimuliData[x,y], kuUniq, IPAUniq, iteration2))
+    return(checkEachLetter2(first50EndThreeVowelRhymingStimuliData[x,y], IPAUniq, kuUniq, iteration2))
   })
   return(save)
 })
 
-replaceKuSymbolsIPADf <- cbind(replaceKuSymbolsIPA)
-replaceKuSymbolsIPADf <- t(replaceKuSymbolsIPADf)
-replaceKuSymbolsIPADf <- as.data.frame(replaceKuSymbolsIPADf)
-
-replaceKuSymbolsIPADf[24,7] <- "brVtS"
-replaceKuSymbolsIPADf
-
-replaceKuSymbolsIPADf[34,7] <- "daaldZ"
-replaceKuSymbolsIPADf
-
-replaceKuSymbolsIPADf[66,7] <- "kVldZ"
-replaceKuSymbolsIPADf
+replaceKuSymbolsIPADf <- cbind(replaceKuSymbolsKu)
 
 replaceKuSymbolsIPA2 <- apply(iteration, 1, function(x){
-  return(unlist(replaceKuSymbolsIPADf[x,]))
+  return(as.character(unlist(replaceKuSymbolsIPADf[x,])))
 })
 
-replaceKuSymbolsIPA2 <- cbind(replaceKuSymbolsIPA2)
-replaceKuSymbolsIPA2 <- t(replaceKuSymbolsIPA2)
-replaceKuSymbolsIPA2 <- as.data.frame(replaceKuSymbolsIPA2)
+replaceKuSymbolsIPADf <- cbind(replaceKuSymbolsIPA2)
+replaceKuSymbolsIPADf <- as.data.frame(replaceKuSymbolsIPADf)
 
-#write.csv(replaceKuSymbolsIPA2,"IPAFORMAT_first50EndThreeVowelRhymingStimuliData.csv", row.names = FALSE)
+# replaceKuSymbolsIPADf[24,7] <- "brVtS"
+# replaceKuSymbolsIPADf
+# 
+# replaceKuSymbolsIPADf[34,7] <- "daaldZ"
+# replaceKuSymbolsIPADf
+# 
+# replaceKuSymbolsIPADf[66,7] <- "kVldZ"
+# replaceKuSymbolsIPADf
+
+# replaceKuSymbolsIPA2 <- cbind(replaceKuSymbolsIPA2)
+# replaceKuSymbolsIPA2 <- t(replaceKuSymbolsIPA2)
+# replaceKuSymbolsIPA2 <- as.data.frame(replaceKuSymbolsIPA2)
+
+write.csv(replaceKuSymbolsIPADf,"vowelRhymeCombosAndData/first50EndThreeVowelRhymingStimuliData.csv", row.names = FALSE)
 
 # --------------------------------------------------------------------------------------------------------
 
