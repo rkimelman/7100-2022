@@ -1088,6 +1088,6 @@ replaceKuSymbolsIPA3 <- apply(iteration, 1, function(x){
 first50EndThreeVowelRhymingStimuliData <- t(replaceKuSymbolsIPA3)
 first50EndThreeVowelRhymingStimuliData <- as.data.frame(first50EndThreeVowelRhymingStimuliData)
 
-write.csv(first50EndThreeVowelRhymingStimuliData,"vowelRhymeCombosAndData/IPAfirst50EndThreeVowelRhymingStimuliData.csv", row.names = FALSE)
+#write.csv(first50EndThreeVowelRhymingStimuliData,"vowelRhymeCombosAndData/IPAfirst50EndThreeVowelRhymingStimuliData.csv", row.names = FALSE)
 
 
