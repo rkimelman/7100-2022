@@ -51,14 +51,10 @@ mappingsToData <- c("Q" , "\\{", "V", "E", "1", "I", "i", "u")
     return(mappingsToData[perms[x,]])
   })
   permsPhonemes2 <- as.data.frame(t(permsPhonemes))
-  
-  dfNew2 <- df[which(df$X.1==numberOfVowelPhonemes),,]
-  iterationNew <- 1:nrow(dfNew2)
-  iterationNew <- as.data.frame(iterationNew)
   testFunction3Phonemes <- function(pronunciation){
-    testIfPresent <- apply(iterationNew, 1, function(x){
-      if(grepl(pronunciation, dfNew2[x,2])){
-        return(dfNew2[x,2])
+    testIfPresent <- apply(iteration, 1, function(x){
+      if(grepl(pronunciation, pseudoWordData[x,2])){
+        return(pseudoWordData[x,2])
       }
       else{
         return(NA)
