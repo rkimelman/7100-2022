@@ -1,22 +1,24 @@
 pseudoWordData <- read.csv(file = "pseudoworddata.csv")
 vowelPhonemes <- c("aa", "ae", "ah", "eh", "ey", "ih", "iy", "uw")
-mappingsToData <- c("Q" , "\\{", "V", "E", "1", "I", "7", "u")
-phonemePermutations <- function(numberOfVowelPhonemes, vowelPhonemes, mappingsToCurrentSystem, numberOfWordPhonemes, df)
+mappingsToData <- c("Q" , "\\{", "V", "E", "1", "I", "i", "u")
+#phonemePermutations <- function(numberOfVowelPhonemes, vowelPhonemes, mappingsToData, numberOfWordPhonemes, df)
   # experiment
-  combo <- t(combn(vowelPhonemes, numberofVowelPhonemes))
-  combo <- as.data.frame(combo)
+  combo1 <- t(combn(mappingsToData, 1))
+  combo2 <- t(combn(mappingsToData, 2))
+  combos <- rbind(combo1, combo2)
+  combos2 <- as.data.frame(combo2)
   
   # obtain two random words with "aa" vowel sound
   
-
-  dfNew <- df[which(df$X.1==numberOfVowelPhonemes),,]
+  numberOfVowelPhonemes <- 2
+  dfNew <- pseudoWordData[which(df$X.1==numberOfVowelPhonemes),,]
   # use random configurations to generate words, but always make each word have at least 1 phonological neighbor
   # should each rhyming word have same number of syllables, and vowels occur in same positions? can code for that
   # generalize above
   testFunction3Phonemes <- function(pronunciation){
     testIfPresent <- apply(iteration, 1, function(x){
-      if(grepl(pronunciation, dfNew[x,2])){
-        return(dfNew[x,2])
+      if(grepl(pronunciation, pseudoWordData[x,2])){
+        return(pseudoWordData[x,2])
       }
       else{
         return(NA)
@@ -26,10 +28,10 @@ phonemePermutations <- function(numberOfVowelPhonemes, vowelPhonemes, mappingsTo
     removeNA <- testIfPresent[!is.na(testIfPresent)]
     return(removeNA)
   }
-  length1 <- 1:length(mappingsToCurrentSystem)
+  length1 <- 1:length(mappingsToData)
   length1 <- as.data.frame(length1)
   singleVowelWords <- apply(length1, 1, function(x){
-    return(testFunction3Phonemes(mappingsToCurrentSystem[x]))
+    return(testFunction3Phonemes(mappingsToData[x]))
   })
   getWords <- apply(length1, 1, function(x){
     return(sample(singleVowelWords[[x]], size = numberOfVowelPhonemes))
@@ -37,19 +39,16 @@ phonemePermutations <- function(numberOfVowelPhonemes, vowelPhonemes, mappingsTo
   getWords <- t(getWords)
   # these are the sets of words we will use for a single vowel internal rhyme
   #-------------------------------------- The above code works -----------------------
-  length1 <- 1:length(mappingsToCurrentSystem)
+  length1 <- 1:length(mappingsToData)
   length1 <- as.data.frame(length1)
   
+  numberofVowelPhonemes <- 3
   library(gtools)
-  perms <- permutations(numberOfVowelPhonemes,numberOfWordPhonemes)
-  lengthPerms <- 1:length(perms)
+  perms <- permutations(length(mappingsToData), numberOfVowelPhonemes)
+  lengthPerms <- 1:nrow(perms)
   iteration <- as.data.frame(lengthPerms)
-  permsVowels <- apply(iteration, 1, function(x){
-    return(c(vowelPhonemes[perms[x,1:numberOfWordPhonemes]]))
-  })
-  permsVowels2 <- as.data.frame(t(permsVowels))
   permsPhonemes <- apply(iteration, 1, function(x){
-    return(c(mappingsToCurrentSystem[perms[x,1:numberOfWordPhonemes]]))
+    return(mappingsToData[perms[x,]])
   })
   permsPhonemes2 <- as.data.frame(t(permsPhonemes))
   
@@ -70,8 +69,8 @@ phonemePermutations <- function(numberOfVowelPhonemes, vowelPhonemes, mappingsTo
     return(removeNA)
   }
   
-  mappingsToCurrentSystem2 <- rep(mappingsToCurrentSystem, length(vowelPhonemes)-1)
-  length2 <- 1:length(mappingsToCurrentSystem2)
+  mappingsToData2 <- rep(mappingsToData, length(vowelPhonemes)-1)
+  length2 <- 1:length(mappingsToData2)
   length2 <- as.data.frame(length2)
   words1 <- apply(length2, 1, function(x){
     return(testFunction3Phonemes(permsPhonemes2$V1[x]))

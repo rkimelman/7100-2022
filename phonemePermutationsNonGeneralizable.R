@@ -8,7 +8,7 @@ combo3 <- as.data.frame(combo3)
 
 # obtain two random words with "aa" vowel sound
 
-df <- read.csv(file = "pseudoworddata.csv")
+df <- read.csv(file = "pseudoworddata2.csv")
 dfNew <- df[which(df$X.1=="3"),,]
 # use random configurations to generate words, but always make each word have at least 1 phonological neighbor
 # should each rhyming word have same number of syllables, and vowels occur in same positions? can code for that
