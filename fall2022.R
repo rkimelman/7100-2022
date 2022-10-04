@@ -27,15 +27,60 @@ segments <- function(x, reverse = FALSE) {
 
 mcf <- readHumdrum('.*rap')
 californiaLove <- readHumdrum('2pac_CaliforniaLove.rap')
-spinePipe(californiaLove, 2:8, 1) -> californiaLove[rev(c('Stress', 'Tone', 'Break', 'Rhyme', 'IPA', 'Lyrics', 'Hype'))]
-californiaLove$Token %hum>% c(~segments(Break %in% c('3', '4','5')), by ~ File) -> californiaLove$Phrase
+
+californiaLoveDF <- as.data.frame(californiaLove)
+
+californiaLoveIPA <- list(californiaLoveDF[2:417,6])
+
+californiaLoveStress <- list(californiaLoveDF[2:417,2])
+
+californiaLoveRhyme <- list(californiaLoveDF[2:417, 5])
+
+ipa_list <- list()
+
+for (i in 1:nrow(californiaLoveDF)){
+  ipa_list <- append(ipa_list, californiaLoveDF[i,6])
+}
+
+rhyme_list <- list()
+
+for (i in 1:nrow(californiaLoveDF)){
+  rhyme_list <- append(rhyme_list, californiaLoveDF[i,5])
+}
+
+stress_list <- list()
+
+for (i in 1:nrow(californiaLoveDF)){
+  stress_list <- append(stress_list, californiaLoveDF[i,2])
+}
+
+capture.output(ipa_list, file = "IPA_caliLove.csv")
+
+capture.output(rhyme_list, file = "rhyme_caliLove.csv")
+
+capture.output(stress_list, file = "stress_caliLove.csv")
+count <- 0
+phrase_list <- list()
+for (i in 1:nrow(californiaLoveDF)){
+  print(californiaLoveDF[i,7])
+  if(californiaLoveDF[i,7] == "."){
+    count <- count + 1
+  }
+  phrase_list <- append(phrase_list, count)
+}
+
+capture.output(phrase_list, file = "phrase_caliLove.csv")
+
+
+spinePipe(californiaLove, 2:8) -> californiaLove[rev(c('Stress', 'Tone', 'Break', 'Rhyme', 'IPA', 'Lyrics', 'Hype'))]
+californiaLove$Token |> c(~segments(Break %in% c('3', '4','5')), by ~ File) -> californiaLove$Phrase
 californiaLove$Token %hum<% c(~list(paste(Lyrics, collapse = ' ')), by ~ File ~ Phrase)
 rhymeSchemes <- californiaLove$Token %hum<% c(~list(Rhyme), by ~ File ~ Phrase)
 lyrics <- californiaLove$Token %hum<% c(~list(Lyrics), by ~ File ~ Phrase)
 stress <- californiaLove$Token %hum<% c(~list(Stress), by ~ File ~ Phrase)
 IPA <- californiaLove$Token %hum<% c(~list(IPA), by ~ File ~ Phrase)
 Tone <- californiaLove$Token %hum<% c(~list(Tone), by ~ File ~ Phrase)
-Phrase <- californiaLove$Token %hum<% c(~list(Phrase), by ~ File ~ Phrase)
+Phrase <- californiaLove$Token |> c(~list(Phrase), by ~ File ~ Phrase)
 Break <- californiaLove$Token %hum<% c(~list(Break), by ~ File ~ Phrase)
 Hype <- californiaLove$Token %hum<% c(~list(Hype), by ~ File ~ Phrase)
 
