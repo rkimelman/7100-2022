@@ -30,11 +30,11 @@ californiaLove <- readHumdrum('2pac_CaliforniaLove.rap')
 
 californiaLoveDF <- as.data.frame(californiaLove)
 
-californiaLoveIPA <- list(californiaLoveDF[2:417,6])
-
-californiaLoveStress <- list(californiaLoveDF[2:417,2])
-
-californiaLoveRhyme <- list(californiaLoveDF[2:417, 5])
+# californiaLoveIPA <- list(californiaLoveDF[2:417,6])
+# 
+# californiaLoveStress <- list(californiaLoveDF[2:417,2])
+# 
+# californiaLoveRhyme <- list(californiaLoveDF[2:417, 5])
 
 ipa_list <- list()
 
