@@ -69,6 +69,16 @@ for (i in 1:nrow(californiaLoveDF)){
   phrase_list <- append(phrase_list, count)
 }
 
+rhythm_list <- list()
+
+for (i in 1:nrow(californiaLoveDF)){
+  print(californiaLoveDF[i,7])
+  if(californiaLoveDF[i,7] == "."){
+    count <- count + 1
+  }
+  phrase_list <- append(phrase_list, count)
+}
+
 capture.output(phrase_list, file = "phrase_caliLove.csv")
 
 
