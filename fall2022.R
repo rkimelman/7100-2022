@@ -30,6 +30,13 @@ californiaLove <- readHumdrum('2pac_CaliforniaLove.rap')
 
 californiaLoveDF <- as.data.frame(californiaLove)
 
+
+threegramed <- within(californiaLove, paste(Token, Token[lag = -1:-2]), subset = Spine == 1, complement = Token)
+
+df <- as.data.frame(threegramed)
+
+capture.output(df, file = "threegramed.csv")
+
 # californiaLoveIPA <- list(californiaLoveDF[2:417,6])
 # 
 # californiaLoveStress <- list(californiaLoveDF[2:417,2])
@@ -72,12 +79,11 @@ for (i in 1:nrow(californiaLoveDF)){
 rhythm_list <- list()
 
 for (i in 1:nrow(californiaLoveDF)){
-  print(californiaLoveDF[i,7])
-  if(californiaLoveDF[i,7] == "."){
-    count <- count + 1
-  }
-  phrase_list <- append(phrase_list, count)
+  print(californiaLoveDF[i,1])
+  rhythm_list <- append(rhythm_list, californiaLoveDF[i,1])
 }
+
+capture.output(rhythm_list, file = "rhythm_caliLove.csv")
 
 capture.output(phrase_list, file = "phrase_caliLove.csv")
 

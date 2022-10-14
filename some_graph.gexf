@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2022-09-14">
+    <creator>NetworkX 2.8.6</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <nodes>
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 2 nodes and 2 edges" label="Graph with 2 nodes and 2 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 2 nodes and 2 edges" label="Graph with 2 nodes and 2 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 2 nodes and 2 edges" label="Graph with 2 nodes and 2 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 2 nodes and 2 edges" label="Graph with 2 nodes and 2 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 2 nodes and 2 edges" label="Graph with 2 nodes and 2 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 2 nodes and 2 edges" label="Graph with 2 nodes and 2 edges" />
+      <node id="Graph with 2 nodes and 2 edges" label="Graph with 2 nodes and 2 edges" />
+      <node id="Graph with 2 nodes and 2 edges" label="Graph with 2 nodes and 2 edges" />
+      <node id="Graph with 4 nodes and 3 edges" label="Graph with 4 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 2 edges" label="Graph with 3 nodes and 2 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+      <node id="Graph with 3 nodes and 3 edges" label="Graph with 3 nodes and 3 edges" />
+    </nodes>
+    <edges>
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 2 nodes and 2 edges" id="0" weight="0" />
+      <edge source="Graph with 2 nodes and 2 edges" target="Graph with 3 nodes and 3 edges" id="1" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 2 nodes and 2 edges" id="2" weight="0" />
+      <edge source="Graph with 2 nodes and 2 edges" target="Graph with 3 nodes and 3 edges" id="3" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 2 nodes and 2 edges" id="4" weight="0" />
+      <edge source="Graph with 2 nodes and 2 edges" target="Graph with 3 nodes and 3 edges" id="5" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 2 nodes and 2 edges" id="6" weight="0" />
+      <edge source="Graph with 2 nodes and 2 edges" target="Graph with 3 nodes and 3 edges" id="7" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 2 nodes and 2 edges" id="8" weight="0" />
+      <edge source="Graph with 2 nodes and 2 edges" target="Graph with 3 nodes and 3 edges" id="9" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 2 nodes and 2 edges" id="10" weight="0" />
+      <edge source="Graph with 2 nodes and 2 edges" target="Graph with 2 nodes and 2 edges" id="11" weight="0" />
+      <edge source="Graph with 2 nodes and 2 edges" target="Graph with 2 nodes and 2 edges" id="12" weight="0" />
+      <edge source="Graph with 2 nodes and 2 edges" target="Graph with 4 nodes and 3 edges" id="13" weight="0" />
+      <edge source="Graph with 2 nodes and 2 edges" target="Graph with 3 nodes and 3 edges" id="14" weight="1" />
+      <edge source="Graph with 2 nodes and 2 edges" target="Graph with 3 nodes and 3 edges" id="15" weight="1" />
+      <edge source="Graph with 2 nodes and 2 edges" target="Graph with 3 nodes and 3 edges" id="16" weight="1" />
+      <edge source="Graph with 2 nodes and 2 edges" target="Graph with 3 nodes and 3 edges" id="17" weight="1" />
+      <edge source="Graph with 4 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="18" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="19" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="20" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="21" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="22" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="23" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="24" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="25" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="26" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="27" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="28" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="29" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="30" weight="1" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="31" weight="1" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="32" weight="1" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="33" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="34" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="35" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="36" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="37" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="38" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="39" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="40" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="41" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="42" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="43" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="44" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="45" weight="1" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="46" weight="1" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="47" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="48" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="49" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="50" weight="1" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="51" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="52" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="53" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="54" weight="1" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 2 edges" id="55" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="56" weight="1" />
+      <edge source="Graph with 3 nodes and 2 edges" target="Graph with 3 nodes and 3 edges" id="57" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="58" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="59" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="60" weight="0" />
+      <edge source="Graph with 3 nodes and 3 edges" target="Graph with 3 nodes and 3 edges" id="61" weight="0" />
+    </edges>
+  </graph>
+</gexf>
