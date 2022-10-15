@@ -31,11 +31,175 @@ californiaLove <- readHumdrum('2pac_CaliforniaLove.rap')
 californiaLoveDF <- as.data.frame(californiaLove)
 
 
-threegramed <- within(californiaLove, paste(Token, Token[lag = -1:-2]), subset = Spine == 1, complement = Token)
+threegramed <- within(californiaLove, paste(Token, Token[lag = -1:-2]), subset = Spine == 2, complement = Token)
 
 df <- as.data.frame(threegramed)
 
-capture.output(df, file = "threegramed.csv")
+rhythm_list <- list()
+
+for (i in 1:nrow(df)){
+  print(df[i,2])
+  rhythm_list <- append(rhythm_list, df[i,2])
+}
+
+capture.output(rhythm_list, file = "stress_caliLove_threegramed.csv")
+
+fivegramed <- within(californiaLove, paste(Token, Token[lag = -1:-4]), subset = Spine == 1, complement = Token)
+
+df <- as.data.frame(fivegramed)
+
+rhythm_list <- list()
+
+for (i in 1:nrow(df)){
+  print(df[i,1])
+  rhythm_list <- append(rhythm_list, df[i,1])
+}
+
+capture.output(rhythm_list, file = "rhythm_caliLove_fivegramed.csv")
+
+sixgramed <- within(californiaLove, paste(Token, Token[lag = -1:-5]), subset = Spine == 1, complement = Token)
+
+df <- as.data.frame(sixgramed)
+
+rhythm_list <- list()
+
+for (i in 1:nrow(df)){
+  print(df[i,1])
+  rhythm_list <- append(rhythm_list, df[i,1])
+}
+
+capture.output(rhythm_list, file = "rhythm_caliLove_sixgramed.csv")
+
+sevengramed <- within(californiaLove, paste(Token, Token[lag = -1:-6]), subset = Spine == 1, complement = Token)
+
+df <- as.data.frame(sevengramed)
+
+rhythm_list <- list()
+
+for (i in 1:nrow(df)){
+  print(df[i,1])
+  rhythm_list <- append(rhythm_list, df[i,1])
+}
+
+capture.output(rhythm_list, file = "rhythm_caliLove_sevengramed.csv")
+
+eightgramed <- within(californiaLove, paste(Token, Token[lag = -1:-7]), subset = Spine == 1, complement = Token)
+
+df <- as.data.frame(eightgramed)
+
+rhythm_list <- list()
+
+for (i in 1:nrow(df)){
+  print(df[i,1])
+  rhythm_list <- append(rhythm_list, df[i,1])
+}
+
+capture.output(rhythm_list, file = "rhythm_caliLove_eightgramed.csv")
+
+ninegramed <- within(californiaLove, paste(Token, Token[lag = -1:-8]), subset = Spine == 1, complement = Token)
+
+df <- as.data.frame(ninegramed)
+
+rhythm_list <- list()
+
+for (i in 1:nrow(df)){
+  print(df[i,1])
+  rhythm_list <- append(rhythm_list, df[i,1])
+}
+
+capture.output(rhythm_list, file = "rhythm_caliLove_ninegramed.csv")
+
+tengramed <- within(californiaLove, paste(Token, Token[lag = -1:-9]), subset = Spine == 1, complement = Token)
+
+df <- as.data.frame(tengramed)
+
+rhythm_list <- list()
+
+for (i in 1:nrow(df)){
+  print(df[i,1])
+  rhythm_list <- append(rhythm_list, df[i,1])
+}
+
+capture.output(rhythm_list, file = "rhythm_caliLove_tengramed.csv")
+
+elevengramed <- within(californiaLove, paste(Token, Token[lag = -1:-10]), subset = Spine == 1, complement = Token)
+
+df <- as.data.frame(elevengramed)
+
+rhythm_list <- list()
+
+for (i in 1:nrow(df)){
+  print(df[i,1])
+  rhythm_list <- append(rhythm_list, df[i,1])
+}
+
+capture.output(rhythm_list, file = "rhythm_caliLove_elevengramed.csv")
+
+thirteengramed <- within(californiaLove, paste(Token, Token[lag = -1:-12]), subset = Spine == 1, complement = Token)
+
+df <- as.data.frame(thirteengramed)
+
+rhythm_list <- list()
+
+for (i in 1:nrow(df)){
+  print(df[i,1])
+  rhythm_list <- append(rhythm_list, df[i,1])
+}
+
+capture.output(rhythm_list, file = "rhythm_caliLove_thirteengramed.csv")
+
+fourteengramed <- within(californiaLove, paste(Token, Token[lag = -1:-13]), subset = Spine == 1, complement = Token)
+
+df <- as.data.frame(fourteengramed)
+
+rhythm_list <- list()
+
+for (i in 1:nrow(df)){
+  print(df[i,1])
+  rhythm_list <- append(rhythm_list, df[i,1])
+}
+
+capture.output(rhythm_list, file = "rhythm_caliLove_fifteengramed.csv")
+
+fifteengramed <- within(californiaLove, paste(Token, Token[lag = -1:-14]), subset = Spine == 1, complement = Token)
+
+df <- as.data.frame(fifteengramed)
+
+rhythm_list <- list()
+
+for (i in 1:nrow(df)){
+  print(df[i,1])
+  rhythm_list <- append(rhythm_list, df[i,1])
+}
+
+capture.output(rhythm_list, file = "rhythm_caliLove_fifteengramed.csv")
+
+sixteengramed <- within(californiaLove, paste(Token, Token[lag = -1:-15]), subset = Spine == 1, complement = Token)
+
+df <- as.data.frame(sixteengramed)
+
+rhythm_list <- list()
+
+for (i in 1:nrow(df)){
+  print(df[i,1])
+  rhythm_list <- append(rhythm_list, df[i,1])
+}
+
+capture.output(rhythm_list, file = "rhythm_caliLove_sixteengramed.csv")
+
+seventeengramed <- within(californiaLove, paste(Token, Token[lag = -1:-16]), subset = Spine == 1, complement = Token)
+
+df <- as.data.frame(seventeengramed)
+
+rhythm_list <- list()
+
+for (i in 1:nrow(df)){
+  print(df[i,1])
+  rhythm_list <- append(rhythm_list, df[i,1])
+}
+
+capture.output(rhythm_list, file = "rhythm_caliLove_seventeengramed.csv")
+
 
 # californiaLoveIPA <- list(californiaLoveDF[2:417,6])
 # 
