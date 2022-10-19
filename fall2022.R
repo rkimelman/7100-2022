@@ -318,7 +318,7 @@ for (i in 1:nrow(df)){
 
 capture.output(rhythm_list, file = "rhythm_howUWantIt_sixteengramed.csv")
 
-twelvegramed <- within(IGetAround, paste(Token, Token[lag = -1:-2]), subset = Spine == 1, complement = Token)
+twelvegramed <- within(IGetAround, paste(Token, Token[lag = -1:-15]), subset = Spine == 1, complement = Token)
 
 df <- as.data.frame(twelvegramed)
 
@@ -329,7 +329,7 @@ for (i in 1:nrow(df)){
   rhythm_list <- append(rhythm_list, df[i,1])
 }
 
-capture.output(rhythm_list, file = "rhythm_IGetAround_threegramed.csv")
+capture.output(rhythm_list, file = "rhythm_IGetAround_sixteengramed.csv")
 
 thirteengramed <- within(CandyShop, paste(Token, Token[lag = -1:-11]), subset = Spine == 2, complement = Token)
 
