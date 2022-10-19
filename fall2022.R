@@ -70,7 +70,7 @@ for (i in 1:nrow(df)){
 
 capture.output(rhythm_list, file = "stress_caliLove_sixgramed.csv")
 
-sevengramed <- within(SoManyTears, paste(Token, Token[lag = -1:-11]), subset = Spine == 1, complement = Token)
+sevengramed <- within(SoManyTears, paste(Token, Token[lag = -1:-5]), subset = Spine == 1, complement = Token)
 
 df <- as.data.frame(sevengramed)
 
@@ -81,7 +81,7 @@ for (i in 1:nrow(df)){
   rhythm_list <- append(rhythm_list, df[i,1])
 }
 
-capture.output(rhythm_list, file = "rhythm_SoManyTears_twelvegramed.csv")
+capture.output(rhythm_list, file = "rhythm_SoManyTears_sixgramed.csv")
 
 eightgramed <- within(californiaLove, paste(Token, Token[lag = -1:-7]), subset = Spine == 2, complement = Token)
 
@@ -318,7 +318,7 @@ for (i in 1:nrow(df)){
 
 capture.output(rhythm_list, file = "rhythm_howUWantIt_sixteengramed.csv")
 
-twelvegramed <- within(IGetAround, paste(Token, Token[lag = -1:-15]), subset = Spine == 1, complement = Token)
+twelvegramed <- within(PapazSong, paste(Token, Token[lag = -1:-15]), subset = Spine == 1, complement = Token)
 
 df <- as.data.frame(twelvegramed)
 
@@ -329,7 +329,7 @@ for (i in 1:nrow(df)){
   rhythm_list <- append(rhythm_list, df[i,1])
 }
 
-capture.output(rhythm_list, file = "rhythm_IGetAround_sixteengramed.csv")
+capture.output(rhythm_list, file = "rhythm_PapazSong_sixteengramed.csv")
 
 thirteengramed <- within(CandyShop, paste(Token, Token[lag = -1:-11]), subset = Spine == 2, complement = Token)
 
@@ -347,32 +347,32 @@ capture.output(rhythm_list, file = "stress_CandyShop_twelvegramed.csv")
 
 ipa_list <- list()
 
-for (i in 1:nrow(CandyShopDF)){
-  ipa_list <- append(ipa_list, CandyShopDF[i,6])
+for (i in 1:nrow(SoManyTearsDF)){
+  ipa_list <- append(ipa_list, SoManyTearsDF[i,6])
 }
 
 rhyme_list <- list()
 
-for (i in 1:nrow(CandyShopDF)){
-  rhyme_list <- append(rhyme_list, CandyShopDF[i,5])
+for (i in 1:nrow(SoManyTearsDF)){
+  rhyme_list <- append(rhyme_list, SoManyTearsDF[i,5])
 }
 
 stress_list <- list()
 
-for (i in 1:nrow(CandyShopDF)){
-  stress_list <- append(stress_list, CandyShopDF[i,2])
+for (i in 1:nrow(SoManyTearsDF)){
+  stress_list <- append(stress_list, SoManyTearsDF[i,2])
 }
 
-capture.output(ipa_list, file = "IPA_CandyShop.csv")
+capture.output(ipa_list, file = "IPA_SoManyTears.csv")
 
-capture.output(rhyme_list, file = "rhyme_CandyShop.csv")
+capture.output(rhyme_list, file = "rhyme_SoManyTears.csv")
 
-capture.output(stress_list, file = "stress_CandyShop.csv")
+capture.output(stress_list, file = "stress_SoManyTears.csv")
 count <- 0
 phrase_list <- list()
-for (i in 1:nrow(CandyShopDF)){
-  print(CandyShopDF[i,7])
-  if(CandyShopDF[i,7] == "."){
+for (i in 1:nrow(SoManyTearsDF)){
+  print(SoManyTearsDF[i,7])
+  if(SoManyTearsDF[i,7] == "."){
     count <- count + 1
   }
   phrase_list <- append(phrase_list, count)
@@ -387,7 +387,7 @@ for (i in 1:nrow(howUWantItDF)){
 
 capture.output(rhythm_list, file = "rhythm_howUWantIt.csv")
 
-capture.output(phrase_list, file = "phrase_CandyShop.csv")
+capture.output(phrase_list, file = "phrase_SoManyTears.csv")
 
 
 spinePipe(californiaLove, 2:8) -> californiaLove[rev(c('Stress', 'Tone', 'Break', 'Rhyme', 'IPA', 'Lyrics', 'Hype'))]
