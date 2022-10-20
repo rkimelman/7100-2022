@@ -26,12 +26,12 @@ segments <- function(x, reverse = FALSE) {
 
 
 mcf <- readHumdrum('.*rap')
-InDaClub <- readHumdrum('50Cent_InDaClub.rap')
+JustALilBit <- readHumdrum('50Cent_JustALilBit.rap')
 
-InDaClubDF <- as.data.frame(InDaClub)
+JustALilBitDF <- as.data.frame(JustALilBit)
 
 
-threegramed <- within(InDaClub, paste(Token, Token[lag = -1:-15]), subset = Spine == 1, complement = Token)
+threegramed <- within(JustALilBit, paste(Token, Token[lag = -1:-15]), subset = Spine == 1, complement = Token)
 
 df <- as.data.frame(threegramed)
 
@@ -42,7 +42,7 @@ for (i in 1:nrow(df)){
   rhythm_list <- append(rhythm_list, df[i,1])
 }
 
-capture.output(rhythm_list, file = "rhythm_InDaClub_sixteengramed.csv")
+capture.output(rhythm_list, file = "rhythm_JustALilBit_sixteengramed.csv")
 
 fivegramed <- within(californiaLove, paste(Token, Token[lag = -1:-4]), subset = Spine == 2, complement = Token)
 
@@ -347,32 +347,32 @@ capture.output(rhythm_list, file = "stress_CandyShop_twelvegramed.csv")
 
 ipa_list <- list()
 
-for (i in 1:nrow(InDaClubDF)){
-  ipa_list <- append(ipa_list, InDaClubDF[i,6])
+for (i in 1:nrow(JustALilBitDF)){
+  ipa_list <- append(ipa_list, JustALilBitDF[i,6])
 }
 
 rhyme_list <- list()
 
-for (i in 1:nrow(InDaClubDF)){
-  rhyme_list <- append(rhyme_list, InDaClubDF[i,5])
+for (i in 1:nrow(JustALilBitDF)){
+  rhyme_list <- append(rhyme_list, JustALilBitDF[i,5])
 }
 
 stress_list <- list()
 
-for (i in 1:nrow(InDaClubDF)){
-  stress_list <- append(stress_list, InDaClubDF[i,2])
+for (i in 1:nrow(JustALilBitDF)){
+  stress_list <- append(stress_list, JustALilBitDF[i,2])
 }
 
-capture.output(ipa_list, file = "IPA_InDaClub.csv")
+capture.output(ipa_list, file = "IPA_JustALilBit.csv")
 
-capture.output(rhyme_list, file = "rhyme_InDaClub.csv")
+capture.output(rhyme_list, file = "rhyme_JustALilBit.csv")
 
-capture.output(stress_list, file = "stress_InDaClub.csv")
+capture.output(stress_list, file = "stress_JustALilBit.csv")
 count <- 0
 phrase_list <- list()
-for (i in 1:nrow(InDaClubDF)){
-  print(InDaClubDF[i,7])
-  if(InDaClubDF[i,7] == "."){
+for (i in 1:nrow(JustALilBitDF)){
+  print(JustALilBitDF[i,7])
+  if(JustALilBitDF[i,7] == "."){
     count <- count + 1
   }
   phrase_list <- append(phrase_list, count)
@@ -387,7 +387,7 @@ for (i in 1:nrow(howUWantItDF)){
 
 capture.output(rhythm_list, file = "rhythm_howUWantIt.csv")
 
-capture.output(phrase_list, file = "phrase_InDaClub.csv")
+capture.output(phrase_list, file = "phrase_JustALilBit.csv")
 
 
 spinePipe(californiaLove, 2:8) -> californiaLove[rev(c('Stress', 'Tone', 'Break', 'Rhyme', 'IPA', 'Lyrics', 'Hype'))]
