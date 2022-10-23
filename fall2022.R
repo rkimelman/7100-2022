@@ -31,7 +31,7 @@ LivinItUp <- readHumdrum('JaRule_LivinItUp.rap')
 LivinItUpDF <- as.data.frame(LivinItUp)
 
 
-threegramed <- within(howUWantIt, paste(Token, Token[lag = -1:-2]), subset = Spine == 1, complement = Token)
+threegramed <- within(Intergalactic, paste(Token, Token[lag = -1:-2]), subset = Spine == 1, complement = Token)
 
 df <- as.data.frame(threegramed)
 
@@ -42,7 +42,7 @@ for (i in 1:nrow(df)){
   rhythm_list <- append(rhythm_list, df[i,1])
 }
 
-capture.output(rhythm_list, file = "rhythm_HowUWantIt_threegramed.csv")
+capture.output(rhythm_list, file = "rhythm_Intergalactic_threegramed.csv")
 
 fivegramed <- within(californiaLove, paste(Token, Token[lag = -1:-4]), subset = Spine == 2, complement = Token)
 
