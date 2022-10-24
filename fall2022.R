@@ -26,12 +26,12 @@ segments <- function(x, reverse = FALSE) {
 
 
 mcf <- readHumdrum('.*rap')
-Clique <- readHumdrum('KanyeWest_Clique.rap')
+GoodLife <- readHumdrum('KanyeWest_GoodLife.rap')
 
-CliqueDF <- as.data.frame(Clique)
+GoodLifeDF <- as.data.frame(GoodLife)
 
 
-threegramed <- within(Clique, paste(Token, Token[lag = -1:-2]), subset = Spine == 1, complement = Token)
+threegramed <- within(GoodLife, paste(Token, Token[lag = -1:-2]), subset = Spine == 1, complement = Token)
 
 df <- as.data.frame(threegramed)
 
@@ -42,7 +42,7 @@ for (i in 1:nrow(df)){
   rhythm_list <- append(rhythm_list, df[i,1])
 }
 
-capture.output(rhythm_list, file = "rhythm_Clique_threegramed.csv")
+capture.output(rhythm_list, file = "rhythm_GoodLife_threegramed.csv")
 
 fivegramed <- within(californiaLove, paste(Token, Token[lag = -1:-4]), subset = Spine == 2, complement = Token)
 
@@ -347,32 +347,32 @@ capture.output(rhythm_list, file = "stress_CandyShop_twelvegramed.csv")
 
 ipa_list <- list()
 
-for (i in 1:nrow(NiggasInParisDF)){
-  ipa_list <- append(ipa_list, NiggasInParisDF[i,6])
+for (i in 1:nrow(GoodLifeDF)){
+  ipa_list <- append(ipa_list, GoodLifeDF[i,6])
 }
 
 rhyme_list <- list()
 
-for (i in 1:nrow(NiggasInParisDF)){
-  rhyme_list <- append(rhyme_list, NiggasInParisDF[i,5])
+for (i in 1:nrow(GoodLifeDF)){
+  rhyme_list <- append(rhyme_list, GoodLifeDF[i,5])
 }
 
 stress_list <- list()
 
-for (i in 1:nrow(NiggasInParisDF)){
-  stress_list <- append(stress_list, NiggasInParisDF[i,2])
+for (i in 1:nrow(GoodLifeDF)){
+  stress_list <- append(stress_list, GoodLifeDF[i,2])
 }
 
-capture.output(ipa_list, file = "IPA_NiggasInParis.csv")
+capture.output(ipa_list, file = "IPA_GoodLife.csv")
 
-capture.output(rhyme_list, file = "rhyme_NiggasInParis.csv")
+capture.output(rhyme_list, file = "rhyme_GoodLife.csv")
 
-capture.output(stress_list, file = "stress_NiggasInParis.csv")
+capture.output(stress_list, file = "stress_GoodLife.csv")
 count <- 0
 phrase_list <- list()
-for (i in 1:nrow(NiggasInParisDF)){
-  print(NiggasInParisDF[i,7])
-  if(NiggasInParisDF[i,7] == "."){
+for (i in 1:nrow(GoodLifeDF)){
+  print(GoodLifeDF[i,7])
+  if(GoodLifeDF[i,7] == "."){
     count <- count + 1
   }
   phrase_list <- append(phrase_list, count)
@@ -387,7 +387,7 @@ for (i in 1:nrow(howUWantItDF)){
 
 capture.output(rhythm_list, file = "rhythm_howUWantIt.csv")
 
-capture.output(phrase_list, file = "phrase_NiggasInParis.csv")
+capture.output(phrase_list, file = "phrase_GoodLife.csv")
 
 
 spinePipe(californiaLove, 2:8) -> californiaLove[rev(c('Stress', 'Tone', 'Break', 'Rhyme', 'IPA', 'Lyrics', 'Hype'))]
