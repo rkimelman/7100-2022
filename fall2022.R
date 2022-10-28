@@ -26,12 +26,12 @@ segments <- function(x, reverse = FALSE) {
 
 
 mcf <- readHumdrum('.*rap')
-WildWildWest <- readHumdrum('KoolMoeDee_WildWildWest.rap')
+Jump <- readHumdrum('KrisKross_Jump.rap')
 
-WildWildWestDF <- as.data.frame(WildWildWest)
+JumpDF <- as.data.frame(Jump)
 
 
-threegramed <- within(WildWildWest, paste(Token, Token[lag = -1:-2]), subset = Spine == 1, complement = Token)
+threegramed <- within(Jump, paste(Token, Token[lag = -1:-2]), subset = Spine == 1, complement = Token)
 
 df <- as.data.frame(threegramed)
 
@@ -42,7 +42,7 @@ for (i in 1:nrow(df)){
   rhythm_list <- append(rhythm_list, df[i,1])
 }
 
-capture.output(rhythm_list, file = "rhythm_WildWildWest_threegramed.csv")
+capture.output(rhythm_list, file = "rhythm_Jump_threegramed.csv")
 
 fivegramed <- within(californiaLove, paste(Token, Token[lag = -1:-4]), subset = Spine == 2, complement = Token)
 
