@@ -26,12 +26,12 @@ segments <- function(x, reverse = FALSE) {
 
 
 mcf <- readHumdrum('.*rap')
-Jump <- readHumdrum('KrisKross_Jump.rap')
+Basketball <- readHumdrum('KurtisBlow_Basketball.rap')
 
-JumpDF <- as.data.frame(Jump)
+BasketballDF <- as.data.frame(Basketball)
 
 
-threegramed <- within(Jump, paste(Token, Token[lag = -1:-2]), subset = Spine == 1, complement = Token)
+threegramed <- within(Basketball, paste(Token, Token[lag = -1:-2]), subset = Spine == 1, complement = Token)
 
 df <- as.data.frame(threegramed)
 
@@ -42,7 +42,7 @@ for (i in 1:nrow(df)){
   rhythm_list <- append(rhythm_list, df[i,1])
 }
 
-capture.output(rhythm_list, file = "rhythm_Jump_threegramed.csv")
+capture.output(rhythm_list, file = "rhythm_Basketball_threegramed.csv")
 
 fivegramed <- within(californiaLove, paste(Token, Token[lag = -1:-4]), subset = Spine == 2, complement = Token)
 
@@ -347,32 +347,32 @@ capture.output(rhythm_list, file = "stress_CandyShop_twelvegramed.csv")
 
 ipa_list <- list()
 
-for (i in 1:nrow(WildWildWestDF)){
-  ipa_list <- append(ipa_list, WildWildWestDF[i,6])
+for (i in 1:nrow(BasketballDF)){
+  ipa_list <- append(ipa_list, BasketballDF[i,6])
 }
 
 rhyme_list <- list()
 
-for (i in 1:nrow(WildWildWestDF)){
-  rhyme_list <- append(rhyme_list, WildWildWestDF[i,5])
+for (i in 1:nrow(BasketballDF)){
+  rhyme_list <- append(rhyme_list, BasketballDF[i,5])
 }
 
 stress_list <- list()
 
-for (i in 1:nrow(WildWildWestDF)){
-  stress_list <- append(stress_list, WildWildWestDF[i,2])
+for (i in 1:nrow(BasketballDF)){
+  stress_list <- append(stress_list, BasketballDF[i,2])
 }
 
-capture.output(ipa_list, file = "IPA_WildWildWest.csv")
+capture.output(ipa_list, file = "IPA_Basketball.csv")
 
-capture.output(rhyme_list, file = "rhyme_WildWildWest.csv")
+capture.output(rhyme_list, file = "rhyme_Basketball.csv")
 
-capture.output(stress_list, file = "stress_WildWildWest.csv")
+capture.output(stress_list, file = "stress_Basketball.csv")
 count <- 0
 phrase_list <- list()
-for (i in 1:nrow(WildWildWestDF)){
-  print(WildWildWestDF[i,7])
-  if(WildWildWestDF[i,7] == "."){
+for (i in 1:nrow(BasketballDF)){
+  print(BasketballDF[i,7])
+  if(BasketballDF[i,7] == "."){
     count <- count + 1
   }
   phrase_list <- append(phrase_list, count)
@@ -387,7 +387,7 @@ for (i in 1:nrow(howUWantItDF)){
 
 capture.output(rhythm_list, file = "rhythm_howUWantIt.csv")
 
-capture.output(phrase_list, file = "phrase_WildWildWest.csv")
+capture.output(phrase_list, file = "phrase_Basketball.csv")
 
 
 spinePipe(californiaLove, 2:8) -> californiaLove[rev(c('Stress', 'Tone', 'Break', 'Rhyme', 'IPA', 'Lyrics', 'Hype'))]
