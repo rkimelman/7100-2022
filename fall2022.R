@@ -26,12 +26,12 @@ segments <- function(x, reverse = FALSE) {
 
 
 mcf <- readHumdrum('.*rap')
-RightAboveIt <- readHumdrum('LilWayne_RightAboveIt.rap')
+SheWill <- readHumdrum('LilWayne_SheWill.rap')
 
-RightAboveItDF <- as.data.frame(RightAboveIt)
+SheWillDF <- as.data.frame(SheWill)
 
 
-threegramed <- within(RightAboveIt, paste(Token, Token[lag = -1:-2]), subset = Spine == 1, complement = Token)
+threegramed <- within(SheWill, paste(Token, Token[lag = -1:-15]), subset = Spine == 1, complement = Token)
 
 df <- as.data.frame(threegramed)
 
@@ -42,7 +42,7 @@ for (i in 1:nrow(df)){
   rhythm_list <- append(rhythm_list, df[i,1])
 }
 
-capture.output(rhythm_list, file = "rhythm_RightAboveIt_threegramed.csv")
+capture.output(rhythm_list, file = "rhythm_SheWill_sixteengramed.csv")
 
 fivegramed <- within(californiaLove, paste(Token, Token[lag = -1:-4]), subset = Spine == 2, complement = Token)
 
@@ -347,32 +347,32 @@ capture.output(rhythm_list, file = "stress_CandyShop_twelvegramed.csv")
 
 ipa_list <- list()
 
-for (i in 1:nrow(RightAboveItDF)){
-  ipa_list <- append(ipa_list, RightAboveItDF[i,6])
+for (i in 1:nrow(SheWillDF)){
+  ipa_list <- append(ipa_list, SheWillDF[i,6])
 }
 
 rhyme_list <- list()
 
-for (i in 1:nrow(RightAboveItDF)){
-  rhyme_list <- append(rhyme_list, RightAboveItDF[i,5])
+for (i in 1:nrow(SheWillDF)){
+  rhyme_list <- append(rhyme_list, SheWillDF[i,5])
 }
 
 stress_list <- list()
 
-for (i in 1:nrow(RightAboveItDF)){
-  stress_list <- append(stress_list, RightAboveItDF[i,2])
+for (i in 1:nrow(SheWillDF)){
+  stress_list <- append(stress_list, SheWillDF[i,2])
 }
 
-capture.output(ipa_list, file = "IPA_RightAboveIt.csv")
+capture.output(ipa_list, file = "IPA_SheWill.csv")
 
-capture.output(rhyme_list, file = "rhyme_RightAboveIt.csv")
+capture.output(rhyme_list, file = "rhyme_SheWill.csv")
 
-capture.output(stress_list, file = "stress_RightAboveIt.csv")
+capture.output(stress_list, file = "stress_SheWill.csv")
 count <- 0
 phrase_list <- list()
-for (i in 1:nrow(RightAboveItDF)){
-  print(RightAboveItDF[i,7])
-  if(RightAboveItDF[i,7] == "."){
+for (i in 1:nrow(SheWillDF)){
+  print(SheWillDF[i,7])
+  if(SheWillDF[i,7] == "."){
     count <- count + 1
   }
   phrase_list <- append(phrase_list, count)
@@ -387,7 +387,7 @@ for (i in 1:nrow(howUWantItDF)){
 
 capture.output(rhythm_list, file = "rhythm_howUWantIt.csv")
 
-capture.output(phrase_list, file = "phrase_RightAboveIt.csv")
+capture.output(phrase_list, file = "phrase_SheWill.csv")
 
 
 spinePipe(californiaLove, 2:8) -> californiaLove[rev(c('Stress', 'Tone', 'Break', 'Rhyme', 'IPA', 'Lyrics', 'Hype'))]
