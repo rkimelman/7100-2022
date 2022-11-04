@@ -31,7 +31,7 @@ ControlMyself <- readHumdrum('LLCoolJ_ControlMyself.rap')
 ControlMyselfDF <- as.data.frame(ControlMyself)
 
 
-threegramed <- within(ControlMyself, paste(Token, Token[lag = -1:-2]), subset = Spine == 1, complement = Token)
+threegramed <- within(ControlMyself, paste(Token, Token[lag = -1:-15]), subset = Spine == 1, complement = Token)
 
 df <- as.data.frame(threegramed)
 
@@ -42,7 +42,7 @@ for (i in 1:nrow(df)){
   rhythm_list <- append(rhythm_list, df[i,1])
 }
 
-capture.output(rhythm_list, file = "rhythm_ControlMyself_threegramed.csv")
+capture.output(rhythm_list, file = "rhythm_ControlMyself_sixteengramed.csv")
 
 fivegramed <- within(californiaLove, paste(Token, Token[lag = -1:-4]), subset = Spine == 2, complement = Token)
 
@@ -387,7 +387,7 @@ for (i in 1:nrow(howUWantItDF)){
 
 capture.output(rhythm_list, file = "rhythm_howUWantIt.csv")
 
-capture.output(phrase_list, file = "phrase_SheWill.csv")
+capture.output(phrase_list, file = "phrase_ControlMyself.csv")
 
 
 spinePipe(californiaLove, 2:8) -> californiaLove[rev(c('Stress', 'Tone', 'Break', 'Rhyme', 'IPA', 'Lyrics', 'Hype'))]
