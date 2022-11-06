@@ -26,12 +26,12 @@ segments <- function(x, reverse = FALSE) {
 
 
 mcf <- readHumdrum('.*rap')
-ControlMyself <- readHumdrum('LLCoolJ_ControlMyself.rap')
+MoneyMaker <- readHumdrum('Ludacris_MoneyMaker.rap')
 
-ControlMyselfDF <- as.data.frame(ControlMyself)
+MoneyMakerDF <- as.data.frame(MoneyMaker)
 
 
-threegramed <- within(ControlMyself, paste(Token, Token[lag = -1:-15]), subset = Spine == 1, complement = Token)
+threegramed <- within(MoneyMaker, paste(Token, Token[lag = -1:-2]), subset = Spine == 1, complement = Token)
 
 df <- as.data.frame(threegramed)
 
@@ -42,7 +42,7 @@ for (i in 1:nrow(df)){
   rhythm_list <- append(rhythm_list, df[i,1])
 }
 
-capture.output(rhythm_list, file = "rhythm_ControlMyself_sixteengramed.csv")
+capture.output(rhythm_list, file = "rhythm_MoneyMaker_threegramed.csv")
 
 fivegramed <- within(californiaLove, paste(Token, Token[lag = -1:-4]), subset = Spine == 2, complement = Token)
 
@@ -347,32 +347,32 @@ capture.output(rhythm_list, file = "stress_CandyShop_twelvegramed.csv")
 
 ipa_list <- list()
 
-for (i in 1:nrow(ControlMyselfDF)){
-  ipa_list <- append(ipa_list, ControlMyselfDF[i,6])
+for (i in 1:nrow(MoneyMakerDF)){
+  ipa_list <- append(ipa_list, MoneyMakerDF[i,6])
 }
 
 rhyme_list <- list()
 
-for (i in 1:nrow(ControlMyselfDF)){
-  rhyme_list <- append(rhyme_list, ControlMyselfDF[i,5])
+for (i in 1:nrow(MoneyMakerDF)){
+  rhyme_list <- append(rhyme_list, MoneyMakerDF[i,5])
 }
 
 stress_list <- list()
 
-for (i in 1:nrow(ControlMyselfDF)){
-  stress_list <- append(stress_list, ControlMyselfDF[i,2])
+for (i in 1:nrow(MoneyMakerDF)){
+  stress_list <- append(stress_list, MoneyMakerDF[i,2])
 }
 
-capture.output(ipa_list, file = "IPA_ControlMyself.csv")
+capture.output(ipa_list, file = "IPA_MoneyMaker.csv")
 
-capture.output(rhyme_list, file = "rhyme_ControlMyself.csv")
+capture.output(rhyme_list, file = "rhyme_MoneyMaker.csv")
 
-capture.output(stress_list, file = "stress_ControlMyself.csv")
+capture.output(stress_list, file = "stress_MoneyMaker.csv")
 count <- 0
 phrase_list <- list()
-for (i in 1:nrow(ControlMyselfDF)){
-  print(ControlMyselfDF[i,7])
-  if(ControlMyselfDF[i,7] == "."){
+for (i in 1:nrow(MoneyMakerDF)){
+  print(MoneyMakerDF[i,7])
+  if(MoneyMakerDF[i,7] == "."){
     count <- count + 1
   }
   phrase_list <- append(phrase_list, count)
@@ -387,7 +387,7 @@ for (i in 1:nrow(howUWantItDF)){
 
 capture.output(rhythm_list, file = "rhythm_howUWantIt.csv")
 
-capture.output(phrase_list, file = "phrase_ControlMyself.csv")
+capture.output(phrase_list, file = "phrase_MoneyMaker.csv")
 
 
 spinePipe(californiaLove, 2:8) -> californiaLove[rev(c('Stress', 'Tone', 'Break', 'Rhyme', 'IPA', 'Lyrics', 'Hype'))]
