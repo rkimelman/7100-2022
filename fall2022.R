@@ -26,12 +26,12 @@ segments <- function(x, reverse = FALSE) {
 
 
 mcf <- readHumdrum('.*rap')
-Legit <- readHumdrum('MCHammer_2Legit2Quit.rap')
+Pray <- readHumdrum('MCHammer_Pray.rap')
 
-LegitDF <- as.data.frame(Legit)
+PrayDF <- as.data.frame(Pray)
 
 
-threegramed <- within(Legit, paste(Token, Token[lag = -1:-2]), subset = Spine == 1, complement = Token)
+threegramed <- within(Pray, paste(Token, Token[lag = -1:-2]), subset = Spine == 1, complement = Token)
 
 df <- as.data.frame(threegramed)
 
@@ -42,7 +42,7 @@ for (i in 1:nrow(df)){
   rhythm_list <- append(rhythm_list, df[i,1])
 }
 
-capture.output(rhythm_list, file = "rhythm_Legit_threegramed.csv")
+capture.output(rhythm_list, file = "rhythm_Pray_threegramed.csv")
 
 fivegramed <- within(californiaLove, paste(Token, Token[lag = -1:-4]), subset = Spine == 2, complement = Token)
 
@@ -347,32 +347,32 @@ capture.output(rhythm_list, file = "stress_CandyShop_twelvegramed.csv")
 
 ipa_list <- list()
 
-for (i in 1:nrow(LegitDF)){
-  ipa_list <- append(ipa_list, LegitDF[i,6])
+for (i in 1:nrow(PrayDF)){
+  ipa_list <- append(ipa_list, PrayDF[i,6])
 }
 
 rhyme_list <- list()
 
-for (i in 1:nrow(LegitDF)){
-  rhyme_list <- append(rhyme_list, LegitDF[i,5])
+for (i in 1:nrow(PrayDF)){
+  rhyme_list <- append(rhyme_list, PrayDF[i,5])
 }
 
 stress_list <- list()
 
-for (i in 1:nrow(LegitDF)){
-  stress_list <- append(stress_list, LegitDF[i,2])
+for (i in 1:nrow(PrayDF)){
+  stress_list <- append(stress_list, PrayDF[i,2])
 }
 
-capture.output(ipa_list, file = "IPA_Legit.csv")
+capture.output(ipa_list, file = "IPA_Pray.csv")
 
-capture.output(rhyme_list, file = "rhyme_Legit.csv")
+capture.output(rhyme_list, file = "rhyme_Pray.csv")
 
-capture.output(stress_list, file = "stress_Legit.csv")
+capture.output(stress_list, file = "stress_Pray.csv")
 count <- 0
 phrase_list <- list()
-for (i in 1:nrow(LegitDF)){
-  print(LegitDF[i,7])
-  if(LegitDF[i,7] == "."){
+for (i in 1:nrow(PrayDF)){
+  print(PrayDF[i,7])
+  if(PrayDF[i,7] == "."){
     count <- count + 1
   }
   phrase_list <- append(phrase_list, count)
@@ -387,7 +387,7 @@ for (i in 1:nrow(howUWantItDF)){
 
 capture.output(rhythm_list, file = "rhythm_howUWantIt.csv")
 
-capture.output(phrase_list, file = "phrase_Legit.csv")
+capture.output(phrase_list, file = "phrase_Pray.csv")
 
 
 spinePipe(californiaLove, 2:8) -> californiaLove[rev(c('Stress', 'Tone', 'Break', 'Rhyme', 'IPA', 'Lyrics', 'Hype'))]
